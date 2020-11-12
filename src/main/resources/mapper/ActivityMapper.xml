@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.mall.dao.ActivityMapper">
+    <resultMap id="BaseResultMap" type="com.sk.mall.entity.Activity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="activityName" jdbcType="VARCHAR" property="activityName"/>
+        <result column="activityDes" jdbcType="VARCHAR" property="activityAddress"/>
+        <result column="discount" jdbcType="REAL" property="disCount"/>
+        <result column="fullPrice" jdbcType="INTEGER" property="fullPrice"/>
+        <result column="reducePrice" jdbcType="INTEGER" property="reducePrice"/>
+        <result column="fullNum" jdbcType="INTEGER" property="fullNum"/>
+        <result column="reduceNum" jdbcType="INTEGER" property="reduceNum"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, activityName, activityDes, discount, fullPrice, reducePrice, fullNum,
+    reduceNum
+    </sql>
+
+    <select id="getAllActivity" resultMap="BaseResultMap">
+        select id,
+               activityName,
+               activityDes,
+               discount,
+               fullPrice,
+               reducePrice,
+               fullNum,
+               reduceNum
+        from activity
+        order by id
+    </select>
+
+    <select id="getActivityById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from activity
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.sk.mall.entity.Activity">
+        insert into activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityname != null">
+                activityName,
+            </if>
+            <if test="activitydes != null">
+                activityDes,
+            </if>
+            <if test="discount != null">
+                discount,
+            </if>
+            <if test="fullprice != null">
+                fullPrice,
+            </if>
+            <if test="reduceprice != null">
+                reducePrice,
+            </if>
+            <if test="fullnum != null">
+                fullNum,
+            </if>
+            <if test="reducenum != null">
+                reduceNum,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="activityname != null">
+                #{activityname,jdbcType=VARCHAR},
+            </if>
+            <if test="activitydes != null">
+                #{activitydes,jdbcType=VARCHAR},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=REAL},
+            </if>
+            <if test="fullprice != null">
+                #{fullprice,jdbcType=INTEGER},
+            </if>
+            <if test="reduceprice != null">
+                #{reduceprice,jdbcType=INTEGER},
+            </if>
+            <if test="fullnum != null">
+                #{fullnum,jdbcType=INTEGER},
+            </if>
+            <if test="reducenum != null">
+                #{reducenum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>
