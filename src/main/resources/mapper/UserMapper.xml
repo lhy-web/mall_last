@@ -73,7 +73,12 @@
     id, username, password, regTime, email, telephone
   </sql>
     <select id="selectAllUser" resultMap="BaseResultMap">
-        select id, username, password, regTime, email, telephone from user order by regTime
+        select id, username, password, regTime, email, telephone from user
+        <if test="name != null">
+            where username = ${username}
+        </if>
+
+        order by regTime
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

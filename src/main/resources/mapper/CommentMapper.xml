@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.mall.dao.CommentMapper">
+    <resultMap id="BaseResultMap" type="com.sk.mall.entity.Comment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="goodsId" jdbcType="INTEGER" property="goodsId"/>
+        <result column="point" jdbcType="INTEGER" property="point"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="commentTime" jdbcType="TIMESTAMP" property="commentTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, goodsId, point, content, commentTime
+  </sql>
+
+    <select id="getByGoodsId"  resultMap="BaseResultMap">
+        select id, userId, goodsId, point, content, commentTime from comment where goodsid = ${goodsId}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.sk.mall.entity.Comment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentid != null">
+                id,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="goodsid != null">
+                goodsId,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="commenttime != null">
+                commentTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentid != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="goodsid != null">
+                #{goodsid,jdbcType=INTEGER},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="commenttime != null">
+                #{commenttime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

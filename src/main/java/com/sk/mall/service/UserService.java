@@ -8,7 +8,7 @@ public interface UserService {
 
     User selectByPrimaryKey(int userId);
 
-    List<User> selectAllUser();
+    List<User> selectAllUser(User user);
 
     void insertSelective(User user);
 
