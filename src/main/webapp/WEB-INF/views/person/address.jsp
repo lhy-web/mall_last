@@ -39,7 +39,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/css/bootstrap.min.css">
     <script src="${pageContext.request.contextPath}/css/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/address.js"></script>
+    <script src="${pageContext.request.contextPath}/js/person/address.js"></script>
     <script src="${pageContext.request.contextPath}/js/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sweetalert.css">
     <script src="${pageContext.request.contextPath}/js/distpicker.js"></script>
@@ -91,7 +91,7 @@
                     <div class="form-group">
                         <label for="detailaddress" class="col-sm-2 control-label">详细地址</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="detailaddress" id="detailaddress"/>
+                            <input type="text" class="form-control" name="detailAddress" id="detailaddress"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -174,22 +174,7 @@
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
                 <button class="templatemo-blue-button" name="insertAddr"><h5>添加地址</h5></button>
-                <%-- <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                     <i class="material-icons">search</i>
-                 </label>
-                 <div class="mdl-textfield__expandable-holder">
-                     <input class="mdl-textfield__input" type="text" id="search">
-                     <label class="mdl-textfield__label" for="search">Enter your query...</label>
-                 </div>--%>
             </div>
-            <%-- <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                 <i class="material-icons">more_vert</i>
-             </button>
-             <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                 <li class="mdl-menu__item">About</li>
-                 <li class="mdl-menu__item">Contact</li>
-                 <li class="mdl-menu__item">Legal information</li>
-             </ul>--%>
         </div>
     </header>
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
@@ -228,7 +213,7 @@
             <div class="mdl-grid demo-content" id="parent">
                 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div class="tab-content">
-                        <table class="table" cellpadding="6" cellspacing="1" address-id="${item.addressid}" id="table">
+                        <table class="table" cellpadding="6" cellspacing="1" address-id="${item.id}" id="table">
                             <thead>
                             <th style="border: 0px solid transparent">
                                     <%--<h1>个人信息</h1>--%>
@@ -237,7 +222,7 @@
                             <tbody>
                             <tr>
                                 <th style="border: 0px solid transparent" class="tl">收货人</th>
-                                <td style="border: 0px solid transparent" class="tr" id="conname">${item.conname}</td>
+                                <td style="border: 0px solid transparent" class="tr" id="conname">${item.conName}</td>
                             </tr>
                             <tr>
                                 <th style="border: 0px solid transparent" class="tl">手机号</th>
@@ -258,7 +243,7 @@
                             <tr>
                                 <th style="border: 0px solid transparent" class="tl">详细地址</th>
                                 <td style="border: 0px solid transparent" class="tr"
-                                    id="detailaddr">${item.detailaddr}</td>
+                                    id="detailaddr">${item.detailAddress}</td>
                             </tr>
                             </tbody>
                         </table>

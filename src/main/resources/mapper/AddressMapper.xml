@@ -72,23 +72,19 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, userId, province, city, county, detailAddr, conName, conTel
-  </sql>
-    <select id="selectAllAddress"  resultMap="BaseResultMap">
-select * from address order by userId
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from address
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+        id, userId, province, city, county, detailAddr, conName, conTel
+    </sql>
+
+    <select id="getAllAddressByUserId" resultMap="BaseResultMap">
+        select * from address
+        <where>
+            <if test="userId != null and userId != ''">
+                and userId = #{userId}
+            </if>
+        </where>
+        order by userId
     </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -96,9 +92,10 @@ select * from address order by userId
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from address
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete
+        from address
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <delete id="deleteByExample" parameterType="com.sk.mall.entity.Address">
         delete from address
         <if test="_parameter != null">
@@ -106,20 +103,20 @@ select * from address order by userId
         </if>
     </delete>
     <insert id="insert" parameterType="com.sk.mall.entity.Address">
-    insert into address (id, userId, province,
-      city, county, detailAddr, 
-      conName, conTel)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR},
-      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{detailaddr,jdbcType=VARCHAR}, 
-      #{conname,jdbcType=VARCHAR}, #{contel,jdbcType=VARCHAR})
-  </insert>
+        insert into address (id, userId, province,
+                             city, county, detailAddr,
+                             conName, conTel)
+        values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR},
+                #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{detailaddr,jdbcType=VARCHAR},
+                #{conname,jdbcType=VARCHAR}, #{contel,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Address">
         insert into address
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                addressID,
+                id,
             </if>
-            <if test="userid != null">
+            <if test="userId != null">
                 userId,
             </if>
             <if test="province != null">
@@ -132,7 +129,7 @@ select * from address order by userId
                 county,
             </if>
             <if test="detailAddress != null">
-                detailAddress,
+                detailAddr,
             </if>
             <if test="conName != null">
                 conName,
@@ -145,8 +142,8 @@ select * from address order by userId
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="userid != null">
-                #{userid,jdbcType=INTEGER},
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
             <if test="province != null">
                 #{province,jdbcType=VARCHAR},
@@ -161,7 +158,7 @@ select * from address order by userId
                 #{detailAddress,jdbcType=VARCHAR},
             </if>
             <if test="conName != null">
-                #{conname,jdbcType=VARCHAR},
+                #{conName,jdbcType=VARCHAR},
             </if>
             <if test="contel != null">
                 #{contel,jdbcType=VARCHAR},
@@ -223,8 +220,8 @@ select * from address order by userId
     <update id="updateByPrimaryKeySelective" parameterType="com.sk.mall.entity.Address">
         update address
         <set>
-            <if test="userid != null">
-                userId = #{userid,jdbcType=INTEGER},
+            <if test="userId != null">
+                userId = #{userId,jdbcType=INTEGER},
             </if>
             <if test="province != null">
                 province = #{province,jdbcType=VARCHAR},
@@ -235,11 +232,11 @@ select * from address order by userId
             <if test="county != null">
                 county = #{county,jdbcType=VARCHAR},
             </if>
-            <if test="detailaddr != null">
+            <if test="detailAddress != null">
                 detailAddr = #{detailAddress,jdbcType=VARCHAR},
             </if>
-            <if test="conname != null">
-                conName = #{conname,jdbcType=VARCHAR},
+            <if test="conName != null">
+                conName = #{conName,jdbcType=VARCHAR},
             </if>
             <if test="contel != null">
                 conTel = #{contel,jdbcType=VARCHAR},
@@ -248,14 +245,14 @@ select * from address order by userId
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.Address">
-    update address
-    set userId = #{userid,jdbcType=INTEGER},
-      province = #{province,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      county = #{county,jdbcType=VARCHAR},
-      detailAddr = #{detailaddr,jdbcType=VARCHAR},
-      conName = #{conname,jdbcType=VARCHAR},
-      conTel = #{contel,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update address
+        set userId     = #{userid,jdbcType=INTEGER},
+            province   = #{province,jdbcType=VARCHAR},
+            city       = #{city,jdbcType=VARCHAR},
+            county     = #{county,jdbcType=VARCHAR},
+            detailAddr = #{detailaddr,jdbcType=VARCHAR},
+            conName    = #{conname,jdbcType=VARCHAR},
+            conTel     = #{contel,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

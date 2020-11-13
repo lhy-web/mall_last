@@ -26,8 +26,8 @@ public class ShopCartServiceImpl implements ShopCartService {
     }
 
     @Override
-    public void deleteByKey(ShopCart shopCartKey) {
-        shopCartMapper.deleteByPrimaryKey(shopCartKey);
+    public void deleteByKey(ShopCart shopCart) {
+        shopCartMapper.deleteByPrimaryKey(shopCart);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ShopCartServiceImpl implements ShopCartService {
     }
 
     @Override
-    public ShopCart selectCartByKey(ShopCart shopCartKey) {
-        return shopCartMapper.selectByPrimaryKey(shopCartKey);
+    public ShopCart selectCartByKey(ShopCart shopCart) {
+        return shopCartMapper.selectByPrimaryKey(shopCart);
     }
 
 }

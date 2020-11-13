@@ -70,13 +70,21 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, username, password, regTime, email, telephone
-  </sql>
+        id, username, password, regTime, email, telephone
+    </sql>
     <select id="selectAllUser" resultMap="BaseResultMap">
         select id, username, password, regTime, email, telephone from user
-        <if test="name != null">
-            where username = ${username}
-        </if>
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+        </where>
 
         order by regTime
     </select>
@@ -87,9 +95,10 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <delete id="deleteByExample" parameterType="com.sk.mall.entity.User">
         delete from user
         <if test="_parameter != null">
@@ -97,17 +106,15 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sk.mall.entity.User">
-    insert into user (id, username, password,
-      regTime, email, telephone
-      )
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{regTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}
-      )
-  </insert>
+        insert into user (id, username, password,
+                          regTime, email, telephone)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{regTime,jdbcType=TIMESTAMP}, #{email,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.sk.mall.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userid != null">
+            <if test="id != null">
                 id,
             </if>
             <if test="username != null">
@@ -116,7 +123,7 @@
             <if test="password != null">
                 password,
             </if>
-            <if test="regtime != null">
+            <if test="regTime != null">
                 regTime,
             </if>
             <if test="email != null">
@@ -127,7 +134,7 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userid != null">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
             <if test="username != null">
@@ -136,7 +143,7 @@
             <if test="password != null">
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test="regtime != null">
+            <if test="regTime != null">
                 #{regTime,jdbcType=TIMESTAMP},
             </if>
             <if test="email != null">
@@ -165,7 +172,7 @@
             <if test="record.password != null">
                 password = #{record.password,jdbcType=VARCHAR},
             </if>
-            <if test="record.regtime != null">
+            <if test="record.regTime != null">
                 regTime = #{record.regTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.email != null">
@@ -200,8 +207,8 @@
             <if test="password != null">
                 password = #{password,jdbcType=VARCHAR},
             </if>
-            <if test="regtime != null">
-                regTime = #{regtime,jdbcType=TIMESTAMP},
+            <if test="regTime != null">
+                regTime = #{regTime,jdbcType=TIMESTAMP},
             </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
@@ -213,12 +220,12 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      regTime = #{regTime,jdbcType=TIMESTAMP},
-      email = #{email,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update user
+        set username  = #{username,jdbcType=VARCHAR},
+            password  = #{password,jdbcType=VARCHAR},
+            regTime   = #{regTime,jdbcType=TIMESTAMP},
+            email     = #{email,jdbcType=VARCHAR},
+            telephone = #{telephone,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

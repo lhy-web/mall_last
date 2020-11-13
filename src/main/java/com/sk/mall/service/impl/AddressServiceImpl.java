@@ -12,9 +12,19 @@ import java.util.List;
 @Service("addressService")
 public class AddressServiceImpl implements AddressService {
 
-    @Autowired(required = false)
+    @Autowired
     private AddressMapper addressMapper;
 
+    /**
+     *  根据用户id 查询所有地址
+     *
+     * @param userId 用户id
+     * @return List<Address>
+     */
+    @Override
+    public List<Address> getAllAddressByUserId(Integer userId) {
+        return addressMapper.getAllAddressByUserId(userId);
+    }
 
     @Override
     public void updateByPrimaryKeySelective(Address address) {

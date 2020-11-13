@@ -2,15 +2,14 @@ package com.sk.mall.service.impl;
 
 
 
-import com.sk.mall.entity.Goods;
+
 import com.sk.mall.service.GoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("goodsService")
-public class GoodsServiceImpl  {
+public class GoodsServiceImpl implements GoodsService {
 
 //    @Autowired(required = false)
 //    GoodsMapper goodsMapper;

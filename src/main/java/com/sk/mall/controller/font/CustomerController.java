@@ -42,7 +42,7 @@ public class CustomerController {
     @RequestMapping("/registerresult")
     public String registerResult(User user, Model registerResult) {
         user.setPassword(Md5Util.MD5Encode(user.getPassword(), "utf-8"));
-        List<User> userList = userService.selectAllUser(user.getUsername());
+        List<User> userList = userService.selectAllUser(new User(user.getUsername(), null));
         if (!userList.isEmpty()) {
             registerResult.addAttribute("errorMsg", "用户名被占用");
             return "register";
@@ -65,10 +65,7 @@ public class CustomerController {
             loginResult.addAttribute("errorMsg", "验证码错误");
             return "login";
         }
-        User user1 =
-        UserExample userExample = new UserExample();
-        userExample.or().andUsernameEqualTo(user.getUsername()).andPasswordEqualTo(user.getPassword());
-        List<User> userList = userService.selectByExample(userExample);
+        List<User> userList = userService.selectAllUser(user);
         if (!userList.isEmpty()) {
             session.setAttribute("user", userList.get(0));
             return "redirect:/main";
@@ -111,24 +108,25 @@ public class CustomerController {
     @RequestMapping("/saveInfo")
     @ResponseBody
     public Msg saveInfo(String name, String email, String telephone, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        UserExample userExample = new UserExample();
-        User user, updateUser = new User();
-        Integer userid;
-        user = (User) session.getAttribute("user");
-        userid = user.getId();
-        userExample.or().andUsernameEqualTo(name);
-        List<User> userList = userService.selectByExample(userExample);
-        if (userList.isEmpty()) {
-            updateUser.setId(userid);
-            updateUser.setUsername(name);
-            updateUser.setEmail(email);
-            updateUser.setTelephone(telephone);
-            userService.updateByPrimaryKeySelective(updateUser);
-            return Msg.success("更新成功");
-        } else {
-            return Msg.fail("更新失败");
-        }
+//        HttpSession session = request.getSession();
+//        UserExample userExample = new UserExample();
+//        User user, updateUser = new User();
+//        Integer userid;
+//        user = (User) session.getAttribute("user");
+//        userid = user.getId();
+//        userExample.or().andUsernameEqualTo(name);
+//        List<User> userList = userService.selectByExample(userExample);
+//        if (userList.isEmpty()) {
+//            updateUser.setId(userid);
+//            updateUser.setUsername(name);
+//            updateUser.setEmail(email);
+//            updateUser.setTelephone(telephone);
+//            userService.updateByPrimaryKeySelective(updateUser);
+//            return Msg.success("更新成功");
+//        } else {
+//            return Msg.fail("更新失败");
+//        }
+        return null;
     }
 
     @Autowired
@@ -148,9 +146,7 @@ public class CustomerController {
         if (user == null) {
             return "redirect:/login";
         }
-        AddressExample addressExample = new AddressExample();
-        addressExample.or().andUseridEqualTo(user.getId());
-        List<Address> addressList = addressService.getAllAddressByExample(addressExample);
+        List<Address> addressList = addressService.getAllAddressByUserId(user.getId());
         addressModel.addAttribute("addressList", addressList);
         return "person/address";
     }
@@ -213,32 +209,32 @@ public class CustomerController {
      */
     @RequestMapping("/info/list")
     public String list(HttpServletRequest request, Model orderModel) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        }
-        OrderExample orderExample = new OrderExample();
-        orderExample.or().andUseridEqualTo(user.getId());
-        List<Order> orderList = orderService.selectOrderByExample(orderExample);
-        orderModel.addAttribute("orderList", orderList);
-        List<OrderItem> orderItemList;
-        Address address;
-        for (Order order : orderList) {
-            OrderItemExample orderItemExample = new OrderItemExample();
-            orderItemExample.or().andOrderidEqualTo(order.getOrderid());
-            orderItemList = orderService.getOrderItemByExample(orderItemExample);
-            List<Integer> goodsIdList = new ArrayList<>();
-            for (OrderItem item : orderItemList) {
-                goodsIdList.add(item.getGoodsid());
-            }
-            GoodsExample goodsExample = new GoodsExample();
-            goodsExample.or().andGoodsidIn(goodsIdList);
-
-            address = addressService.selectByPrimaryKey(order.getAddressid());
-            order.setAddress(address);
-        }
-        orderModel.addAttribute("orderList", orderList);
+//        HttpSession session = request.getSession();
+//        User user = (User) session.getAttribute("user");
+//        if (user == null) {
+//            return "redirect:/login";
+//        }
+//        OrderExample orderExample = new OrderExample();
+//        orderExample.or().andUseridEqualTo(user.getId());
+//        List<Order> orderList = orderService.selectOrderByExample(orderExample);
+//        orderModel.addAttribute("orderList", orderList);
+//        List<OrderItem> orderItemList;
+//        Address address;
+//        for (Order order : orderList) {
+//            OrderItemExample orderItemExample = new OrderItemExample();
+//            orderItemExample.or().andOrderidEqualTo(order.getOrderid());
+//            orderItemList = orderService.getOrderItemByExample(orderItemExample);
+//            List<Integer> goodsIdList = new ArrayList<>();
+//            for (OrderItem item : orderItemList) {
+//                goodsIdList.add(item.getGoodsid());
+//            }
+//            GoodsExample goodsExample = new GoodsExample();
+//            goodsExample.or().andGoodsidIn(goodsIdList);
+//
+//            address = addressService.selectByPrimaryKey(order.getAddressid());
+//            order.setAddress(address);
+//        }
+//        orderModel.addAttribute("orderList", orderList);
         return "/person/list";
     }
 
@@ -246,7 +242,7 @@ public class CustomerController {
     @RequestMapping("/deleteList")
     @ResponseBody
     public Msg deleteList(Order order) {
-        orderService.deleteById(order.getOrderid());
+//        orderService.deleteById(order.getOrderid());
         return Msg.success("删除成功");
     }
 
@@ -265,39 +261,39 @@ public class CustomerController {
         if (user == null) {
             return "redirect:/login";
         }
+//
+//        //一页显示几个数据
+//        PageHelper.startPage(pn, 16);
+//
+//        FavoriteExample favoriteExample = new FavoriteExample();
+//        favoriteExample.or().andUseridEqualTo(user.getId());
+//        List<Favorite> favoriteList = goodsService.selectFavByExample(favoriteExample);
+//
+//        List<Integer> goodsIdList = new ArrayList<>();
+//        for (Favorite tmp : favoriteList) {
+//            goodsIdList.add(tmp.getGoodsId());
+//        }
+//
+//        GoodsExample goodsExample = new GoodsExample();
+//        List<Goods> goodsList = new ArrayList<>();
+//        if (!goodsIdList.isEmpty()) {
+//            goodsExample.or().andGoodsidIn(goodsIdList);
+//            goodsList = goodsService.selectByExample(goodsExample);
+//        }
+//
+//        //获取图片地址
+//        for (int i = 0; i < goodsList.size(); i++) {
+//            Goods goods = goodsList.get(i);
+//            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getId());
+//            goods.setImagePaths(imagePathList);
+//            //判断是否收藏
+//            goods.setFav(true);
+//            goodsList.set(i, goods);
+//        }
 
-        //一页显示几个数据
-        PageHelper.startPage(pn, 16);
-
-        FavoriteExample favoriteExample = new FavoriteExample();
-        favoriteExample.or().andUseridEqualTo(user.getId());
-        List<Favorite> favoriteList = goodsService.selectFavByExample(favoriteExample);
-
-        List<Integer> goodsIdList = new ArrayList<>();
-        for (Favorite tmp : favoriteList) {
-            goodsIdList.add(tmp.getGoodsId());
-        }
-
-        GoodsExample goodsExample = new GoodsExample();
-        List<Goods> goodsList = new ArrayList<>();
-        if (!goodsIdList.isEmpty()) {
-            goodsExample.or().andGoodsidIn(goodsIdList);
-            goodsList = goodsService.selectByExample(goodsExample);
-        }
-
-        //获取图片地址
-        for (int i = 0; i < goodsList.size(); i++) {
-            Goods goods = goodsList.get(i);
-            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getId());
-            goods.setImagePaths(imagePathList);
-            //判断是否收藏
-            goods.setFav(true);
-            goodsList.set(i, goods);
-        }
-
-        //显示几个页号
-        PageInfo page = new PageInfo(goodsList, 5);
-        model.addAttribute("pageInfo", page);
+//        //显示几个页号
+//        PageInfo page = new PageInfo(goodsList, 5);
+//        model.addAttribute("pageInfo", page);
         return "favorite";
     }
 
@@ -314,10 +310,10 @@ public class CustomerController {
     @RequestMapping("/finishList")
     @ResponseBody
     public Msg finishiList(Integer orderid) {
-        Order order = orderService.selectByPrimaryKey(orderid);
-        order.setIsreceive(true);
-        order.setIscomplete(true);
-        orderService.updateOrderByKey(order);
+//        Order order = orderService.selectByPrimaryKey(orderid);
+//        order.setIsreceive(true);
+//        order.setIscomplete(true);
+//        orderService.updateOrderByKey(order);
         return Msg.success("完成订单成功");
     }
 

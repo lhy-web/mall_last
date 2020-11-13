@@ -38,12 +38,13 @@ public class UserController {
     @RequestMapping("/showjson")
     @ResponseBody
     public Msg getAllGoods(@RequestParam(value = "page", defaultValue = "1") Integer pn) {
-        //一页显示几个数据
-        PageHelper.startPage(pn, 10);
-        List<User> userList = userService.selectAllUser();
-        //显示几个页号
-        PageInfo<User> page = new PageInfo<>(userList, 5);
-        return Msg.success("查询成功!").add("pageInfo", page);
+//        //一页显示几个数据
+//        PageHelper.startPage(pn, 10);
+//        List<User> userList = userService.selectAllUser();
+//        //显示几个页号
+//        PageInfo<User> page = new PageInfo<>(userList, 5);
+//        return Msg.success("查询成功!").add("pageInfo", page);
+        return Msg.success("查询成功!");
     }
 
 

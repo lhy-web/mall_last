@@ -23,7 +23,7 @@
         and goodsid = #{goodsid,jdbcType=INTEGER}
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.ShopCartKey">
+    <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.ShopCart">
     delete from shopcart
     where userId = #{userid,jdbcType=INTEGER}
       and goodsid = #{goodsid,jdbcType=INTEGER}

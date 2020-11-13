@@ -3,8 +3,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
 <div class="row">
     <div class="col-md-4" role="navigation">
-        <!-- <h1 style="font-size: 20px;margin-top: 9px">东大咸鱼</h1> -->
-
         <ul class="nav nav-pills">
             <c:if test="${empty sessionScope.user}">
                 <li><a href="${pageContext.request.contextPath}/login" style="color: #F22E00">请登录</a></li>
@@ -63,17 +61,19 @@
                  id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a class="a-color" href="${pageContext.request.contextPath}/main">首页</a></li>
-                    <li><a class="a-color" href="${pageContext.request.contextPath}/information">个人信息</a></li>
-                    <li class="dropdown"><a class="a-color" href="${pageContext.request.contextPath}/info/list"
-                                            class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">我的订单 <span
-                            class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="${pageContext.request.contextPath}/info/address">地址管理</a></li>
-                            <li><a href="${pageContext.request.contextPath}/order">交易中</a></li>
-                            <li role="separator" class="divider"></li>
-                        </ul>
-                    </li>
+                    <c:if test="${!empty sessionScope.user}">
+                        <li><a class="a-color" href="${pageContext.request.contextPath}/information">个人信息</a></li>
+                        <li class="dropdown"><a class="a-color" href="${pageContext.request.contextPath}/info/list"
+                                                class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                aria-haspopup="true" aria-expanded="false">我的订单 <span
+                                class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="${pageContext.request.contextPath}/info/address">地址管理</a></li>
+                                <li><a href="${pageContext.request.contextPath}/order">交易中</a></li>
+                                <li role="separator" class="divider"></li>
+                            </ul>
+                        </li>
+                    </c:if>
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search" method="get"
@@ -86,8 +86,6 @@
                     </button>
                 </form>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 </div>

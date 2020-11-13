@@ -5,8 +5,17 @@ import com.sk.mall.entity.Address;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 public interface AddressService {
-//     List<Address> getAllAddressByExample(AddressExample addressExample);
+     /**
+      *  根据用户id 查询所有地址
+      *
+      * @param userId 用户id
+      * @return List<Address>
+      */
+     List<Address> getAllAddressByUserId(Integer userId);
 
      void updateByPrimaryKeySelective(Address address);
 

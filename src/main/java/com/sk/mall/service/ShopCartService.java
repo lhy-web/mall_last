@@ -9,7 +9,7 @@ public interface ShopCartService {
 
     List<ShopCart> selectByExample(String userId);
 
-    void deleteByKey(ShopCart shopCartKey);
+    void deleteByKey(ShopCart shopCart);
 
     void updateCartByKey(ShopCart shopCart);
 

@@ -16,28 +16,6 @@
     <script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/login.js"></script>
 </head>
-<%--<script>
-
-	$(document).ready(function() {
-
-		
-		$(document).keypress(function(e) {
-			if (e.which == 13) {
-				e.preventDefault();
-				
-				$(".login-input").click();
-				//form.submit();
-			}
-		});
-		input_value();
-	})
-	
-	function input_value() {
-		if (UserID != "null") {
-			document.getElementById("inputEmail3").value = UserID;
-		}
-	}
-</script>--%>
 
 <script type="text/javascript">
     function reloadcode() {
@@ -50,7 +28,7 @@
 <body onload="input_value()">
 <div id="main" class="container">
     <div id="header">
-        <%@ include file="header.jsp" %>
+        <%@ include file="header.jsp"%>
     </div>
     <div class="login">
         <div class="row">

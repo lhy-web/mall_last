@@ -6,7 +6,7 @@ import com.sk.mall.entity.Goods;
 import java.util.List;
 
 public interface GoodsService {
-    Integer addGoods(Goods goods);
+//    Integer addGoods(Goods goods);
 
 //    void addImagePath(ImagePath imagePath);
 //

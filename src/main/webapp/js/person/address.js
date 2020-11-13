@@ -15,12 +15,12 @@ $(document).ready(function () {
 
     $("#saveAddr").click(function () {
         var saveAddr = {};
-        saveAddr.addressid = addresId;
+        saveAddr.id = addresId;
         saveAddr.province = $("#provinceUpdate").val();
         saveAddr.city = $("#cityUpdate").val();
         saveAddr.county = $("#countyUpdate").val();
-        saveAddr.detailaddr = $("#detailaddress").val();
-        saveAddr.conname = $("#name").val();
+        saveAddr.detailAddress = $("#detailaddress").val();
+        saveAddr.conName = $("#name").val();
         saveAddr.contel = $("#telephone").val();
 
         $.ajax({
@@ -49,7 +49,7 @@ $(document).ready(function () {
     $("[name='deleteAddr']").click(function () {
         addresId = $(this).parents("#parent").find("#table").attr("address-id");
         var address = {};
-        address.addressid = addresId;
+        address.id = addresId;
         $.ajax({
             type: "POST",
             url: "/shop/deleteAddr",
@@ -76,13 +76,13 @@ $(document).ready(function () {
 
     $("#insertAddr").click(function () {
         var insertAddr = {};
-        insertAddr.addressid = {};
-        insertAddr.userid = {};
+        insertAddr.id = null;
+        insertAddr.userid = null;
         insertAddr.province = $("#provinceInsert").val();
         insertAddr.city = $("#cityInsert").val();
         insertAddr.county = $("#countyInsert").val();
-        insertAddr.detailaddr = $("#detailaddressInsert").val();
-        insertAddr.conname = $("#nameInsert").val();
+        insertAddr.detailAddress = $("#detailaddressInsert").val();
+        insertAddr.conName = $("#nameInsert").val();
         insertAddr.contel = $("#telephoneInsert").val();
         $.ajax({
             type: "POST",
@@ -97,7 +97,7 @@ $(document).ready(function () {
                 });
             },
             error: function () {
-                alert("添加失败");
+                alert("添加失败,请完善信息");
             }
         });
 

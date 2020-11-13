@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    List<User> selectAllUser();
+    List<User> selectAllUser(User user);
 
     User selectByPrimaryKey(Integer userid);
 
