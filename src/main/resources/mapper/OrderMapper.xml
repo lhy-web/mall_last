@@ -99,8 +99,9 @@
     <select id="getAllOrderByUserId" resultMap="orderResult">
         select o.* from indent o , address a where o.addressId = a.id and  o.userId = #{userId}
     </select>
-    <select id="getAllByState" resultMap="orderResult">
-        select o.* from indent o , address a where o.addressId = a.id
+
+    <select id="getAllByState" resultMap="orderIncludeAddress">
+        select o.* ,a.*from indent o , address a where o.addressId = a.id
         <if test="isSend !=null and !isSend">
             and isSend = 0
         </if>

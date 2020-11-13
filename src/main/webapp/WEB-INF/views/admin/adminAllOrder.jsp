@@ -55,7 +55,7 @@
                 <div class="templatemo-flex-row flex-content-row">
                     <div class="col-1">
                         <div class="panel panel-default margin-10">
-                            <div class="panel-heading"><h2>${orderInfo.address.conname}</h2></div>
+                            <div class="panel-heading"><h2>${orderInfo.address.conName}</h2></div>
                             <div class="panel-body">
                                 <div>
                                     <div class="order-info margin-bottom-10">
@@ -91,7 +91,7 @@
                                                     <td>￥${orderInfo.oldPrice}</td>
                                                     <td>￥${orderInfo.newPrice}</td>
                                                     <td>${orderInfo.address.conName}</td>
-                                                    <td>${orderInfo.address.province} ${orderInfo.address.city} ${orderInfo.address.county} ${orderInfo.address.detailAddrress}</td>
+                                                    <td>${orderInfo.address.province} ${orderInfo.address.city} ${orderInfo.address.county} ${orderInfo.address.detailAddress}</td>
                                                     <td>${orderInfo.address.contel}</td>
                                                     <td>${orderInfo.orderTime}</td>
                                                 </tr>

@@ -55,7 +55,7 @@
                 <div class="templatemo-flex-row flex-content-row">
                     <div class="col-1">
                         <div class="panel panel-default margin-10">
-                            <div class="panel-heading"><h2>${orderInfo.address.coNname}</h2></div>
+                            <div class="panel-heading"><h2>${orderInfo.address.conName}</h2></div>
                             <div class="panel-body">
                                 <div>
                                     <div class="order-info margin-bottom-10">
