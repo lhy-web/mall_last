@@ -10,6 +10,7 @@ import com.sk.mall.service.OrderService;
 import com.sk.mall.service.UserService;
 import com.sk.mall.util.Md5Util;
 import com.sk.mall.util.Msg;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,34 +100,33 @@ public class CustomerController {
     /**
      * 修改个人信息
      *
-     * @param name
-     * @param email
-     * @param telephone
-     * @param request
-     * @return
+     * @param username 用户名
+     * @param email 邮箱
+     * @param telephone 手机号
+     * @param request 用来获取session
+     * @return Msg
      */
     @RequestMapping("/saveInfo")
     @ResponseBody
-    public Msg saveInfo(String name, String email, String telephone, HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        UserExample userExample = new UserExample();
-//        User user, updateUser = new User();
-//        Integer userid;
-//        user = (User) session.getAttribute("user");
-//        userid = user.getId();
-//        userExample.or().andUsernameEqualTo(name);
-//        List<User> userList = userService.selectByExample(userExample);
-//        if (userList.isEmpty()) {
-//            updateUser.setId(userid);
-//            updateUser.setUsername(name);
-//            updateUser.setEmail(email);
-//            updateUser.setTelephone(telephone);
-//            userService.updateByPrimaryKeySelective(updateUser);
-//            return Msg.success("更新成功");
-//        } else {
-//            return Msg.fail("更新失败");
-//        }
-        return null;
+    public Msg saveInfo(String username, String email, String telephone, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user, updateUser = new User();
+        user = (User) session.getAttribute("user");
+        if (user == null){
+            return Msg.fail("请重新登录");
+        }
+        Integer userId = user.getId();
+        List<User> userList = userService.selectAllUser(new User(username, null));
+        if (userList.isEmpty()) {
+            updateUser.setId(userId);
+            updateUser.setUsername(username);
+            updateUser.setEmail(email);
+            updateUser.setTelephone(telephone);
+            userService.updateByPrimaryKeySelective(updateUser);
+            return Msg.success("更新成功");
+        } else {
+            return Msg.fail("更新失败");
+        }
     }
 
     @Autowired
@@ -209,32 +209,13 @@ public class CustomerController {
      */
     @RequestMapping("/info/list")
     public String list(HttpServletRequest request, Model orderModel) {
-//        HttpSession session = request.getSession();
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            return "redirect:/login";
-//        }
-//        OrderExample orderExample = new OrderExample();
-//        orderExample.or().andUseridEqualTo(user.getId());
-//        List<Order> orderList = orderService.selectOrderByExample(orderExample);
-//        orderModel.addAttribute("orderList", orderList);
-//        List<OrderItem> orderItemList;
-//        Address address;
-//        for (Order order : orderList) {
-//            OrderItemExample orderItemExample = new OrderItemExample();
-//            orderItemExample.or().andOrderidEqualTo(order.getOrderid());
-//            orderItemList = orderService.getOrderItemByExample(orderItemExample);
-//            List<Integer> goodsIdList = new ArrayList<>();
-//            for (OrderItem item : orderItemList) {
-//                goodsIdList.add(item.getGoodsid());
-//            }
-//            GoodsExample goodsExample = new GoodsExample();
-//            goodsExample.or().andGoodsidIn(goodsIdList);
-//
-//            address = addressService.selectByPrimaryKey(order.getAddressid());
-//            order.setAddress(address);
-//        }
-//        orderModel.addAttribute("orderList", orderList);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        List<Order> orderList = orderService.getAllByUserId(user.getId());
+        orderModel.addAttribute("orderList", orderList);
         return "/person/list";
     }
 
@@ -242,67 +223,38 @@ public class CustomerController {
     @RequestMapping("/deleteList")
     @ResponseBody
     public Msg deleteList(Order order) {
-//        orderService.deleteById(order.getOrderid());
+        orderService.deleteById(order.getId());
         return Msg.success("删除成功");
     }
 
-    /**
-     * 收藏商品
-     *
-     * @param pn
-     * @param request
-     * @param model
-     * @return
-     */
+
     @RequestMapping("/info/favorite")
+    @ApiOperation(value = "获取收藏商品", notes = "获取收藏商品")
     public String showFavorite(@RequestParam(value = "page", defaultValue = "1") Integer pn, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
-//
-//        //一页显示几个数据
-//        PageHelper.startPage(pn, 16);
-//
-//        FavoriteExample favoriteExample = new FavoriteExample();
-//        favoriteExample.or().andUseridEqualTo(user.getId());
-//        List<Favorite> favoriteList = goodsService.selectFavByExample(favoriteExample);
-//
-//        List<Integer> goodsIdList = new ArrayList<>();
-//        for (Favorite tmp : favoriteList) {
-//            goodsIdList.add(tmp.getGoodsId());
-//        }
-//
-//        GoodsExample goodsExample = new GoodsExample();
-//        List<Goods> goodsList = new ArrayList<>();
-//        if (!goodsIdList.isEmpty()) {
-//            goodsExample.or().andGoodsidIn(goodsIdList);
-//            goodsList = goodsService.selectByExample(goodsExample);
-//        }
-//
-//        //获取图片地址
-//        for (int i = 0; i < goodsList.size(); i++) {
-//            Goods goods = goodsList.get(i);
-//            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getId());
-//            goods.setImagePaths(imagePathList);
-//            //判断是否收藏
-//            goods.setFav(true);
-//            goodsList.set(i, goods);
-//        }
-
-//        //显示几个页号
-//        PageInfo page = new PageInfo(goodsList, 5);
-//        model.addAttribute("pageInfo", page);
-        return "favorite";
+        //一页显示几个数据
+        PageHelper.startPage(pn, 10);
+        List<Goods> goodsList = goodsService.selectFavByUserId(user.getId());
+        for (Goods goods : goodsList) {
+            //判断是否收藏
+            goods.setFav(true);
+        }
+        //显示几个页号
+        PageInfo<Goods> page = new PageInfo<>(goodsList, 5);
+        model.addAttribute("pageInfo", page);
+        return "person/favorite";
     }
 
-    @RequestMapping("/savePsw")
+    @RequestMapping("/updatePassword")
     @ResponseBody
-    public Msg savePsw(String Psw, HttpServletRequest request) {
+    public Msg savePsw(String password, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        user.setPassword(Md5Util.MD5Encode(Psw, "UTF-8"));
+        user.setPassword(Md5Util.MD5Encode(password, "UTF-8"));
         userService.updateByPrimaryKeySelective(user);
         return Msg.success("修改密码成功");
     }

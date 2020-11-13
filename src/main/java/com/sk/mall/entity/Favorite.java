@@ -10,6 +10,14 @@ public class Favorite {
 
     private Date collectTime;
 
+    public Favorite() {
+    }
+
+    public Favorite(Integer userId, Integer goodsId) {
+        this.userId = userId;
+        this.goodsId = goodsId;
+    }
+
     public Integer getUserId() {
         return userId;
     }

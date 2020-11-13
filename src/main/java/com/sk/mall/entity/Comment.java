@@ -15,7 +15,6 @@ public class Comment {
 
     private Date commentTime;
 
-    private String username;
 
     public Integer getId() {
         return id;
@@ -65,13 +64,6 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Override
     public String toString() {
@@ -82,7 +74,6 @@ public class Comment {
                 ", point=" + point +
                 ", content='" + content + '\'' +
                 ", commentTime=" + commentTime +
-                ", username='" + username + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.sk.mall.service.impl;
 
-
 import com.sk.mall.dao.CommentMapper;
 import com.sk.mall.entity.Comment;
 import com.sk.mall.service.CommentService;
@@ -9,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Service("commentService")
 public class CommentServiceImpl implements CommentService {
 
-    @Autowired(required = false)
+    @Autowired
     private CommentMapper commentMapper;
 
     @Override

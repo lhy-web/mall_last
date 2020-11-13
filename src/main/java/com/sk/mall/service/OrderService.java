@@ -1,16 +1,23 @@
 package com.sk.mall.service;
 
-
 import com.sk.mall.entity.Order;
-import com.sk.mall.entity.OrderItem;
-
 import java.util.List;
 
 
+/**
+ * @author qiaochx
+ */
 public interface OrderService {
 //     void insertOrder(Order order);
-//
-//     void deleteById(Integer orderid);
+
+     /**
+      * 删除订单
+      *
+      * @param orderId 订单id
+      */
+     void deleteById(Integer orderId);
+
+     List<Order> getAllByState(Order order);
 //
 //
 //     List<Order> selectOrderByExample(OrderExample orderExample);
@@ -21,9 +28,17 @@ public interface OrderService {
 //
 //     Address getAddressByKey(Integer addressid);
 //
-//     void updateOrderByKey(Order order);
+     void updateOrderByKey(Order order);
 //
 //     Order selectByPrimaryKey(Integer orderid);
 //
 //    void insertOrderItem(OrderItem orderItem);
+
+     /**
+      * 根据用户id查找订单
+      *
+      * @param userId 用户id
+      * @return 订单列表
+      */
+     List<Order> getAllByUserId(int userId);
 }

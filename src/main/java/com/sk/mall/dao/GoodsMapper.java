@@ -37,4 +37,13 @@ public interface GoodsMapper {
 //    int updateByPrimaryKey(Goods record);
 //
 //    List<Goods> selectByExampleWithBLOBsLimit(GoodsExample digGoodsExample);
+//
+
+    /**
+     * 根据用户id来查找喜欢的商品
+     *
+     * @param userId 用户id
+     * @return List<Goods>
+     */
+    List<Goods> selectFavByUserId(Integer userId);
 }

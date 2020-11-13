@@ -13,6 +13,12 @@ public interface FavoriteMapper {
 
     int insertSelective(Favorite record);
 
+    /**
+     * 查询某个人所有的收藏
+     *
+     * @param userId 用户id
+     * @return List<Favorite>
+     */
     List<Favorite> getAllFavorite(String userId);
 
     Favorite selectByPrimaryKey(Favorite key);

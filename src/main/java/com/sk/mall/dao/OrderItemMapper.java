@@ -30,4 +30,12 @@ public interface OrderItemMapper {
     int updateByPrimaryKeySelective(OrderItem record);
 
     int updateByPrimaryKey(OrderItem record);
+
+    /**
+     * 根据订单id获取订单商品
+     *
+     * @param orderId order
+     * @return List<OrderItem>
+     */
+    List<OrderItem> getOrderItemByOrderId(int orderId);
 }

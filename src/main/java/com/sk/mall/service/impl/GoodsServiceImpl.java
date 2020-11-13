@@ -1,9 +1,12 @@
 package com.sk.mall.service.impl;
 
 
-
-
+import com.sk.mall.dao.FavoriteMapper;
+import com.sk.mall.dao.GoodsMapper;
+import com.sk.mall.entity.Favorite;
+import com.sk.mall.entity.Goods;
 import com.sk.mall.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,15 +14,23 @@ import java.util.List;
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 
-//    @Autowired(required = false)
-//    GoodsMapper goodsMapper;
-//
+
+    @Autowired
+    GoodsMapper goodsMapper;
+
+    @Override
+    public List<Goods> selectFavByUserId(Integer userId) {
+        return goodsMapper.selectFavByUserId(userId);
+    }
+
+    //
 //    @Autowired(required = false)
 //    ImagePathMapper imagePathMapper;
 //
-//    @Autowired(required = false)
-//    FavoriteMapper favoriteMapper;
-//
+    @Autowired(required = false)
+    FavoriteMapper favoriteMapper;
+
+    //
 //    @Override
 //    public Integer addGoods(Goods goods) {
 //        goodsMapper.insertSelective(goods);
@@ -64,20 +75,22 @@ public class GoodsServiceImpl implements GoodsService {
 //        return goodsMapper.selectByExampleWithBLOBsLimit(digGoodsExample);
 //    }
 //
-//    @Override
-//    public void addFavorite(Favorite favorite) {
-//        favoriteMapper.insertSelective(favorite);
-//    }
+
+    @Override
+    public void addFavorite(Favorite favorite) {
+        favoriteMapper.insertSelective(favorite);
+    }
 //
 //    @Override
 //    public Favorite selectFavByKey(FavoriteKey favoriteKey) {
 //        return favoriteMapper.selectByPrimaryKey(favoriteKey);
 //    }
 //
-//    @Override
-//    public void deleteFavByKey(FavoriteKey favoriteKey) {
-//        favoriteMapper.deleteByPrimaryKey(favoriteKey);
-//    }
+
+    @Override
+    public void deleteFavByKey(Favorite favoriteKey) {
+        favoriteMapper.deleteByPrimaryKey(favoriteKey);
+    }
 //
 //    @Override
 //    public List<Favorite> selectFavByExample(FavoriteExample favoriteExample) {

@@ -17,7 +17,7 @@ public class Order {
 
     private Boolean isPay;
 
-    private Boolean issEnd;
+    private Boolean isSend;
 
     private Boolean isReceive;
 
@@ -27,23 +27,7 @@ public class Order {
 
     private List<OrderItem> orderItems;
 
-
-    public Order() {
-    }
-
-    public Order(Integer id, Integer userId, Date orderTime, Float oldPrice, Float newPrice, Boolean isPay, Boolean issEnd, Boolean isReceive, Boolean isComplete, Integer addressId, List<OrderItem> orderItems) {
-        this.id = id;
-        this.userId = userId;
-        this.orderTime = orderTime;
-        this.oldPrice = oldPrice;
-        this.newPrice = newPrice;
-        this.isPay = isPay;
-        this.issEnd = issEnd;
-        this.isReceive = isReceive;
-        this.isComplete = isComplete;
-        this.addressId = addressId;
-        this.orderItems = orderItems;
-    }
+    private Address address;
 
     public Integer getId() {
         return id;
@@ -93,27 +77,27 @@ public class Order {
         isPay = pay;
     }
 
-    public Boolean getIssEnd() {
-        return issEnd;
+    public Boolean getIsSend() {
+        return isSend;
     }
 
-    public void setIssEnd(Boolean issEnd) {
-        this.issEnd = issEnd;
+    public void setIsSend(Boolean send) {
+        isSend = send;
     }
 
-    public Boolean getReceive() {
+    public Boolean getIsReceive() {
         return isReceive;
     }
 
-    public void setReceive(Boolean receive) {
+    public void setIsReceive(Boolean receive) {
         isReceive = receive;
     }
 
-    public Boolean getComplete() {
+    public Boolean getIsComplete() {
         return isComplete;
     }
 
-    public void setComplete(Boolean complete) {
+    public void setIsComplete(Boolean complete) {
         isComplete = complete;
     }
 
@@ -133,20 +117,13 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", orderTime=" + orderTime +
-                ", oldPrice=" + oldPrice +
-                ", newPrice=" + newPrice +
-                ", isPay=" + isPay +
-                ", issEnd=" + issEnd +
-                ", isReceive=" + isReceive +
-                ", isComplete=" + isComplete +
-                ", addressId=" + addressId +
-                ", orderItems=" + orderItems +
-                '}';
+    public Address getAddress() {
+        return address;
     }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+
 }

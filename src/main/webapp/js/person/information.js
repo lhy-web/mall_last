@@ -26,7 +26,10 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.msg == "更新失败") {
                     swal(result.msg);
-                } else {
+                } else if(result.msg === "请重新登录"){
+                    swal(result.msg);
+                    window.location.href="/shop/login";
+                }else {
                     $("#update-info").modal('hide');
                     swal("修改成功", "", "success");
                     $("button").click(function () {
@@ -75,10 +78,10 @@ $(document).ready(function () {
     $("#savePsw").click(function () {
         if (oldPswflag == 1 && newPswflag == 1) {
             var Psw = {};
-            Psw.Psw = $("#newPsw").val();
+            Psw.password = $("#newPsw").val();
             $.ajax({
                 type: "POST",
-                url: "/shop/savePsw",
+                url: "/shop/updatePassword",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: Psw,
                 dateType: "json",

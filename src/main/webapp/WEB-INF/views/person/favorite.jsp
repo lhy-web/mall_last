@@ -114,22 +114,8 @@
             <span class="mdl-layout-title">我的收藏</span>
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                <%-- <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-                     <i class="material-icons">search</i>
-                 </label>
-                 <div class="mdl-textfield__expandable-holder">
-                     <input class="mdl-textfield__input" type="text" id="search">
-                     <label class="mdl-textfield__label" for="search">Enter your query...</label>
-                 </div>--%>
+
             </div>
-            <%-- <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-                 <i class="material-icons">more_vert</i>
-             </button>
-             <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-                 <li class="mdl-menu__item">About</li>
-                 <li class="mdl-menu__item">Contact</li>
-                 <li class="mdl-menu__item">Legal information</li>
-             </ul>--%>
         </div>
     </header>
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
@@ -164,13 +150,13 @@
                                 <c:forEach items="${pageInfo.list}" var="goods">
                                     <li class="data-item-li">
                                         <div class="to-big">
-                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.goodsid}">
+                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">
                                                 <img src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
                                                      width="240px" height="240px" alt=""/>
                                             </a>
                                         </div>
                                         <p class="text-right">
-                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.goodsid}">${goods.goodsname}</a>
+                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">${goods.goodsName}</a>
                                         </p>
                                         <div class="text-right">
                                             <b>￥${goods.price}</b>
@@ -179,11 +165,10 @@
                                             <c:if test="${goods.fav}">
                                                 <button
                                                         class="like-button glyphicon glyphicon-trash btn btn-default"
-                                                        data-id="${goods.goodsid}"
+                                                        data-id="${goods.id}"
                                                         style="display: none;"></button>
                                             </c:if>
 
-                                            <!-- <button class="like-button1 glyphicon glyphicon-heart-empty btn btn-default "></button> -->
                                         </div>
                                     </li>
                                 </c:forEach>

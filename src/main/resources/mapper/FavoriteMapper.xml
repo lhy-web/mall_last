@@ -13,7 +13,7 @@
     <select id="getAllFavorite" parameterType="com.sk.mall.entity.Favorite" resultMap="BaseResultMap">
         select userId, goodsId, collectTime
         from collection
-        where userId = ${userId}
+        where userId = ${id}
     </select>
     <select id="selectByPrimaryKey" parameterType="com.sk.mall.entity.Favorite" resultMap="BaseResultMap">
         select

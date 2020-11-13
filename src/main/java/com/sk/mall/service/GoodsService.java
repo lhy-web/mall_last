@@ -1,6 +1,7 @@
 package com.sk.mall.service;
 
 
+import com.sk.mall.entity.Favorite;
 import com.sk.mall.entity.Goods;
 
 import java.util.List;
@@ -21,12 +22,30 @@ public interface GoodsService {
 //    Goods selectById(Integer goodsid);
 //
 //    List<Goods> selectByExampleLimit(GoodsExample digGoodsExample);
-//
-//    void addFavorite(Favorite favorite);
+
+    /**
+     * 收藏商品
+     *
+     * @param favorite 商品
+     */
+    void addFavorite(Favorite favorite);
 //
 //    Favorite selectFavByKey(FavoriteKey favoriteKey);
 //
-//    void deleteFavByKey(FavoriteKey favoriteKey);
-//
-//    List<Favorite> selectFavByExample(FavoriteExample favoriteExample);
+
+    /**
+     * 根据用户id、商品id删除收藏信息
+     *
+     * @param favorite 收藏信息
+     */
+    void deleteFavByKey(Favorite favorite);
+
+
+    /**
+     * 查找个人喜欢的商品
+     *
+     * @param userId 用户id
+     * @return List<Goods>
+     */
+    List<Goods> selectFavByUserId(Integer userId);
 }

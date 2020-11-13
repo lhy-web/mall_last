@@ -20,6 +20,14 @@ public class OrderItem {
         this.id = id;
     }
 
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     public Goods getGoods() {
         return goods;
     }
@@ -34,5 +42,15 @@ public class OrderItem {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", goods=" + goods +
+                ", num=" + num +
+                '}';
     }
 }

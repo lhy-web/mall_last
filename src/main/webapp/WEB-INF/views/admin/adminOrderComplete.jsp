@@ -55,7 +55,7 @@
                 <div class="templatemo-flex-row flex-content-row">
                     <div class="col-1">
                         <div class="panel panel-default margin-10">
-                            <div class="panel-heading"><h2>${orderInfo.address.conname}</h2></div>
+                            <div class="panel-heading"><h2>${orderInfo.address.conName}</h2></div>
                             <div class="panel-body">
                                 <div>
                                     <div class="order-info margin-bottom-10">
@@ -86,14 +86,14 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td>${orderInfo.orderid}</td>
-                                                    <td>${orderInfo.userid}</td>
-                                                    <td>￥${orderInfo.oldprice}</td>
-                                                    <td>￥${orderInfo.newprice}</td>
-                                                    <td>${orderInfo.address.conname}</td>
-                                                    <td>${orderInfo.address.province} ${orderInfo.address.city} ${orderInfo.address.county} ${orderInfo.address.detailaddr}</td>
+                                                    <td>${orderInfo.id}</td>
+                                                    <td>${orderInfo.userId}</td>
+                                                    <td>￥${orderInfo.oldPrice}</td>
+                                                    <td>￥${orderInfo.newPrice}</td>
+                                                    <td>${orderInfo.address.conName}</td>
+                                                    <td>${orderInfo.address.province} ${orderInfo.address.city} ${orderInfo.address.county} ${orderInfo.address.detailAddress}</td>
                                                     <td>${orderInfo.address.contel}</td>
-                                                    <td>${orderInfo.ordertime}</td>
+                                                    <td>${orderInfo.orderTime}</td>
                                                 </tr>
 
                                                 </tbody>
@@ -123,15 +123,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach items="${orderInfo.goodsInfo}" var="goods">
+                                                <c:forEach items="${orderInfo.orderItems}" var="orderItem">
                                                     <tr>
-                                                        <td>${goods.goodsid}</td>
-                                                        <td>${goods.goodsname}</td>
-                                                        <td>￥${goods.price}</td>
-                                                        <td>${goods.num}</td>
+                                                        <td>${orderItem.goods.id}</td>
+                                                        <td>${orderItem.goods.goodsName}</td>
+                                                        <td>￥${orderItem.goods.price}</td>
+                                                        <td>${orderItem.num}</td>
                                                             <%--<td>234&lt;%&ndash;${goods.detailcate}&ndash;%&gt;</td>--%>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.goodsid}"
+                                                            <a href="${pageContext.request.contextPath}/detail?goodsid=${orderItem.goods.id}"
                                                                class="templatemo-link">详情</a></td>
                                                             <%--<td>
                                                                 <button href="" class="templatemo-edit-btn">编辑</button>

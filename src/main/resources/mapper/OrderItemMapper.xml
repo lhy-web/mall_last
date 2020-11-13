@@ -2,10 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.mall.dao.OrderItemMapper">
     <resultMap id="BaseResultMap" type="com.sk.mall.entity.OrderItem">
-        <id column="itemId" jdbcType="INTEGER" property="itemid"/>
-        <result column="orderId" jdbcType="INTEGER" property="orderid"/>
-        <result column="goodsId" jdbcType="INTEGER" property="goodsid"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="orderId" jdbcType="INTEGER" property="orderId"/>
         <result column="num" jdbcType="INTEGER" property="num"/>
+    </resultMap>
+
+    <resultMap id="resultIncludeGoods" type="com.sk.mall.entity.OrderItem" extends="BaseResultMap">
+        <association property="goods" javaType="com.sk.mall.entity.Goods">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <result column="goodsName" jdbcType="VARCHAR" property="goodsName"/>
+            <result column="price" jdbcType="INTEGER" property="price"/>
+            <result column="num" jdbcType="INTEGER" property="num"/>
+            <result column="upTime" jdbcType="TIMESTAMP" property="upTime"/>
+            <result column="category" jdbcType="INTEGER" property="category"/>
+            <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
+            <result column="detailCate" jdbcType="VARCHAR" property="detailCate"/>
+            <result column="activityId" jdbcType="INTEGER" property="activityId"/>
+            <result column="isSale" jdbcType="INTEGER" property="isSale"/>
+        </association>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -68,8 +82,13 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    itemId, orderId, goodsId, num
+    id, orderId, goodsId, num
   </sql>
+
+    <select id="getOrderItemByOrderId" resultMap="resultIncludeGoods">
+        select o.*,g.* from orderitem o, goods g where o.goodsId = g.id and orderId = #{orderId}
+    </select>
+
     <select id="selectByExample" parameterType="com.sk.mall.entity.OrderItem" resultMap="BaseResultMap">
         select
         <if test="distinct">

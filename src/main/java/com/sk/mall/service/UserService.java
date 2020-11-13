@@ -4,6 +4,9 @@ import com.sk.mall.entity.User;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 public interface UserService {
 
     User selectByPrimaryKey(int userId);
@@ -14,6 +17,11 @@ public interface UserService {
 
     void deleteUserById(Integer userid);
 
+    /**
+     * 修改密码
+     *
+     * @param user 用户
+     */
     void updateByPrimaryKeySelective(User user);
 
 }

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.sk.mall.entity.*;
 import com.sk.mall.service.*;
 import com.sk.mall.util.Msg;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,36 +133,33 @@ public class FrontGoodsController {
     @RequestMapping("/collect")
     @ResponseBody
     public Msg collectGoods(Integer goodsid, HttpSession session) {
-//        //取登录用户信息,未登录重定向至登录页面
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            return Msg.fail("收藏失败");
-//        }
-//
-//        //添加收藏
-//        Favorite favorite = new Favorite();
-//        favorite.setCollectTime(new Date());
-//        favorite.setGoodsId(goodsid);
-//        favorite.setUserId(user.getId());
-
-//        goodsService.addFavorite(favorite);
-
+        //取登录用户信息,未登录重定向至登录页面
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return Msg.fail("收藏失败");
+        }
+        //添加收藏
+        Favorite favorite = new Favorite();
+        favorite.setCollectTime(new Date());
+        favorite.setGoodsId(goodsid);
+        favorite.setUserId(user.getId());
+        goodsService.addFavorite(favorite);
         return Msg.success("收藏成功");
     }
 
     @RequestMapping("/deleteCollect")
     @ResponseBody
+    @ApiOperation(value = "取消收藏", notes = "取消收藏")
     public Msg deleteFavGoods(Integer goodsid, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            return Msg.fail("取消收藏失败");
-//        }
-//
-//        //删除收藏
-//        goodsService.deleteFavByKey(new FavoriteKey(user.getId(), goodsid));
-
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return Msg.fail("取消收藏失败");
+        }
+        //删除收藏
+        goodsService.deleteFavByKey(new Favorite(user.getId(), goodsid));
         return Msg.success("取消收藏成功");
     }
+
 
     @RequestMapping("/category")
     public String getCateGoods(String cate, @RequestParam(value = "page", defaultValue = "1") Integer pn, Model model, HttpSession session) {

@@ -10,5 +10,12 @@ public interface ImagePathMapper {
 
     int insertSelective(ImagePath record);
 
-    List<ImagePath> getImagesByGoodsId(String goodsId);
+
+    /**
+     * 查询商品的所有图片
+     *
+     * @param id 商品id
+     * @return  List<ImagePath>
+     */
+    List<ImagePath> getImagesByGoodsId(String id);
 }

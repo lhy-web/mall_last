@@ -145,20 +145,20 @@
             <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                 <h3>未发货</h3><%--未收到货--%>
                 <c:forEach items="${orderList}" var="order">
-                    <c:if test="${!order.issend}">
+                    <c:if test="${!order.isSend}">
                         <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"
                              name="parent">
                             <div class="tab-content col-lg-12">
                                 <table class="table " cellpadding="6" cellspacing="1"><%--订单信息--%>
                                     <tbody>
                                     <td class="no-border col-lg-9">
-                                        订单号：<i name="orderid">${order.orderid}</i>
+                                        订单号：<i name="orderid">${order.id}</i>
                                         &nbsp;
                                         &nbsp;
                                         订单日期:
-                                            ${order.ordertime.year+1900} 年
-                                            ${order.ordertime.month+1} 月
-                                            ${order.ordertime.date} 日
+                                            ${order.orderTime.year+1900} 年
+                                            ${order.orderTime.month+1} 月
+                                            ${order.orderTime.date} 日
                                         &nbsp;
                                         收货地址:
                                             ${order.address.province}
@@ -177,7 +177,7 @@
                                                 ${order.address.county}
                                         </td>--%>
                                     <td class="no-border col-lg-3">
-                                        原价:${order.oldprice} 现价:${order.newprice}
+                                        原价:${order.oldPrice} 现价:${order.newPrice}
                                     </td>
                                     </tbody>
                                 </table>
@@ -202,25 +202,25 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <c:forEach items="${order.goodsInfo}" var="good">
+                                <c:forEach items="${order.orderItems}" var="orderItem">
                                     <table class="table table-bordered" cellpadding="6" cellspacing="1"><%--商品信息--%>
 
                                         <tbody>
                                         <tr>
                                             <td class="col-lg-1">
-                                                    ${good.goodsid}
+                                                    ${orderItem.goods.id}
                                             </td>
                                             <td class="col-lg-2">
-                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${good.goodsid}">${good.goodsname}</a>
+                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${orderItem.goods.id}">${orderItem.goods.goodsName}</a>
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.price}
+                                                    ${orderItem.goods.price}
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.num}
+                                                    ${orderItem.goods.num}
                                             </td>
                                             <td class="col-lg-2">
-                                                    ${good.categoryName}
+                                                    ${orderItem.goods.categoryName}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -237,7 +237,7 @@
             <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                 <h3>未收货</h3><%--未完成--%>
                 <c:forEach items="${orderList}" var="order">
-                    <c:if test="${order.issend&&!order.isreceive}">
+                    <c:if test="${order.isSend && !order.isReceive}">
                         <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"
                              name="parent">
                             <div class="tab-content col-lg-12">
@@ -245,12 +245,12 @@
                                     <tbody>
                                     <tr>
                                         <td class="no-border col-lg-9">
-                                            订单号：<i name="orderid">${order.orderid}</i>
+                                            订单号：<i name="orderid">${order.id}</i>
                                             &nbsp;
                                             订单日期:
-                                                ${order.ordertime.year+1900} 年
-                                                ${order.ordertime.month+1} 月
-                                                ${order.ordertime.date} 日
+                                                ${order.orderTime.year+1900} 年
+                                                ${order.orderTime.month+1} 月
+                                                ${order.orderTime.date} 日
                                             &nbsp;
                                             收货地址:
                                                 ${order.address.province}
@@ -258,7 +258,7 @@
                                                 ${order.address.county}
                                         </td>
                                         <td class="no-border col-lg-3">
-                                            原价:${order.oldprice} 现价:${order.newprice}
+                                            原价:${order.oldPrice} 现价:${order.newPrice}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -284,24 +284,24 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <c:forEach items="${order.goodsInfo}" var="good">
+                                <c:forEach items="${order.orderItems}" var="orderItem">
                                     <table class="table table-bordered" cellpadding="6" cellspacing="1"><%--商品信息--%>
                                         <tbody>
                                         <tr>
                                             <td class="col-lg-1">
-                                                    ${good.goodsid}
+                                                    ${orderItem.goods.id}
                                             </td>
                                             <td class="col-lg-2">
-                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${good.goodsid}">${good.goodsname}</a>
+                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${orderItem.goods.id}">${orderItem.goods.goodsName}</a>
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.price}
+                                                    ${orderItem.goods.price}
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.num}
+                                                    ${orderItem.goods.num}
                                             </td>
                                             <td class="col-lg-2">
-                                                    ${good.categoryName}
+                                                    ${orderItem.goods.categoryName}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -319,7 +319,7 @@
             <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                 <h3>已完成</h3><%--已完成--%>
                 <c:forEach items="${orderList}" var="order">
-                    <c:if test="${order.iscomplete}">
+                    <c:if test="${order.isComplete}">
                         <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid"
                              name="parent">
                             <div class="tab-content col-lg-12">
@@ -327,13 +327,13 @@
                                     <tbody>
                                     <tr>
                                         <td class="no-border col-lg-9">
-                                            订单号：<i name="orderid">${order.orderid}</i>
+                                            订单号：<i name="orderid">${order.id}</i>
                                             &nbsp;
                                             &nbsp;
                                             订单日期:
-                                                ${order.ordertime.year+1900} 年
-                                                ${order.ordertime.month+1} 月
-                                                ${order.ordertime.date} 日
+                                                ${order.orderTime.year+1900} 年
+                                                ${order.orderTime.month+1} 月
+                                                ${order.orderTime.date} 日
                                             &nbsp;
                                             收货地址:
                                                 ${order.address.province}
@@ -341,7 +341,7 @@
                                                 ${order.address.county}
                                         </td>
                                         <td class="no-border col-lg-3">
-                                            原价:${order.oldprice} 现价:${order.newprice}
+                                            原价:${order.oldPrice} 现价:${order.newPrice}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -370,24 +370,24 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <c:forEach items="${order.goodsInfo}" var="good">
+                                <c:forEach items="${order.orderItems}" var="orderItem">
                                     <table class="table table-bordered" cellpadding="6" cellspacing="1"><%--商品信息--%>
                                         <tbody>
                                         <tr>
                                             <td class="col-lg-1">
-                                                    ${good.goodsid}
+                                                    ${orderItem.goods.id}
                                             </td>
                                             <td class="col-lg-2">
-                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${good.goodsid}">${good.goodsname}</a>
+                                                <a href="${pageContext.request.contextPath}/detail?goodsid=${orderItem.goods.id}">${orderItem.goods.goodsName}</a>
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.price}
+                                                    ${orderItem.goods.price}
                                             </td>
                                             <td class="col-lg-1">
-                                                    ${good.num}
+                                                    ${orderItem.goods.num}
                                             </td>
                                             <td class="col-lg-2">
-                                                    ${good.categoryName}
+                                                    ${orderItem.goods.categoryName}
                                             </td>
                                             <td class="col-lg-1">
                                                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect font-color"

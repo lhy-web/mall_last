@@ -14,9 +14,9 @@ import java.util.List;
 
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
-//
-//    @Autowired(required = false)
-//    private OrderMapper orderMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
 //
 //    @Autowired(required = false)
 //    private OrderItemMapper orderItemMapper;
@@ -29,10 +29,15 @@ public class OrderServiceImpl implements OrderService {
 //        orderMapper.insertSelective(order);
 //    }
 //
-//    @Override
-//    public void deleteById(Integer orderid) {
-//        orderMapper.deleteByPrimaryKey(orderid);
-//    }
+    @Override
+    public void deleteById(Integer orderid) {
+        orderMapper.deleteById(orderid);
+    }
+
+    @Override
+    public List<Order> getAllByState(Order order) {
+        return orderMapper.getAllByState(order);
+    }
 //
 //
 //    @Override
@@ -56,10 +61,10 @@ public class OrderServiceImpl implements OrderService {
 //        return addressMapper.selectByPrimaryKey(addressid);
 //    }
 //
-//    @Override
-//    public void updateOrderByKey(Order order) {
-//        orderMapper.updateByPrimaryKeySelective(order);
-//    }
+    @Override
+    public void updateOrderByKey(Order order) {
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
 //
 //    @Override
 //    public Order selectByPrimaryKey(Integer orderid) {
@@ -70,4 +75,9 @@ public class OrderServiceImpl implements OrderService {
 //    public void insertOrderItem(OrderItem orderItem) {
 //        orderItemMapper.insertSelective(orderItem);
 //    }
+
+    @Override
+    public List<Order> getAllByUserId(int userId) {
+        return orderMapper.getAllOrderByUserId(userId);
+    }
 }

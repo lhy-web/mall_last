@@ -9,6 +9,7 @@
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="commentTime" jdbcType="TIMESTAMP" property="commentTime"/>
     </resultMap>
+
     <sql id="Base_Column_List">
     id, userId, goodsId, point, content, commentTime
   </sql>
@@ -20,13 +21,13 @@
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Comment">
         insert into comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="commentid != null">
+            <if test="id != null">
                 id,
             </if>
-            <if test="userid != null">
+            <if test="userId != null">
                 userId,
             </if>
-            <if test="goodsid != null">
+            <if test="goodsId != null">
                 goodsId,
             </if>
             <if test="point != null">
@@ -35,19 +36,19 @@
             <if test="content != null">
                 content,
             </if>
-            <if test="commenttime != null">
+            <if test="commentTime != null">
                 commentTime,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="commentid != null">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="userid != null">
-                #{userid,jdbcType=INTEGER},
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
-            <if test="goodsid != null">
-                #{goodsid,jdbcType=INTEGER},
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
             </if>
             <if test="point != null">
                 #{point,jdbcType=INTEGER},
@@ -55,8 +56,8 @@
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
             </if>
-            <if test="commenttime != null">
-                #{commenttime,jdbcType=TIMESTAMP},
+            <if test="commentTime != null">
+                #{commentTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>

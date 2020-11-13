@@ -46,11 +46,12 @@ $(document).ready(function () {
     var goodsId = {};
 
     $("[name='evaluate']").click(function () {
+        alert(111);
         $("#evaluate").modal({
             backdrop: 'static'
         });
         goodsId = $(this).parents(".table-bordered").find(".col-lg-1").eq(0).text();
-
+        alert(goodsId);
     })
 
     $("#star").raty({path: '../image/img'});
@@ -59,9 +60,9 @@ $(document).ready(function () {
         var score = $("[name='score']").val();
         var content = $("#description").val();
         var comment = {};
-        comment.commentid = {};
-        comment.userid = {};
-        comment.goodsid = goodsId;
+        comment.commentid = null;
+        comment.userId = null;
+        comment.goodsId = goodsId;
         comment.point = score;
         comment.content = content;
         $.ajax({

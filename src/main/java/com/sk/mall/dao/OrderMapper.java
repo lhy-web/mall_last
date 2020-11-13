@@ -13,7 +13,7 @@ public interface OrderMapper {
 //
 //    int deleteByExample(OrderExample example);
 //
-//    int deleteByPrimaryKey(Integer orderid);
+    int deleteById(Integer orderid);
 //
 //    int insert(Order record);
 //
@@ -27,9 +27,18 @@ public interface OrderMapper {
 //
 //    int updateByExample(@Param("record") Order record, @Param("example") OrderExample example);
 //
-//    int updateByPrimaryKeySelective(Order record);
+    int updateByPrimaryKeySelective(Order record);
 //
 //    int updateByPrimaryKey(Order record);
 //
-//    List<Order> queryAllOrderByUserId(int userId);
+
+    /**
+     * 根据userId来查询所有的订单
+     *
+     * @param userId 用户id
+     * @return  List<Order>
+     */
+    List<Order> getAllOrderByUserId(int userId);
+
+    List<Order> getAllByState(Order order);
 }
