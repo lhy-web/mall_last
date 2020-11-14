@@ -17,10 +17,6 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/css/bootstrap/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/css/templatemo-style.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -83,7 +79,7 @@
                         <div class="col-sm-9">
                             <select class="form-control" id="category" name="category">
                                 <c:forEach items="${categoryList}" var="item">
-                                    <option value="${item.cateid}">${item.catename}</option>
+                                    <option value="${item.id}">${item.cateName}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -221,7 +217,7 @@
 <div id="path" style="display: none;">${pageContext.request.contextPath}</div>
 <!-- jQuery -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/templatemo-script.js"></script>
-<script src="${pageContext.request.contextPath}/js/goodsManage.js"></script>
+<script src="${pageContext.request.contextPath}/js/admin/goodsManage.js"></script>
 <!-- Templatemo Script -->
 <script>
     $(document).ready(function () {

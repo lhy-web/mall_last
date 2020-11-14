@@ -42,11 +42,13 @@ public class GoodsServiceImpl implements GoodsService {
 //        imagePathMapper.insertSelective(imagePath);
 //    }
 //
-//    @Override
-//    public List<Goods> selectByExample(GoodsExample example) {
-//        return goodsMapper.selectByExampleWithBLOBs(example);
-//    }
-//
+
+    @Override
+    public List<Goods> getAllGoods() {
+        return goodsMapper.getAllGoods();
+    }
+
+    //
 //    @Override
 //    public void deleteGoodsById(Integer goodsid) {
 //        goodsMapper.deleteByPrimaryKey(goodsid);
@@ -65,10 +67,10 @@ public class GoodsServiceImpl implements GoodsService {
 //        return imagePathMapper.selectByExample(imagePathExample);
 //    }
 //
-//    @Override
-//    public Goods selectById(Integer goodsid) {
-//        return goodsMapper.selectByPrimaryKey(goodsid);
-//    }
+    @Override
+    public Goods selectById(Integer goodsid) {
+        return goodsMapper.getById(goodsid);
+    }
 //
 //    @Override
 //    public List<Goods> selectByExampleLimit(GoodsExample digGoodsExample) {
@@ -80,12 +82,12 @@ public class GoodsServiceImpl implements GoodsService {
     public void addFavorite(Favorite favorite) {
         favoriteMapper.insertSelective(favorite);
     }
-//
-//    @Override
-//    public Favorite selectFavByKey(FavoriteKey favoriteKey) {
-//        return favoriteMapper.selectByPrimaryKey(favoriteKey);
-//    }
-//
+
+    @Override
+    public Favorite selectFavByKey(Favorite favorite) {
+        return favoriteMapper.selectByPrimaryKey(favorite);
+    }
+
 
     @Override
     public void deleteFavByKey(Favorite favoriteKey) {

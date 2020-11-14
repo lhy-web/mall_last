@@ -20,10 +20,13 @@ public interface GoodsMapper {
 //
 //    List<Goods> selectByExampleWithBLOBs(GoodsExample example);
 //
-//    List<Goods> selectByExample(GoodsExample example);
-//
-//    Goods selectByPrimaryKey(Integer goodsid);
-//
+
+    List<Goods> getAllGoods();
+
+
+    Goods getById(Integer goodsid);
+
+    //
 //    int updateByExampleSelective(@Param("record") Goods record, @Param("example") GoodsExample example);
 //
 //    int updateByExampleWithBLOBs(@Param("record") Goods record, @Param("example") GoodsExample example);

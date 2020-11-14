@@ -71,21 +71,6 @@
 
             });
 
-            /*$("#chatto").click(function () {
-                $.ajax({
-                    url: "/shop/chat/", //把表单数据发送到ajax.jsp
-                    type: "POST",
-                    data: {
-                        sendto: 5
-                    },
-                    error: function (request) {
-                        alert(result.msg);
-                    },
-                    success: function (result) {
-                    }
-                });
-            });*/
-
             $('.fav-button').click(function () {
                 //$(this).removeClass("glyphicon-heart-empty");
                 var goodsId = $(this).attr('data-id');
@@ -130,11 +115,6 @@
                     })
                 }
 
-                /*$.post("servlet/CollectServlet", {
-                 goodsId: goodsId,
-                 });
-                 // alert("商品已加入购物车！");*/
-
                 if (isChangeBtn) {
                     $(this).children("i").toggleClass("fa-heart fa-heart-o");
                     var likeContent = $(this).children("span").text();
@@ -173,7 +153,7 @@
                 <%--<li><a href="index.html">Shop /</a></li>
                 <li><a href="index.html">Headlight/</a></li>
                 <li><a href="index.html">Hats /</a></li>--%>
-                <li class="br-active">${goodsInfo['goods'].goodsname}</li>
+                <li class="br-active">${goods.goodsName}</li>
             </ul>
         </div>
         <div class="row">
@@ -181,7 +161,7 @@
                 <div class="shopdetails">
                     <div id="leftbox">
                         <div id="showbox">
-                            <c:forEach items="${goodsInfo['image']}" var="path">
+                            <c:forEach items="${goods.imagePaths}" var="path">
                                 <img src="${pageContext.request.contextPath}/pictures/${path.path}" width="400"
                                      height="400"/>
                             </c:forEach>
@@ -198,70 +178,49 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="elav_titel">
                     <div class="elv_heading">
-                        <h3>${goodsInfo['goods'].goodsname}</h3>
+                        <h3>${goods.goodsName}</h3>
                     </div>
                     <div class="price_rating">
-                        <%--<a href="#">
-                            <i class="fa fa-star"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-star"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-star"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa fa-star"></i>
-                        </a>
-                        <a class="not-rated" href="#">
-                            <i class="fa fa-star-o"></i>
-                        </a>
-                        <a class="review-link" href="#">
-                            (
-                            <span class="count">2</span>
-                            customer reviews)
-                        </a>--%>
+
                     </div>
-                    <!-- <div class="evavet_description">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet sem vitae urna fringilla tempus.</p>
-                    </div> -->
+
                 </div>
                 <div class="elav_info">
                     <!-- 价格 -->
                     <div class="price_box price_box_acr new_meta">
                         <%--<span class="old- price old- price-2">$250.00</span>--%>
-                        <span class="spical-price spical-price-2">￥${goodsInfo['goods'].price}</span>
+                        <span class="spical-price spical-price-2">￥${goods.price}</span>
                     </div>
                     <div class="new_meta">
                             <span class="sku_wrapper big-font">
                                 类别:
-                                <span class="sku">${goodsInfo['cate'].catename}</span>
+                                <span class="sku">${goods.categoryName}</span>
                             </span>
                         <span class="sku_wrapper big-font">
                                 数量:
-                                <span class="sku">${goodsInfo['goods'].num}</span>
+                                <span class="sku">${goods.num}</span>
                             </span>
                     </div>
 
                     <div class="new_meta">
                             <span class="sku_wrapper big-font">
                                 优惠:
-                                <c:if test="${goodsInfo['goods'].activityid != 1}">
-                                    <span class="sku">${goodsInfo['goods'].activity.activityname}</span>
-                                    <span class="span-block">${goodsInfo['goods'].activity.activitydes}</span>
-                                    <span class="span-block">折扣:${goodsInfo['goods'].activity.discount}</span>
-                                    <c:if test="${!empty goodsInfo['goods'].activity.fullprice}">
+                                <c:if test="${goods.activity.id != 1}">
+                                    <span class="sku">${goods.activity.activityName}</span>
+                                    <span class="span-block">${goods.activity.activityAddress}</span>
+                                    <span class="span-block">折扣:${goods.activity.disCount}</span>
+                                    <c:if test="${!empty goodsInfo['goods'].activity.fullPrice}">
                                         <span class="span-block">
-                                            满${goodsInfo['goods'].activity.fullprice}减${goodsInfo['goods'].activity.reduceprice}
+                                            满${goods.activity.fullprice}减${goods.activity.reducePrice}
                                         </span>
                                     </c:if>
-                                    <c:if test="${!empty goodsInfo['goods'].activity.fullnum}">
+                                    <c:if test="${!empty goods.activity.fullNum}">
                                         <span class="span-block">
-                                            满${goodsInfo['goods'].activity.fullnum}免${goodsInfo['goods'].activity.reducenum}
+                                            满${goods.activity.fullNum}免${goods.activity.reduceNum}
                                         </span>
                                     </c:if>
                                 </c:if>
-                                <c:if test="${goodsInfo['goods'].activityid == 1}">
+                                <c:if test="${goods.activity == null}">
                                     <span class="sku">暂无优惠，敬请期待！</span>
                                 </c:if>
                             </span>
@@ -278,34 +237,26 @@
                         </div>
                         <form class="cart-btn-area new_meta" action="${pageContext.request.contextPath}/addCart"
                               method="post">
-                            <input type="hidden" value="${goodsInfo['goods'].goodsid}" name="goodsid"/>
+                            <input type="hidden" value="${goods.id}" name="goodsid"/>
                             <input type="number" value="1" name="goodsnum">
                             <button class="add-tocart cart_zpf" type="submit">加入购物车</button>
                         </form>
                         <div class="add_defi new_meta">
                             <a data-original-title="Add to Wishlist" data-toggle="tooltip" class="fav-button big-font"
-                               data-id="${goodsInfo['goods'].goodsid}">
-                                <c:if test="${goodsInfo['goods'].fav}">
+                               data-id="${goods.id}">
+                                <c:if test="${goods.fav}">
                                     <i class="fa fa-heart"></i>
                                     取消收藏
                                 </c:if>
-                                <c:if test="${!goodsInfo['goods'].fav}">
+                                <c:if test="${!goods.fav}">
                                     <i class="fa fa-heart-o"></i>
                                     <span class="like-content">收藏</span>
                                 </c:if>
                             </a>
                         </div>
                     </div>
-
-                    <!-- <div class="add_defi_2">
-                        <a data-original-title="Compare" title="" data-toggle="tooltip" rel="nofollow" data-product_id="45" href=""><i class="fa fa-refresh another_icon"></i> Compare</a>
-                    </div> -->
-
                 </div>
             </div>
-            <!-- <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-
-        </div> -->
         </div>
     </div>
 </div>

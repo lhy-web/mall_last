@@ -12,8 +12,6 @@ public interface CateService {
 
      void insertSelective(Category category);
 
-//     List<Category> selectByExampleLimit(CategoryExample digCategoryExample);
-
      Category selectById(Integer category);
 
      void updateByPrimaryKeySelective(Category category);

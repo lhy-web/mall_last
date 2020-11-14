@@ -177,7 +177,6 @@ function to_page(path, page) {
         data: "page=" + page,
         type: "get",
         success: function (result) {
-
             //解析显示
             build_goods_table(path, result);
 
@@ -196,12 +195,12 @@ function build_goods_table(path, result) {
     $("#goodsinfo tbody").empty();
     var goods = result.info.pageInfo.list;
     $.each(goods, function (index, item) {
-        var goodsid = $("<td></td>").append(item.goodsid);
-        var goodsname = $("<td></td>").append(item.goodsname);
+        var goodsid = $("<td></td>").append(item.id);
+        var goodsname = $("<td></td>").append(item.goodsName);
         var price = $("<td></td>").append(item.price);
         var num = $("<td></td>").append(item.num);
-        var detailcate = $("<td></td>").append(item.detailcate);
-        var activityid = $("<td></td>").append(item.activityid);
+        var detailcate = $("<td></td>").append(item.detailCate);
+        var activityid = $("<td></td>").append(item.Activity.activityName);
 
         // var detailA = $('<a tabindex="0" class="btn btn-sm description" role="button" placement="top" data-toggle="popover" data-trigger="focus" title="描述" ></a>').append("描述");
         var detailBtn = $('<button type="button" class="description" data-container="body" data-toggle="popover" data-placement="top"></button>').append("描述");

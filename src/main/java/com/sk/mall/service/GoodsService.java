@@ -11,7 +11,7 @@ public interface GoodsService {
 
 //    void addImagePath(ImagePath imagePath);
 //
-//    List<Goods> selectByExample(GoodsExample example);
+    List<Goods> getAllGoods();
 
 //    void deleteGoodsById(Integer goodsid);
 //
@@ -19,7 +19,7 @@ public interface GoodsService {
 //
 //    List<ImagePath> findImagePath(Integer goodsid);
 //
-//    Goods selectById(Integer goodsid);
+    Goods selectById(Integer goodsid);
 //
 //    List<Goods> selectByExampleLimit(GoodsExample digGoodsExample);
 
@@ -29,9 +29,9 @@ public interface GoodsService {
      * @param favorite 商品
      */
     void addFavorite(Favorite favorite);
-//
-//    Favorite selectFavByKey(FavoriteKey favoriteKey);
-//
+
+    Favorite selectFavByKey(Favorite favorite);
+
 
     /**
      * 根据用户id、商品id删除收藏信息

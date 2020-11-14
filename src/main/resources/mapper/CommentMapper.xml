@@ -15,7 +15,7 @@
   </sql>
 
     <select id="getByGoodsId"  resultMap="BaseResultMap">
-        select id, userId, goodsId, point, content, commentTime from comment where goodsid = ${goodsId}
+        select id, userId, goodsId, point, content, commentTime from comment where goodsid = ${goodsId} order by commentTime desc
     </select>
 
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Comment">

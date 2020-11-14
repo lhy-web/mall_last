@@ -3,6 +3,9 @@ package com.sk.mall.controller.admin;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sk.mall.entity.Admin;
+import com.sk.mall.entity.Category;
+import com.sk.mall.entity.Goods;
+import com.sk.mall.service.CateService;
 import com.sk.mall.service.GoodsService;
 import com.sk.mall.util.ImageUtil;
 import com.sk.mall.util.Msg;
@@ -21,51 +24,56 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/goods")
 public class GoodsController {
-//
-//    @Autowired
-//    private GoodsService goodsService;
-//
-//    /**
-//     *  重定向当商品页
-//     *
-//     * @param model 存数据
-//     * @param session 取admin
-//     * @return String
-//     */
-//    @RequestMapping("/show")
-//    public String goodsManage(Model model, HttpSession session) {
-//        Admin admin = (Admin) session.getAttribute("admin");
-//        // 把商品类型查询出来返回给前端，以供商品修改使用
-//        List<Category> categoryList = cateService.selectByExample(new CategoryExample());
-//        model.addAttribute("categoryList", categoryList);
-//        if (admin == null) {
-//            return "redirect:/admin/login";
-//        }
-//        return "admin/adminAllGoods";
-//    }
-//
-//    /**
-//     * 分页显示商品
-//     *
-//     * @param pn      页码
-//     * @param model   返回给前端的值
-//     * @param session session取admin
-//     * @return Msg
-//     */
-//    @RequestMapping("/showjson")
-//    @ResponseBody
-//    public Msg getAllGoods(@RequestParam(value = "page", defaultValue = "1") Integer pn, Model model, HttpSession session) {
-//        Admin admin = (Admin) session.getAttribute("admin");
-//        if (admin == null) {
-//            return Msg.fail("请先登录");
-//        }
-//        //一页显示几个数据
-//        PageHelper.startPage(pn, 10);
-//        List<Goods> employees = goodsService.selectByExample(new GoodsExample());
-//        PageInfo page = new PageInfo(employees, 5);
-//        model.addAttribute("pageInfo", page);
-//        return Msg.success("查询成功!").add("pageInfo", page);
-//    }
+
+    @Autowired
+    private GoodsService goodsService;
+
+
+    @Autowired
+    private CateService cateService;
+
+    /**
+     *  重定向当商品页
+     *
+     * @param model 存数据
+     * @param session 取admin
+     * @return String
+     */
+    @RequestMapping("/show")
+    public String goodsManage(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+        // 把商品类型查询出来返回给前端，以供商品修改使用
+        List<Category> categoryList = cateService.getAllCate();
+        model.addAttribute("categoryList", categoryList);
+        return "admin/adminAllGoods";
+    }
+
+
+    /**
+     * 分页显示商品
+     *
+     * @param pn      页码
+     * @param model   返回给前端的值
+     * @param session session取admin
+     * @return Msg
+     */
+    @RequestMapping("/showjson")
+    @ResponseBody
+    public Msg getAllGoods(@RequestParam(value = "page", defaultValue = "1") Integer pn, Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (admin == null) {
+            return Msg.fail("请先登录");
+        }
+        //一页显示几个数据
+        PageHelper.startPage(pn, 10);
+        List<Goods> goods = goodsService.getAllGoods();
+        PageInfo<Goods> page = new PageInfo<>(goods, 5);
+        model.addAttribute("pageInfo", page);
+        return Msg.success("查询成功!").add("pageInfo", page);
+    }
 //
 //
 //    /**

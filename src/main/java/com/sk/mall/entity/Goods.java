@@ -34,7 +34,9 @@ public class Goods {
 
     private Integer isSale;
 
-    public Integer getId() {
+    private List<Comment> comments;
+
+     public Integer getId() {
         return id;
     }
 
@@ -88,6 +90,14 @@ public class Goods {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public String getDetailCate() {

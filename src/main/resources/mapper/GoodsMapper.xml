@@ -10,8 +10,8 @@
         <result column="category" jdbcType="INTEGER" property="category"/>
         <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
         <result column="detailCate" jdbcType="VARCHAR" property="detailCate"/>
-        <result column="activityId" jdbcType="INTEGER" property="activityId"/>
         <result column="isSale" jdbcType="INTEGER" property="isSale"/>
+        <association property="activity" select="com.sk.mall.dao.ActivityMapper.getActivityById" javaType="com.sk.mall.entity.Activity" column="activityId"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sk.mall.entity.Goods">
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
@@ -19,6 +19,11 @@
 
     <resultMap extends="ResultMapWithBLOBs" id="ResultMapIncludeImage" type="com.sk.mall.entity.Goods">
         <collection property="imagePaths" javaType="ArrayList" ofType="com.sk.mall.entity.ImagePath" select="com.sk.mall.dao.ImagePathMapper.getImagesByGoodsId" column="id" />
+
+    </resultMap>
+
+    <resultMap extends="ResultMapIncludeImage" id="ResultMapIncludeComment" type="com.sk.mall.entity.Goods">
+        <collection property="comments" javaType="ArrayList" ofType="com.sk.mall.entity.Comment" select="com.sk.mall.dao.CommentMapper.getByGoodsId" column="id" />
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -87,6 +92,14 @@
     description
   </sql>
 
+    <select id="selectFavByUserId" resultMap="ResultMapIncludeImage">
+        select g.* from goods g , collection c where g.id = c.goodsId and c.userId = #{userId} and isSale = 1
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="ResultMapIncludeComment">
+        select g.* from goods g  where g.id = #{id}
+    </select>
+
     <select id="selectByExampleWithBLOBs" parameterType="com.sk.mall.entity.Goods"
             resultMap="ResultMapWithBLOBs">
         select
@@ -123,28 +136,12 @@
         </if>
         limit 10
     </select>
-    <select id="selectByExample" parameterType="com.sk.mall.entity.Goods" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from goods
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+    <select id="getAllGoods"  resultMap="BaseResultMap">
+        select * from goods order by upTime
     </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from goods
-        where goodsId = #{goodsid,jdbcType=INTEGER}
-    </select>
+
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods
     where goodsId = #{goodsid,jdbcType=INTEGER}
@@ -350,7 +347,5 @@
     where goodsId = #{goodsid,jdbcType=INTEGER}
   </update>
 
-    <select id="selectFavByUserId" resultMap="ResultMapIncludeImage">
-        select g.* from goods g , collection c where g.id = c.goodsId and c.userId = #{userId} and isSale = 1
-    </select>
+
 </mapper>

@@ -15,6 +15,7 @@
         from collection
         where userId = ${id}
     </select>
+
     <select id="selectByPrimaryKey" parameterType="com.sk.mall.entity.Favorite" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -22,6 +23,7 @@
         where userId = #{userid,jdbcType=INTEGER}
         and goodsId = #{goodsid,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.Favorite">
         delete
         from collection
