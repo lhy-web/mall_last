@@ -34,7 +34,7 @@
 <body>
 <!-- Left column -->
 <div class="templatemo-flex-row">
-    <jsp:include page="admin/sidebar.jsp"></jsp:include>
+    <jsp:include page="sidebar.jsp"></jsp:include>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
@@ -58,23 +58,23 @@
                     <div class="row form-group">
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithSuccess">活动名称</label>
-                            <input type="text" class="form-control show-inpu" id="inputWithSuccess" name="activityname">
+                            <input type="text" class="form-control show-inpu" id="inputWithSuccess" name="activityName">
                         </div>
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithDiscount">折扣</label>
-                            <input type="number" class="form-control" id="inputWithDiscount" name="discount"
+                            <input type="number" class="form-control" id="inputWithDiscount" name="disCount"
                                    step="0.01">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithFullprice">满</label>
-                            <input type="number" class="form-control" id="inputWithFullprice" name="fullprice"
+                            <input type="number" class="form-control" id="inputWithFullprice" name="fullPrice"
                                    placeholder="￥满减">
                         </div>
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithReduceprice">减</label>
-                            <input type="number" class="form-control" id="inputWithReduceprice" name="reduceprice"
+                            <input type="number" class="form-control" id="inputWithReduceprice" name="reducePrice"
                                    placeholder="￥满减">
                         </div>
                     </div>
@@ -82,12 +82,12 @@
                     <div class="row form-group">
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithFullnum">满</label>
-                            <input type="number" class="form-control" id="inputWithFullnum" name="fullnum"
+                            <input type="number" class="form-control" id="inputWithFullnum" name="fullNum"
                                    placeholder="满免">
                         </div>
                         <div class="col-lg-6 form-group">
                             <label class="control-label" for="inputWithReducenum">免</label>
-                            <input type="number" class="form-control" id="inputWithReducenum" name="reducenum"
+                            <input type="number" class="form-control" id="inputWithReducenum" name="reduceNum"
                                    placeholder="满免">
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="row form-group">
                         <div class="col-lg-12 form-group">
                             <label class="control-label" for="inputNote">活动描述</label>
-                            <textarea class="form-control" id="inputNote" rows="3" name="activitydes"></textarea>
+                            <textarea class="form-control" id="inputNote" rows="3" name="activityDes"></textarea>
                         </div>
                     </div>
 

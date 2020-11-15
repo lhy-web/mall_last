@@ -2,32 +2,60 @@ package com.sk.mall.dao;
 
 
 import com.sk.mall.entity.Category;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Repository
 public interface CategoryMapper {
-//    long countByExample(CategoryExample example);
-//
-//    int deleteByExample(CategoryExample example);
 
+    /**
+     * 通过id删除
+     *
+     * @param id id
+     */
     void deleteById(Integer id);
 
-    int insert(Category record);
-
+    /**
+     * 添加商品分类
+     *
+     * @param record 分类
+     * @return int
+     */
     int insertSelective(Category record);
 
+    /**
+     * 查找所有分类
+     *
+     * @return List<Category>
+     */
     List<Category> getAllCate();
 
-    Category selectByPrimaryKey(Integer cateid);
+    /**
+     * 通过主键id查找
+     *
+     * @param cateId id
+     * @return Category
+     */
+    Category selectByPrimaryKey(Integer cateId);
 
-//    int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
-//
-//    int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
+    /**
+     * 通过名称查找
+     *
+     * @param name 名称
+     * @return Category
+     */
+    Category selectByName(String name);
 
-    int updateByPrimaryKeySelective(Category record);
+    /**
+     * 修改分类
+     *
+     * @param category 信息
+     * @return int
+     */
+    int updateByPrimaryKeySelective(Category category);
 
-    int updateByPrimaryKey(Category record);
 }

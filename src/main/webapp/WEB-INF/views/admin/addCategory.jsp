@@ -15,7 +15,7 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/templatemo-style.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/css/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/categery.js"></script>
+    <script src="${pageContext.request.contextPath}/js/admin/categery.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -66,7 +66,7 @@
 </div>
 <!-- Left column -->
 <div class="templatemo-flex-row">
-    <jsp:include page="admin/sidebar.jsp"></jsp:include>
+    <jsp:include page="sidebar.jsp"></jsp:include>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
         <jsp:include page="goodsNav.jsp"></jsp:include>
@@ -87,7 +87,7 @@
                             <c:forEach items="${categoryList}" var="category">
                                 <tr>
                                     <td><a href="" class="templatemo-link"
-                                           cateId="${category.cateid}">${category.catename}</a></td>
+                                           cateId="${category.id}">${category.cateName}</a></td>
                                     <td>
                                         <button href="" class="templatemo-edit-btn" name="changCate">编辑</button>
                                     </td>
@@ -104,7 +104,7 @@
                 <form action="${pageContext.request.contextPath}/admin/goods/addCategoryResult" method="post">
                     <div class="row form-group">
                         <div class="col-lg-6 form-group">
-                            <input type="text" class="form-control" id="catename" name="catename">
+                            <input type="text" class="form-control" id="catename" name="cateName">
                         </div>
                         <div class="col-lg-4 form-group">
                             <button type="submit" class="templatemo-blue-button">添加</button>

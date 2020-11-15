@@ -42,6 +42,16 @@ public class Activity {
 
     private Integer reduceNum;
 
+    private String activityDes;
+
+    public String getActivityDes() {
+        return activityDes;
+    }
+
+    public void setActivityDes(String activityDes) {
+        this.activityDes = activityDes;
+    }
+
     public Integer getId() {
         return id;
     }

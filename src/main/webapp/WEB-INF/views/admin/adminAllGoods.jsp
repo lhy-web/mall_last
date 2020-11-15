@@ -181,7 +181,7 @@
     </div>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
-        <jsp:include page="../goodsNav.jsp"/>
+        <jsp:include page="goodsNav.jsp"/>
         <div class="templatemo-content-container">
             <div class="templatemo-content-widget no-padding">
                 <div class="panel panel-default table-responsive">

@@ -2,19 +2,54 @@ package com.sk.mall.service;
 
 
 import com.sk.mall.entity.Category;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("CateService")
+/**
+ * @author qiaochx
+ */
 public interface CateService {
+    /**
+     * 查找所有分类
+     *
+     * @return List<Category>
+     */
     List<Category> getAllCate();
 
-     void insertSelective(Category category);
+    /**
+     * 添加商品分类
+     *
+     * @param category 分类
+     */
+    void insertSelective(Category category);
 
-     Category selectById(Integer category);
+    /**
+     * 通过主键id查找
+     *
+     * @param cateId id
+     * @return Category
+     */
+    Category selectById(Integer cateId);
 
-     void updateByPrimaryKeySelective(Category category);
+    /**
+     * 通过名称查找
+     *
+     * @param name 名称
+     * @return Category
+     */
+    Category selectByName(String name);
 
-     void deleteById(Integer id);
+    /**
+     * 修改分类
+     *
+     * @param category 信息
+     */
+    void updateByPrimaryKeySelective(Category category);
+
+    /**
+     * 通过id删除
+     *
+     * @param id id
+     */
+    void deleteById(Integer id);
 }

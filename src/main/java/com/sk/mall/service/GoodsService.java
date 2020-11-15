@@ -3,19 +3,20 @@ package com.sk.mall.service;
 
 import com.sk.mall.entity.Favorite;
 import com.sk.mall.entity.Goods;
+import com.sk.mall.entity.ImagePath;
 
 import java.util.List;
 
 public interface GoodsService {
-//    Integer addGoods(Goods goods);
+    Integer addGoods(Goods goods);
 
-//    void addImagePath(ImagePath imagePath);
-//
+    void addImagePath(ImagePath imagePath);
+
     List<Goods> getAllGoods();
 
-//    void deleteGoodsById(Integer goodsid);
-//
-//    void updateGoodsById(Goods goods);
+    void deleteGoodsById(Integer id);
+
+    void updateGoodsById(Goods goods);
 //
 //    List<ImagePath> findImagePath(Integer goodsid);
 //

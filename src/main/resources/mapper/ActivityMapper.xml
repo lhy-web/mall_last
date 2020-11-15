@@ -10,10 +10,11 @@
         <result column="reducePrice" jdbcType="INTEGER" property="reducePrice"/>
         <result column="fullNum" jdbcType="INTEGER" property="fullNum"/>
         <result column="reduceNum" jdbcType="INTEGER" property="reduceNum"/>
+        <result column="activityDes" jdbcType="VARCHAR" property="activityDes"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, activityName, activityDes, discount, fullPrice, reducePrice, fullNum,
+        id, activityName, activityDes, discount, fullPrice, reducePrice, fullNum,activityDes
     reduceNum
     </sql>
 
@@ -49,52 +50,53 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="activityname != null">
+            <if test="activityName != null">
                 activityName,
             </if>
-            <if test="activitydes != null">
+            <if test="activityDes != null">
                 activityDes,
             </if>
-            <if test="discount != null">
+            <if test="disCount != null">
                 discount,
             </if>
-            <if test="fullprice != null">
+            <if test="fullPrice != null">
                 fullPrice,
             </if>
-            <if test="reduceprice != null">
+            <if test="reducePrice != null">
                 reducePrice,
             </if>
-            <if test="fullnum != null">
+            <if test="fullNum != null">
                 fullNum,
             </if>
-            <if test="reducenum != null">
+            <if test="reduceNum != null">
                 reduceNum,
             </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="activityname != null">
-                #{activityname,jdbcType=VARCHAR},
+            <if test="activityName != null">
+                #{activityName,jdbcType=VARCHAR},
             </if>
-            <if test="activitydes != null">
-                #{activitydes,jdbcType=VARCHAR},
+            <if test="activityDes != null">
+                #{activityDes,jdbcType=VARCHAR},
             </if>
-            <if test="discount != null">
-                #{discount,jdbcType=REAL},
+            <if test="disCount != null">
+                #{disCount,jdbcType=REAL},
             </if>
-            <if test="fullprice != null">
-                #{fullprice,jdbcType=INTEGER},
+            <if test="fullPrice != null">
+                #{fullPrice,jdbcType=INTEGER},
             </if>
-            <if test="reduceprice != null">
-                #{reduceprice,jdbcType=INTEGER},
+            <if test="reducePrice != null">
+                #{reducePrice,jdbcType=INTEGER},
             </if>
-            <if test="fullnum != null">
-                #{fullnum,jdbcType=INTEGER},
+            <if test="fullNum != null">
+                #{fullNum,jdbcType=INTEGER},
             </if>
-            <if test="reducenum != null">
-                #{reducenum,jdbcType=INTEGER},
+            <if test="reduceNum != null">
+                #{reduceNum,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>

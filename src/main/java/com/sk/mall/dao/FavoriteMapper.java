@@ -1,26 +1,38 @@
 package com.sk.mall.dao;
 
-
 import com.sk.mall.entity.Favorite;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Repository
 public interface FavoriteMapper {
 
+    /**
+     * 根据主键删除收藏
+     *
+     * @param key 主键
+     * @return int
+     */
     int deleteByPrimaryKey(Favorite key);
 
+    /**
+     * 添加收藏
+     *
+     * @param record 收藏信息
+     * @return int
+     */
     int insertSelective(Favorite record);
 
     /**
-     * 查询某个人所有的收藏
+     * 查找是否收藏了
      *
-     * @param userId 用户id
-     * @return List<Favorite>
+     * @param key 主键
+     * @return Favorite
      */
-    List<Favorite> getAllFavorite(String userId);
-
     Favorite selectByPrimaryKey(Favorite key);
 
 }

@@ -12,13 +12,13 @@
     </select>
 
 
-    <insert id="insertSelective" parameterType="com.sk.mall.entity.ImagePath">
+    <insert id="addImagePath" parameterType="com.sk.mall.entity.ImagePath">
         insert into imagepath
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pathid != null">
+            <if test="id != null">
                 id,
             </if>
-            <if test="goodid != null">
+            <if test="goodId != null">
                 goodId,
             </if>
             <if test="path != null">
@@ -26,10 +26,10 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="pathid != null">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="goodid != null">
+            <if test="goodId != null">
                 #{goodId,jdbcType=INTEGER},
             </if>
             <if test="path != null">

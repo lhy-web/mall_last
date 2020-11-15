@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface ImagePathMapper {
 
-    int insertSelective(ImagePath record);
+    int addImagePath(ImagePath record);
 
 
     /**

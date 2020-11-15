@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Service("cateService")
 public class CateServiceImpl implements CateService {
 
-    @Autowired(required = false)
+    @Autowired
     CategoryMapper categoryMapper;
 
     @Override
@@ -25,8 +28,13 @@ public class CateServiceImpl implements CateService {
     }
 
     @Override
-    public Category selectById(Integer category) {
-        return categoryMapper.selectByPrimaryKey(category);
+    public Category selectById(Integer cateId) {
+        return categoryMapper.selectByPrimaryKey(cateId);
+    }
+
+    @Override
+    public Category selectByName(String name) {
+        return categoryMapper.selectByName(name);
     }
 
     @Override

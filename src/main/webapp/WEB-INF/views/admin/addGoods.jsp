@@ -15,21 +15,12 @@
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/templatemo-style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <script src="${pageContext.request.contextPath}/js/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sweetalert.css">
-
-    <%--<c:if test="${empty msg}">
-        <script>
-            swal(${msg}, "成功","success");
-        </script>
-    </c:if>--%>
 </head>
 <body>
 <!-- Left column -->
@@ -37,7 +28,7 @@
     <jsp:include page="sidebar.jsp"></jsp:include>
     <!-- Main content -->
     <div class="templatemo-content col-1 light-gray-bg">
-        <jsp:include page="../goodsNav.jsp"></jsp:include>
+        <jsp:include page="goodsNav.jsp"></jsp:include>
         <div class="templatemo-content-container">
             <div class="templatemo-content-widget white-bg">
                 <h2 class="margin-bottom-10">添加商品</h2>
@@ -47,7 +38,7 @@
                     <div class="row form-group">
                         <div class="col-lg-12 form-group">
                             <label class="control-label" for="inputWithSuccess">商品名称</label>
-                            <input type="text" class="form-control" id="inputWithSuccess" name="goodsname">
+                            <input type="text" class="form-control" id="inputWithSuccess" name="goodsName">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -71,13 +62,13 @@
                             <label class="control-label templatemo-block">类别</label>
                             <select class="form-control" name="category">
                                 <c:forEach items="${categoryList}" var="item">
-                                    <option value="${item.cateid}">${item.catename}</option>
+                                    <option value="${item.id}">${item.cateName}</option>
                                 </c:forEach>
                             </select>
                         </div>
                         <div class="col-lg-6 col-md-6 form-group">
                             <label class="control-label" for="inputWithSuccess2">详细类别</label>
-                            <input type="text" class="form-control" id="inputWithSuccess2" name="detailcate">
+                            <input type="text" class="form-control" id="inputWithSuccess2" name="detailCate">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -111,6 +102,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             swal('${msg}', '成功', 'success');
+            if ('${msg}' === "商品添加成功!"){
+                swal('${msg}', '成功', 'success');
+            }
+            if ('${msg}' === "商品添加失败!"){
+                alert("商品添加失败，请上传全部信息");
+            }
         });
     </script>
 </c:if>

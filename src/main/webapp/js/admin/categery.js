@@ -11,8 +11,8 @@ $(document).ready(function () {
 
     $("#saveCatename").click(function () {
         var category = {};
-        category.cateid = cateId;
-        category.catename = $("#categoryName").val();
+        category.id = cateId;
+        category.cateName = $("#categoryName").val();
         $.ajax({
             type: "POST",
             url: "/shop/admin/goods/saveCate",
@@ -34,9 +34,10 @@ $(document).ready(function () {
             }
         });
     })
+
     $("[name='deleteCate']").click(function () {
         var category = {};
-        category.cateid = $(this).parent().prev().prev().children().attr("cateId");
+        category.id = $(this).parent().prev().prev().children().attr("cateId");
         $.ajax({
             type: "POST",
             url: "/shop/admin/goods/deleteCate",

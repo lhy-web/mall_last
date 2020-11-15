@@ -20,8 +20,8 @@
         select
         <include refid="Base_Column_List"/>
         from collection
-        where userId = #{userid,jdbcType=INTEGER}
-        and goodsId = #{goodsid,jdbcType=INTEGER}
+        where userId = #{userId,jdbcType=INTEGER}
+        and goodsId = #{goodsId,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.Favorite">
@@ -39,24 +39,24 @@
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Favorite">
         insert into collection
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userid != null">
+            <if test="userId != null">
                 userId,
             </if>
-            <if test="goodsid != null">
+            <if test="goodsId != null">
                 goodsId,
             </if>
-            <if test="collecttime != null">
+            <if test="collectTime != null">
                 collectTime,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userid != null">
+            <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
             </if>
-            <if test="goodsid != null">
+            <if test="goodsId != null">
                 #{goodsId,jdbcType=INTEGER},
             </if>
-            <if test="collecttime != null">
+            <if test="collectTime != null">
                 #{collectTime,jdbcType=TIMESTAMP},
             </if>
         </trim>

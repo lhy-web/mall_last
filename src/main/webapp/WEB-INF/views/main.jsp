@@ -631,7 +631,6 @@
         </c:if>
     </div>
 </div>
-<div class="button">版权归长沙理工大学网络工程系张鑫毕设所有</div>
 </body>
 </html>
 

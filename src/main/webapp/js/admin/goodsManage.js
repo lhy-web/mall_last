@@ -46,13 +46,13 @@ $(document).on("click", "#saveUpdate", function () {
         url: "/shop/admin/goods/update/",
         type: "POST",
         data: {
-            goodsid: ugoodsid,
-            goodsname: ugoodsname,
+            id: ugoodsid,
+            goodsName: ugoodsname,
             price: uprice,
             num: unum,
             description: udescription,
             category: ucategory,
-            detailcate: udetailcate,
+            detailCate: udetailcate,
         },
         success: function (result) {
             $("#update-goods").modal('hide');
@@ -116,13 +116,13 @@ $(document).on("click", ".templatemo-delete-btn", function () {
 });*/
 
 function showActInfo(activityId) {
-    $('#activityname').text(activity[activityId - 1].activityname);
-    $('#activitydes').text(activity[activityId - 1].activitydes);
-    $('#discount').text(activity[activityId - 1].discount);
-    $('#fullprice').text(activity[activityId - 1].fullprice);
-    $('#reduceprice').text(activity[activityId - 1].reduceprice);
-    $('#fullnum').text(activity[activityId - 1].fullnum);
-    $('#reducenum').text(activity[activityId - 1].reducenum);
+    $('#activityname').text(activity[activityId - 1].activityName);
+    $('#activitydes').text(activity[activityId - 1].activityDes);
+    $('#discount').text(activity[activityId - 1].disCount);
+    $('#fullprice').text(activity[activityId - 1].fullPrice);
+    $('#reduceprice').text(activity[activityId - 1].reducePrice);
+    $('#fullnum').text(activity[activityId - 1].fullNum);
+    $('#reducenum').text(activity[activityId - 1].reduceNum);
 }
 
 $("#activity-id").change(function () {
@@ -138,7 +138,7 @@ function getActivity() {
                 $("#activity-id").empty();
                 activity = result.info.activity;
                 $.each(activity, function (index, item) {
-                    $("#activity-id").append($("<option></option>").attr("value", item.activityid).append(item.activityid));
+                    $("#activity-id").append($("<option></option>").attr("value", item).append(item.activityName));
                 });
                 showActInfo(1);
             } else {
@@ -151,14 +151,14 @@ function getActivity() {
 //保存活动信息
 $(document).on("click", "#saveActivity", function () {
     var goodsid = $("#activity-goodsid").text();
-    var activityid = $("#activity-id").val();
+    var activityid = $("#activity-id").val().id;
 
     $.ajax({
         url: "/shop/admin/activity/update/",
         type: "POST",
         data: {
-            goodsid: goodsid,
-            activityid: activityid
+            goodsId: goodsid,
+            activityId: activityid
         },
         success: function (result) {
             $("#activity-goods").modal('hide');
@@ -200,14 +200,18 @@ function build_goods_table(path, result) {
         var price = $("<td></td>").append(item.price);
         var num = $("<td></td>").append(item.num);
         var detailcate = $("<td></td>").append(item.detailCate);
-        var activityid = $("<td></td>").append(item.Activity.activityName);
+        var activityid;
+        if (item.activity != null){
+          activityid = $("<td></td>").append(item.activity.activityName);
+        } else{
+            activityid = $("<td></td>").append("");
+        }
 
-        // var detailA = $('<a tabindex="0" class="btn btn-sm description" role="button" placement="top" data-toggle="popover" data-trigger="focus" title="描述" ></a>').append("描述");
         var detailBtn = $('<button type="button" class="description" data-container="body" data-toggle="popover" data-placement="top"></button>').append("描述");
 
         detailBtn = detailBtn.attr("data-content", item.description);
 
-        var detailA = $("<a></a>").addClass("templatemo-link").attr("href", "/shop/detail?goodsid=" + item.goodsid).append("详情");
+        var detailA = $("<a></a>").addClass("templatemo-link").attr("href", "/shop/detail?goodsid=" + item.id).append("详情");
 
         var editBtn = $("<button></button>").addClass("templatemo-edit-btn").append("编辑");
         var deleteBtn = $("<button></button>").addClass("templatemo-delete-btn").append("删除");
@@ -225,7 +229,6 @@ function build_goods_table(path, result) {
         });
 
         var actTd = $("<td></td>").append(actBtn);
-
         var detailTd = $("<td></td>").append(detailA);
         var editTd = $("<td></td>").append(editBtn);
         var deleteTd = $("<td></td>").append(deleteBtn);

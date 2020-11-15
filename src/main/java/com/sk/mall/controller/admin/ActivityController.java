@@ -62,7 +62,7 @@ public class ActivityController {
         if (admin == null) {
             return "redirect:/admin/login";
         }
-        return "addActivity";
+        return "admin/addActivity";
     }
 
     @RequestMapping("/addResult")
@@ -71,19 +71,19 @@ public class ActivityController {
         return "redirect:/admin/activity/show";
     }
 
-//    @RequestMapping("/update")
-//    @ResponseBody
-//    public Msg updateActivity(Integer goodsid, Integer activityid, HttpSession session) {
-//        Admin admin = (Admin) session.getAttribute("admin");
-//        if (admin == null) {
-//            return Msg.fail("请先登录");
-//        }
-//        Goods goods = new Goods();
-//        goods.setActivityid(activityid);
-//        goods.setId(goodsid);
-//        goodsService.updateGoodsById(goods);
-//        return Msg.success("更新商品活动成功");
-//    }
+    @RequestMapping("/update")
+    @ResponseBody
+    public Msg updateActivity(Integer goodsid, Integer activityid, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        if (admin == null) {
+            return Msg.fail("请先登录");
+        }
+        Goods goods = new Goods();
+        goods.setActivityId(activityid);
+        goods.setId(goodsid);
+        goodsService.updateGoodsById(goods);
+        return Msg.success("更新商品活动成功");
+    }
 
     @RequestMapping("delete")
     public String deleteActivity(Integer activityid, HttpSession session) {

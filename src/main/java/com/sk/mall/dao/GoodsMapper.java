@@ -12,11 +12,13 @@ public interface GoodsMapper {
 //
 //    int deleteByExample(GoodsExample example);
 //
-//    int deleteByPrimaryKey(Integer goodsid);
+    int deleteById(Integer id);
 //
 //    int insert(Goods record);
 //
-//    int insertSelective(Goods record);
+
+    int insertSelective(Goods record);
+
 //
 //    List<Goods> selectByExampleWithBLOBs(GoodsExample example);
 //
@@ -33,7 +35,7 @@ public interface GoodsMapper {
 //
 //    int updateByExample(@Param("record") Goods record, @Param("example") GoodsExample example);
 //
-//    int updateByPrimaryKeySelective(Goods record);
+    int updateByPrimaryKeySelective(Goods record);
 //
 //    int updateByPrimaryKeyWithBLOBs(Goods record);
 //

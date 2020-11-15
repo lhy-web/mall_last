@@ -11,19 +11,22 @@
         <result column="categoryName" jdbcType="VARCHAR" property="categoryName"/>
         <result column="detailCate" jdbcType="VARCHAR" property="detailCate"/>
         <result column="isSale" jdbcType="INTEGER" property="isSale"/>
-        <association property="activity" select="com.sk.mall.dao.ActivityMapper.getActivityById" javaType="com.sk.mall.entity.Activity" column="activityId"/>
+        <association property="activity" select="com.sk.mall.dao.ActivityMapper.getActivityById"
+                     javaType="com.sk.mall.entity.Activity" column="activityId"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sk.mall.entity.Goods">
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
 
     <resultMap extends="ResultMapWithBLOBs" id="ResultMapIncludeImage" type="com.sk.mall.entity.Goods">
-        <collection property="imagePaths" javaType="ArrayList" ofType="com.sk.mall.entity.ImagePath" select="com.sk.mall.dao.ImagePathMapper.getImagesByGoodsId" column="id" />
+        <collection property="imagePaths" javaType="ArrayList" ofType="com.sk.mall.entity.ImagePath"
+                    select="com.sk.mall.dao.ImagePathMapper.getImagesByGoodsId" column="id"/>
 
     </resultMap>
 
     <resultMap extends="ResultMapIncludeImage" id="ResultMapIncludeComment" type="com.sk.mall.entity.Goods">
-        <collection property="comments" javaType="ArrayList" ofType="com.sk.mall.entity.Comment" select="com.sk.mall.dao.CommentMapper.getByGoodsId" column="id" />
+        <collection property="comments" javaType="ArrayList" ofType="com.sk.mall.entity.Comment"
+                    select="com.sk.mall.dao.CommentMapper.getByGoodsId" column="id"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -87,17 +90,24 @@
     </sql>
     <sql id="Base_Column_List">
         id, goodsName, price, num, upTime, category, categoryName, detailCate, activityId, isSale
-  </sql>
+    </sql>
     <sql id="Blob_Column_List">
-    description
-  </sql>
+        description
+    </sql>
 
     <select id="selectFavByUserId" resultMap="ResultMapIncludeImage">
-        select g.* from goods g , collection c where g.id = c.goodsId and c.userId = #{userId} and isSale = 1
+        select g.*
+        from goods g,
+             collection c
+        where g.id = c.goodsId
+          and c.userId = #{userId}
+          and isSale = 1
     </select>
 
     <select id="getById" parameterType="java.lang.Integer" resultMap="ResultMapIncludeComment">
-        select g.* from goods g  where g.id = #{id}
+        select g.*
+        from goods g
+        where g.id = #{id}
     </select>
 
     <select id="selectByExampleWithBLOBs" parameterType="com.sk.mall.entity.Goods"
@@ -136,39 +146,41 @@
         </if>
         limit 10
     </select>
-    <select id="getAllGoods"  resultMap="BaseResultMap">
-        select * from goods order by upTime
+    <select id="getAllGoods" resultMap="BaseResultMap">
+        select *
+        from goods
+        order by upTime
     </select>
 
 
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete
+        from goods
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from goods
-    where goodsId = #{goodsid,jdbcType=INTEGER}
-  </delete>
     <delete id="deleteByExample" parameterType="com.sk.mall.entity.Goods">
         delete from goods
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
+
     <insert id="insert" parameterType="com.sk.mall.entity.Goods">
-    insert into goods (goodsId, goodsName, price, 
-      num, upTime, category, 
-      detailCate, activityId, description
-      )
-    values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{num,jdbcType=INTEGER}, #{uptime,jdbcType=TIMESTAMP}, #{category,jdbcType=INTEGER}, 
-      #{detailcate,jdbcType=VARCHAR}, #{activityid,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-    <insert id="insertSelective" parameterType="com.sk.mall.entity.Goods" useGeneratedKeys="true" keyProperty="goodsid">
+        insert into goods (id, goodsName, price,
+                           num, upTime, category,
+                           detailCate, activityId, description)
+        values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+                #{num,jdbcType=INTEGER}, #{uptime,jdbcType=TIMESTAMP}, #{category,jdbcType=INTEGER},
+                #{detailcate,jdbcType=VARCHAR}, #{activityid,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sk.mall.entity.Goods" useGeneratedKeys="true" keyProperty="id">
         insert into goods
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="goodsid != null">
-                goodsId,
+            <if test="id != null">
+                id,
             </if>
-            <if test="goodsname != null">
+            <if test="goodsName != null">
                 goodsName,
             </if>
             <if test="price != null">
@@ -177,28 +189,34 @@
             <if test="num != null">
                 num,
             </if>
-            <if test="uptime != null">
+            <if test="upTime != null">
                 upTime,
             </if>
             <if test="category != null">
                 category,
             </if>
-            <if test="detailcate != null">
+            <if test="categoryName != null">
+                categoryName,
+            </if>
+            <if test="detailCate != null">
                 detailCate,
             </if>
-            <if test="activityid != null">
+            <if test="activityId != null">
                 activityId,
             </if>
             <if test="description != null">
                 description,
             </if>
+            <if test="isSale != null">
+                isSale,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="goodsid != null">
-                #{goodsid,jdbcType=INTEGER},
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
             </if>
-            <if test="goodsname != null">
-                #{goodsname,jdbcType=VARCHAR},
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
             </if>
             <if test="price != null">
                 #{price,jdbcType=INTEGER},
@@ -206,20 +224,26 @@
             <if test="num != null">
                 #{num,jdbcType=INTEGER},
             </if>
-            <if test="uptime != null">
-                #{uptime,jdbcType=TIMESTAMP},
+            <if test="upTime != null">
+                #{upTime,jdbcType=TIMESTAMP},
             </if>
             <if test="category != null">
                 #{category,jdbcType=INTEGER},
             </if>
-            <if test="detailcate != null">
-                #{detailcate,jdbcType=VARCHAR},
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=INTEGER},
             </if>
-            <if test="activityid != null">
-                #{activityid,jdbcType=INTEGER},
+            <if test="detailCate != null">
+                #{detailCate,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
             </if>
             <if test="description != null">
                 #{description,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isSale != null">
+                #{isSale,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -232,8 +256,8 @@
     <update id="updateByExampleSelective" parameterType="map">
         update goods
         <set>
-            <if test="record.goodsid != null">
-                goodsId = #{record.goodsid,jdbcType=INTEGER},
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
             </if>
             <if test="record.goodsname != null">
                 goodsName = #{record.goodsname,jdbcType=VARCHAR},
@@ -250,11 +274,11 @@
             <if test="record.category != null">
                 category = #{record.category,jdbcType=INTEGER},
             </if>
-            <if test="record.detailcate != null">
-                detailCate = #{record.detailcate,jdbcType=VARCHAR},
+            <if test="record.detailCate != null">
+                detailCate = #{record.detailCate,jdbcType=VARCHAR},
             </if>
-            <if test="record.activityid != null">
-                activityId = #{record.activityid,jdbcType=INTEGER},
+            <if test="record.activityId != null">
+                activityId = #{record.activityId,jdbcType=INTEGER},
             </if>
             <if test="record.description != null">
                 description = #{record.description,jdbcType=LONGVARCHAR},
@@ -266,7 +290,7 @@
     </update>
     <update id="updateByExampleWithBLOBs" parameterType="map">
         update goods
-        set goodsId = #{record.goodsid,jdbcType=INTEGER},
+        set id = #{record.id,jdbcType=INTEGER},
         goodsName = #{record.goodsname,jdbcType=VARCHAR},
         price = #{record.price,jdbcType=INTEGER},
         num = #{record.num,jdbcType=INTEGER},
@@ -281,7 +305,7 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update goods
-        set goodsId = #{record.goodsid,jdbcType=INTEGER},
+        set id = #{record.id,jdbcType=INTEGER},
         goodsName = #{record.goodsname,jdbcType=VARCHAR},
         price = #{record.price,jdbcType=INTEGER},
         num = #{record.num,jdbcType=INTEGER},
@@ -293,11 +317,12 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.sk.mall.entity.Goods">
         update goods
         <set>
-            <if test="goodsname != null">
-                goodsName = #{goodsname,jdbcType=VARCHAR},
+            <if test="goodsName != null">
+                goodsName = #{goodsName,jdbcType=VARCHAR},
             </if>
             <if test="price != null">
                 price = #{price,jdbcType=INTEGER},
@@ -305,47 +330,54 @@
             <if test="num != null">
                 num = #{num,jdbcType=INTEGER},
             </if>
-            <if test="uptime != null">
-                upTime = #{uptime,jdbcType=TIMESTAMP},
+            <if test="upTime != null">
+                upTime = #{upTime,jdbcType=TIMESTAMP},
             </if>
             <if test="category != null">
                 category = #{category,jdbcType=INTEGER},
             </if>
-            <if test="detailcate != null">
-                detailCate = #{detailcate,jdbcType=VARCHAR},
+            <if test="categoryName != null">
+                categoryName = #{categoryName,jdbcType=VARCHAR},
             </if>
-            <if test="activityid != null">
-                activityId = #{activityid,jdbcType=INTEGER},
+            <if test="detailCate != null">
+                detailCate = #{detailCate,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                activityId = #{activityId,jdbcType=INTEGER},
             </if>
             <if test="description != null">
                 description = #{description,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where goodsId = #{goodsid,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sk.mall.entity.Goods">
-    update goods
-    set goodsName = #{goodsname,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-      upTime = #{uptime,jdbcType=TIMESTAMP},
-      category = #{category,jdbcType=INTEGER},
-      detailCate = #{detailcate,jdbcType=VARCHAR},
-      activityId = #{activityid,jdbcType=INTEGER},
-      description = #{description,jdbcType=LONGVARCHAR}
-    where goodsId = #{goodsid,jdbcType=INTEGER}
-  </update>
+        update goods
+        set goodsName    = #{goodsName,jdbcType=VARCHAR},
+            price        = #{price,jdbcType=INTEGER},
+            num          = #{num,jdbcType=INTEGER},
+            upTime       = #{upTime,jdbcType=TIMESTAMP},
+            category     = #{category,jdbcType=INTEGER},
+            categoryName = #{categoryName,jdbcType=VARCHAR},
+            detailCate   = #{detailCate,jdbcType=VARCHAR},
+            activityId   = #{activityId,jdbcType=INTEGER},
+            description  = #{description,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
     <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.Goods">
-    update goods
-    set goodsName = #{goodsname,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER},
-      upTime = #{uptime,jdbcType=TIMESTAMP},
-      category = #{category,jdbcType=INTEGER},
-      detailCate = #{detailcate,jdbcType=VARCHAR},
-      activityId = #{activityid,jdbcType=INTEGER}
-    where goodsId = #{goodsid,jdbcType=INTEGER}
-  </update>
+        update goods
+        set goodsName    = #{goodsname,jdbcType=VARCHAR},
+            price        = #{price,jdbcType=INTEGER},
+            num          = #{num,jdbcType=INTEGER},
+            upTime       = #{uptime,jdbcType=TIMESTAMP},
+            category     = #{category,jdbcType=INTEGER},
+            categoryName = #{categoryName,jdbcType=VARCHAR},
+            detailCate   = #{detailcate,jdbcType=VARCHAR},
+            activityId   = #{activityid,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
 
 </mapper>
