@@ -15,7 +15,8 @@
     </resultMap>
 
     <resultMap id="orderResult" extends="BaseResultMap" type="com.sk.mall.entity.Order">
-        <collection property="orderItems"  javaType="ArrayList" ofType="com.sk.mall.entity.OrderItem" select="com.sk.mall.dao.OrderItemMapper.getOrderItemByOrderId" column="id"/>
+        <collection property="orderItems" javaType="ArrayList" ofType="com.sk.mall.entity.OrderItem"
+                    select="com.sk.mall.dao.OrderItemMapper.getOrderItemByOrderId" column="id"/>
     </resultMap>
 
     <resultMap id="orderIncludeAddress" extends="orderResult" type="com.sk.mall.entity.Order">
@@ -92,12 +93,16 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, userId, orderTime, oldPrice, newPrice, isPay, isSend, isReceive, isComplete,
+        id, userId, orderTime, oldPrice, newPrice, isPay, isSend, isReceive, isComplete,
     addressId
-  </sql>
+    </sql>
 
     <select id="getAllOrderByUserId" resultMap="orderResult">
-        select o.* from indent o , address a where o.addressId = a.id and  o.userId = #{userId}
+        select o.*
+        from indent o,
+             address a
+        where o.addressId = a.id
+          and o.userId = #{userId}
     </select>
 
     <select id="getAllByState" resultMap="orderIncludeAddress">
@@ -126,16 +131,17 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from indent
-        where orderId = #{orderid,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteById" parameterType="java.lang.Integer">
-    delete from indent
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete
+        from indent
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <delete id="deleteByExample" parameterType="com.sk.mall.entity.Order">
         delete from indent
         <if test="_parameter != null">
@@ -143,15 +149,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sk.mall.entity.Order">
-    insert into indent (id, userId, orderTime,
-      oldPrice, newPrice, isPay, isSend, 
-      isReceive, isComplete, addressId
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP},
-      #{oldPrice,jdbcType=REAL}, #{newPrice,jdbcType=REAL}, #{isPay,jdbcType=BIT}, #{issend,jdbcType=BIT}, 
-      #{isReceive,jdbcType=BIT}, #{isComplete,jdbcType=BIT}, #{addressId,jdbcType=INTEGER}
-      )
-  </insert>
+        insert into indent (id, userId, orderTime,
+                            oldPrice, newPrice, isPay, isSend,
+                            isReceive, isComplete, addressId)
+        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP},
+                #{oldPrice,jdbcType=REAL}, #{newPrice,jdbcType=REAL}, #{isPay,jdbcType=BIT}, #{issend,jdbcType=BIT},
+                #{isReceive,jdbcType=BIT}, #{isComplete,jdbcType=BIT}, #{addressId,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Order" useGeneratedKeys="true" keyProperty="orderid">
         insert into indent
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -313,16 +317,16 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.Order">
-    update indent
-    set userId = #{userId,jdbcType=INTEGER},
-      orderTime = #{orderTime,jdbcType=TIMESTAMP},
-      oldPrice = #{oldPrice,jdbcType=REAL},
-      newPrice = #{newPrice,jdbcType=REAL},
-      isPay = #{isPay,jdbcType=BIT},
-      isSend = #{isSend,jdbcType=BIT},
-      isReceive = #{isReceive,jdbcType=BIT},
-      isComplete = #{isComplete,jdbcType=BIT},
-      addressId = #{addressId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update indent
+        set userId     = #{userId,jdbcType=INTEGER},
+            orderTime  = #{orderTime,jdbcType=TIMESTAMP},
+            oldPrice   = #{oldPrice,jdbcType=REAL},
+            newPrice   = #{newPrice,jdbcType=REAL},
+            isPay      = #{isPay,jdbcType=BIT},
+            isSend     = #{isSend,jdbcType=BIT},
+            isReceive  = #{isReceive,jdbcType=BIT},
+            isComplete = #{isComplete,jdbcType=BIT},
+            addressId  = #{addressId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

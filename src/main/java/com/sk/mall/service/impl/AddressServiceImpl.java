@@ -16,7 +16,7 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
 
     /**
-     *  根据用户id 查询所有地址
+     * 根据用户id 查询所有地址
      *
      * @param userId 用户id
      * @return List<Address>

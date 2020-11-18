@@ -1,7 +1,6 @@
 package com.sk.mall.controller.font;
 
 
-import com.sk.mall.entity.*;
 import com.sk.mall.service.*;
 import com.sk.mall.util.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 @Controller

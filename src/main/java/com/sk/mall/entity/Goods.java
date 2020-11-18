@@ -36,7 +36,7 @@ public class Goods {
 
     private List<Comment> comments;
 
-     public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

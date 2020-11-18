@@ -82,11 +82,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, orderId, goodsId, num
-  </sql>
+        id, orderId, goodsId, num
+    </sql>
 
     <select id="getOrderItemByOrderId" resultMap="resultIncludeGoods">
-        select o.*,g.* from orderitem o, goods g where o.goodsId = g.id and orderId = #{orderId}
+        select o.*, g.*
+        from orderitem o,
+             goods g
+        where o.goodsId = g.id
+          and orderId = #{orderId}
     </select>
 
     <select id="selectByExample" parameterType="com.sk.mall.entity.OrderItem" resultMap="BaseResultMap">
@@ -110,9 +114,10 @@
         where itemId = #{itemid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orderitem
-    where itemId = #{itemid,jdbcType=INTEGER}
-  </delete>
+        delete
+        from orderitem
+        where itemId = #{itemid,jdbcType=INTEGER}
+    </delete>
     <delete id="deleteByExample" parameterType="com.sk.mall.entity.OrderItem">
         delete from orderitem
         <if test="_parameter != null">
@@ -120,11 +125,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sk.mall.entity.OrderItem">
-    insert into orderitem (itemId, orderId, goodsId, 
-      num)
-    values (#{itemid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, 
-      #{num,jdbcType=INTEGER})
-  </insert>
+        insert into orderitem (itemId, orderId, goodsId,
+                               num)
+        values (#{itemid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER},
+                #{num,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="com.sk.mall.entity.OrderItem">
         insert into orderitem
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -208,10 +213,10 @@
         where itemId = #{itemid,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.OrderItem">
-    update orderitem
-    set orderId = #{orderid,jdbcType=INTEGER},
-      goodsId = #{goodsid,jdbcType=INTEGER},
-      num = #{num,jdbcType=INTEGER}
-    where itemId = #{itemid,jdbcType=INTEGER}
-  </update>
+        update orderitem
+        set orderId = #{orderid,jdbcType=INTEGER},
+            goodsId = #{goodsid,jdbcType=INTEGER},
+            num     = #{num,jdbcType=INTEGER}
+        where itemId = #{itemid,jdbcType=INTEGER}
+    </update>
 </mapper>

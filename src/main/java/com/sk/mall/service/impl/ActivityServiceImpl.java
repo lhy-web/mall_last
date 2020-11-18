@@ -15,7 +15,7 @@ public class ActivityServiceImpl implements ActivityService {
     ActivityMapper activityMapper;
 
     @Override
-    public List<Activity> getAllActivity( ) {
+    public List<Activity> getAllActivity() {
         return activityMapper.getAllActivity();
     }
 

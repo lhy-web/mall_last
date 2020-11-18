@@ -15,6 +15,7 @@ public class Comment {
 
     private Date commentTime;
 
+    private User user;
 
     public Integer getId() {
         return id;
@@ -64,6 +65,13 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
@@ -74,6 +82,7 @@ public class Comment {
                 ", point=" + point +
                 ", content='" + content + '\'' +
                 ", commentTime=" + commentTime +
+                ", user=" + user +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.sk.mall.service.impl;
 
-
 import com.sk.mall.dao.UserMapper;
 import com.sk.mall.entity.User;
 import com.sk.mall.service.UserService;
@@ -9,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -39,6 +41,5 @@ public class UserServiceImpl implements UserService {
     public void updateByPrimaryKeySelective(User user) {
         userMapper.updateByPrimaryKeySelective(user);
     }
-
 
 }

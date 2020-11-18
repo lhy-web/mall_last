@@ -3,7 +3,10 @@ package com.sk.mall.controller.font;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sk.mall.entity.*;
+import com.sk.mall.entity.Comment;
+import com.sk.mall.entity.Favorite;
+import com.sk.mall.entity.Goods;
+import com.sk.mall.entity.User;
 import com.sk.mall.service.*;
 import com.sk.mall.util.Msg;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FrontGoodsController {
@@ -59,45 +65,26 @@ public class FrontGoodsController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchGoods(@RequestParam(value = "page", defaultValue = "1") Integer pn, String keyword, Model model, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//
-//        //一页显示几个数据
-//        PageHelper.startPage(pn, 16);
-//
-//        //查询数据
-//        GoodsExample goodsExample = new GoodsExample();
-//        goodsExample.or().andGoodsnameLike("%" + keyword + "%");
-//        List<Goods> goodsList = goodsService.selectByExample(goodsExample);
-//
-//        //获取图片地址
-//        for (int i = 0; i < goodsList.size(); i++) {
-//            Goods goods = goodsList.get(i);
-//
-//            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getId());
-//
-//            goods.setImagePaths(imagePathList);
-//
-//            //判断是否收藏
-//            if (user == null) {
-//                goods.setFav(false);
-//            } else {
-//                Favorite favorite = goodsService.selectFavByKey(new FavoriteKey(user.getId(), goods.getId()));
-//                if (favorite == null) {
-//                    goods.setFav(false);
-//                } else {
-//                    goods.setFav(true);
-//                }
-//            }
-//
-//            goodsList.set(i, goods);
-//        }
-//
-//
-//        //显示几个页号
-//        PageInfo page = new PageInfo(goodsList, 5);
-//        model.addAttribute("pageInfo", page);
-//        model.addAttribute("keyword", keyword);
+        User user = (User) session.getAttribute("user");
+        //一页显示几个数据
+        PageHelper.startPage(pn, 16);
+        //查询数据
+        List<Goods> goodsList = goodsService.getBySearchName(keyword);
 
+        //获取图片地址
+        for (Goods goods : goodsList) {
+            //判断是否收藏
+            if (user == null) {
+                goods.setFav(false);
+            } else {
+                Favorite favorite = goodsService.selectFavByKey(new Favorite(user.getId(), goods.getId()));
+                goods.setFav(favorite != null);
+            }
+        }
+        //显示几个页号
+        PageInfo page = new PageInfo(goodsList, 5);
+        model.addAttribute("pageInfo", page);
+        model.addAttribute("keyword", keyword);
         return "search";
     }
 

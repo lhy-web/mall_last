@@ -3,8 +3,6 @@ package com.sk.mall.dao;
 import com.sk.mall.entity.Favorite;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * @author qiaochx
  */

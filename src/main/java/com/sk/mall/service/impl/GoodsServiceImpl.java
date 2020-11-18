@@ -86,12 +86,11 @@ public class GoodsServiceImpl implements GoodsService {
     public Goods selectById(Integer goodsid) {
         return goodsMapper.getById(goodsid);
     }
-//
-//    @Override
-//    public List<Goods> selectByExampleLimit(GoodsExample digGoodsExample) {
-//        return goodsMapper.selectByExampleWithBLOBsLimit(digGoodsExample);
-//    }
-//
+
+    @Override
+    public List<Goods> getBySearchName(String keyWord) {
+        return goodsMapper.getBySearchName("%" + keyWord + "%");
+    }
 
     @Override
     public void addFavorite(Favorite favorite) {

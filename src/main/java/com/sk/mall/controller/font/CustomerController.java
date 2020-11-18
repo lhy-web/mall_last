@@ -3,7 +3,10 @@ package com.sk.mall.controller.font;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sk.mall.entity.*;
+import com.sk.mall.entity.Address;
+import com.sk.mall.entity.Goods;
+import com.sk.mall.entity.Order;
+import com.sk.mall.entity.User;
 import com.sk.mall.service.AddressService;
 import com.sk.mall.service.GoodsService;
 import com.sk.mall.service.OrderService;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +82,7 @@ public class CustomerController {
      * 个人信息管理
      *
      * @param userModel 前端展示信息
-     * @param request  用来获取session
+     * @param request   用来获取session
      * @return String
      */
     @RequestMapping("/information")
@@ -100,10 +102,10 @@ public class CustomerController {
     /**
      * 修改个人信息
      *
-     * @param username 用户名
-     * @param email 邮箱
+     * @param username  用户名
+     * @param email     邮箱
      * @param telephone 手机号
-     * @param request 用来获取session
+     * @param request   用来获取session
      * @return Msg
      */
     @RequestMapping("/saveInfo")
@@ -112,7 +114,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         User user, updateUser = new User();
         user = (User) session.getAttribute("user");
-        if (user == null){
+        if (user == null) {
             return Msg.fail("请重新登录");
         }
         Integer userId = user.getId();
@@ -135,7 +137,7 @@ public class CustomerController {
     /**
      * 跳转地址页面
      *
-     * @param request request
+     * @param request      request
      * @param addressModel Model
      * @return String
      */
@@ -203,7 +205,7 @@ public class CustomerController {
     /**
      * 查询订单
      *
-     * @param request HttpServletRequest
+     * @param request    HttpServletRequest
      * @param orderModel Model
      * @return String
      */
@@ -222,8 +224,8 @@ public class CustomerController {
 
     @RequestMapping("/deleteList")
     @ResponseBody
-    public Msg deleteList(Order order) {
-        orderService.deleteById(order.getId());
+    public Msg deleteList(int orderId) {
+        orderService.deleteById(orderId);
         return Msg.success("删除成功");
     }
 
@@ -262,10 +264,10 @@ public class CustomerController {
     @RequestMapping("/finishList")
     @ResponseBody
     public Msg finishiList(Integer orderid) {
-//        Order order = orderService.selectByPrimaryKey(orderid);
-//        order.setIsreceive(true);
-//        order.setIscomplete(true);
-//        orderService.updateOrderByKey(order);
+        Order order = orderService.getById(orderid);
+        order.setIsReceive(true);
+        order.setIsComplete(true);
+        orderService.updateOrderByKey(order);
         return Msg.success("完成订单成功");
     }
 

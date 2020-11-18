@@ -1,7 +1,8 @@
 package com.sk.mall.controller.font;
 
 
-import com.sk.mall.entity.*;
+import com.sk.mall.entity.Goods;
+import com.sk.mall.entity.User;
 import com.sk.mall.service.CateService;
 import com.sk.mall.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

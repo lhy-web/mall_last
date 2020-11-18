@@ -17,12 +17,13 @@ public interface GoodsService {
     void deleteGoodsById(Integer id);
 
     void updateGoodsById(Goods goods);
-//
+
+    //
 //    List<ImagePath> findImagePath(Integer goodsid);
 //
     Goods selectById(Integer goodsid);
-//
-//    List<Goods> selectByExampleLimit(GoodsExample digGoodsExample);
+
+    List<Goods> getBySearchName(String keyWord);
 
     /**
      * 收藏商品

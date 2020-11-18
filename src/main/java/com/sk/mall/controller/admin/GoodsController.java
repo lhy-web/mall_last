@@ -35,9 +35,9 @@ public class GoodsController {
     private CateService cateService;
 
     /**
-     *  重定向当商品页
+     * 重定向当商品页
      *
-     * @param model 存数据
+     * @param model   存数据
      * @param session 取admin
      * @return String
      */
@@ -81,8 +81,8 @@ public class GoodsController {
     /**
      * 添加商品回调函数
      *
-     * @param msg 添加商品信息发返回值
-     * @param model 前端传值
+     * @param msg     添加商品信息发返回值
+     * @param model   前端传值
      * @param session 取admin，判断登录
      * @return String
      */
@@ -103,7 +103,8 @@ public class GoodsController {
 
     /**
      * 修改商品
-     * @param goods 商品
+     *
+     * @param goods   商品
      * @param session 取admin
      * @return Msg
      */
@@ -120,6 +121,7 @@ public class GoodsController {
 
     /**
      * 删除商品信息
+     *
      * @param goodsid 商品id
      * @return Msg
      */
@@ -134,8 +136,8 @@ public class GoodsController {
     /**
      * 添加商品，添加完成之后，重定向当添加商品页面
      *
-     * @param goods 商品
-     * @param fileToUpload 文件
+     * @param goods              商品
+     * @param fileToUpload       文件
      * @param redirectAttributes 重定向传递数据
      * @return String
      */
@@ -150,7 +152,7 @@ public class GoodsController {
         try {
             goodsService.addGoods(goods);
             for (MultipartFile multipartFile : fileToUpload) {
-                if (multipartFile.getOriginalFilename() == null || multipartFile.getOriginalFilename().equals("")){
+                if (multipartFile.getOriginalFilename() == null || multipartFile.getOriginalFilename().equals("")) {
                     throw new RuntimeException("请添加图片");
                 }
                 String fileName = goods.getGoodsName() + multipartFile.getOriginalFilename();
@@ -158,7 +160,7 @@ public class GoodsController {
                 //把图片路径存入数据库中
                 goodsService.addImagePath(new ImagePath(null, goods.getId(), imagePath));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("succeseMsg", "商品添加失败!");
         }
         redirectAttributes.addFlashAttribute("succeseMsg", "商品添加成功!");
@@ -169,8 +171,8 @@ public class GoodsController {
     /**
      * 添加商品分类
      *
-     * @param msg 分类信息
-     * @param model 返回给前端的数据
+     * @param msg     分类信息
+     * @param model   返回给前端的数据
      * @param session 取admin
      * @return String
      */
@@ -225,6 +227,7 @@ public class GoodsController {
 
     /**
      * 删除分类
+     *
      * @param category 分类信息
      * @return Msg
      */

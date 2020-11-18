@@ -73,14 +73,14 @@ public class ActivityController {
 
     @RequestMapping("/update")
     @ResponseBody
-    public Msg updateActivity(Integer goodsid, Integer activityid, HttpSession session) {
+    public Msg updateActivity(Integer goodsId, Integer activityId, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin == null) {
             return Msg.fail("请先登录");
         }
         Goods goods = new Goods();
-        goods.setActivityId(activityid);
-        goods.setId(goodsid);
+        goods.setActivityId(activityId);
+        goods.setId(goodsId);
         goodsService.updateGoodsById(goods);
         return Msg.success("更新商品活动成功");
     }

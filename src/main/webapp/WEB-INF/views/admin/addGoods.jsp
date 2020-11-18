@@ -102,10 +102,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             swal('${msg}', '成功', 'success');
-            if ('${msg}' === "商品添加成功!"){
+            if ('${msg}' === "商品添加成功!") {
                 swal('${msg}', '成功', 'success');
             }
-            if ('${msg}' === "商品添加失败!"){
+            if ('${msg}' === "商品添加失败!") {
                 alert("商品添加失败，请上传全部信息");
             }
         });

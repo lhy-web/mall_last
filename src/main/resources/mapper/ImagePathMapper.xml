@@ -8,7 +8,10 @@
     </resultMap>
 
     <select id="getImagesByGoodsId" resultMap="BaseResultMap">
-        select id, goodId, path from imagepath where goodId = ${id} order by goodId
+        select id, goodId, path
+        from imagepath
+        where goodId = ${id}
+        order by goodId
     </select>
 
 

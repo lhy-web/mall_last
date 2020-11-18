@@ -9,10 +9,12 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    userId, goodsId, cateDate, goodsNum
-  </sql>
+        userId, goodsId, cateDate, goodsNum
+    </sql>
     <select id="getShopCartsByUserId" resultMap="BaseResultMap">
-        select userId, goodsId, cateDate, goodsNum from shopcart  where userId = #{userid,jdbcType=INTEGER}
+        select userId, goodsId, cateDate, goodsNum
+        from shopcart
+        where userId = #{userid,jdbcType=INTEGER}
     </select>
 
     <select id="selectByPrimaryKey" parameterType="com.sk.mall.entity.ShopCart" resultMap="BaseResultMap">
@@ -24,10 +26,11 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.ShopCart">
-    delete from shopcart
-    where userId = #{userid,jdbcType=INTEGER}
-      and goodsid = #{goodsid,jdbcType=INTEGER}
-  </delete>
+        delete
+        from shopcart
+        where userId = #{userid,jdbcType=INTEGER}
+          and goodsid = #{goodsid,jdbcType=INTEGER}
+    </delete>
 
 
     <insert id="insertSelective" parameterType="com.sk.mall.entity.ShopCart">

@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("[name='deleteList']").click(function () {
         var orderid = $(this).parents("[name='parent']").find("[name='orderid']").text();
         var order = {};
-        order.orderid = parseInt(orderid);
+        order.orderId = parseInt(orderid);
         $.ajax({
             type: "POST",
             url: "/shop/deleteList",

@@ -32,6 +32,7 @@ public class UserController {
 
     /**
      * 查询所有用户
+     *
      * @param pn 查询用户
      * @return Msg
      */
@@ -49,6 +50,7 @@ public class UserController {
 
     /**
      * 删除用户
+     *
      * @param userid 用 户id
      * @return Msg
      */

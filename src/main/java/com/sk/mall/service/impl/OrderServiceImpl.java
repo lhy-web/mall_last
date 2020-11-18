@@ -1,11 +1,8 @@
 package com.sk.mall.service.impl;
 
 
-import com.sk.mall.dao.AddressMapper;
-import com.sk.mall.dao.OrderItemMapper;
 import com.sk.mall.dao.OrderMapper;
 import com.sk.mall.entity.Order;
-import com.sk.mall.entity.OrderItem;
 import com.sk.mall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +14,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
-//
+
+    //
 //    @Autowired(required = false)
 //    private OrderItemMapper orderItemMapper;
 //
@@ -30,15 +28,16 @@ public class OrderServiceImpl implements OrderService {
 //    }
 //
     @Override
-    public void deleteById(Integer orderid) {
-        orderMapper.deleteById(orderid);
+    public void deleteById(Integer orderId) {
+        orderMapper.deleteById(orderId);
     }
 
     @Override
     public List<Order> getAllByState(Order order) {
         return orderMapper.getAllByState(order);
     }
-//
+
+    //
 //
 //    @Override
 //    public List<Order> selectOrderByExample(OrderExample orderExample) {
@@ -65,11 +64,11 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrderByKey(Order order) {
         orderMapper.updateByPrimaryKeySelective(order);
     }
-//
-//    @Override
-//    public Order selectByPrimaryKey(Integer orderid) {
-//        return orderMapper.selectByPrimaryKey(orderid);
-//    }
+
+    @Override
+    public Order getById(int orderId) {
+        return orderMapper.getById(orderId);
+    }
 //
 //    @Override
 //    public void insertOrderItem(OrderItem orderItem) {

@@ -64,8 +64,9 @@ public class AdminOrderController {
 
     /**
      * 查询未收货订单
-     * @param pn 页码
-     * @param model model
+     *
+     * @param pn      页码
+     * @param model   model
      * @param session session
      * @return String
      */
@@ -92,9 +93,9 @@ public class AdminOrderController {
     /**
      * 已经接收的订单
      *
-     * @param pn 页码
-     * @param model Model
-     * @param session  session
+     * @param pn      页码
+     * @param model   Model
+     * @param session session
      * @return String
      */
     @RequestMapping("/complete")

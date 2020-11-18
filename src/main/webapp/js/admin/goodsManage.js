@@ -138,7 +138,7 @@ function getActivity() {
                 $("#activity-id").empty();
                 activity = result.info.activity;
                 $.each(activity, function (index, item) {
-                    $("#activity-id").append($("<option></option>").attr("value", item).append(item.activityName));
+                    $("#activity-id").append($("<option></option>").attr("value", item.id).append(item.activityName));
                 });
                 showActInfo(1);
             } else {
@@ -151,7 +151,7 @@ function getActivity() {
 //保存活动信息
 $(document).on("click", "#saveActivity", function () {
     var goodsid = $("#activity-goodsid").text();
-    var activityid = $("#activity-id").val().id;
+    var activityid = $("#activity-id").val();
 
     $.ajax({
         url: "/shop/admin/activity/update/",
@@ -201,9 +201,9 @@ function build_goods_table(path, result) {
         var num = $("<td></td>").append(item.num);
         var detailcate = $("<td></td>").append(item.detailCate);
         var activityid;
-        if (item.activity != null){
-          activityid = $("<td></td>").append(item.activity.activityName);
-        } else{
+        if (item.activity != null) {
+            activityid = $("<td></td>").append(item.activity.activityName);
+        } else {
             activityid = $("<td></td>").append("");
         }
 
@@ -219,7 +219,7 @@ function build_goods_table(path, result) {
         var desTd = $("<td hidden></td>").append(detailBtn);
 
         //活动按钮
-        var actBtn = $("<button></button>").addClass("templatemo-activity-btn").attr("data-actGoodsid", item.goodsid).append("添加");
+        var actBtn = $("<button></button>").addClass("templatemo-activity-btn").attr("data-actGoodsid", item.id).append("添加");
         actBtn.click(function () {
             $("#activity-goods").modal({
                 backdrop: 'static'

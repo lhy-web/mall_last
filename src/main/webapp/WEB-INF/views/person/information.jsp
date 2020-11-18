@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="form-group" style="display: none" id="oldPswError">
-                        <label  class="col-sm-2 control-label"></label>
+                        <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-9">
                             <label style="color: #BD1F3B">密码错误</label>
                         </div>
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     <div class="form-group" style="display: none" id="newPswError">
-                        <label  class="col-sm-2 control-label"></label>
+                        <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-9">
                             <label style="color: #BD1F3B">密码应长度大于8</label>
                         </div>

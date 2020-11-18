@@ -2,32 +2,50 @@ package com.sk.mall.dao;
 
 
 import com.sk.mall.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface UserMapper {
-//    long countByExample(UserExample example);
-//
-//    int deleteByExample(UserExample example);
+    /**
+     * 根据主键删除
+     *
+     * @param userId 用户id
+     * @return int
+     */
+    int deleteByPrimaryKey(Integer userId);
 
-    int deleteByPrimaryKey(Integer userid);
+    /**
+     * 添加人员
+     *
+     * @param user 用户资料
+     * @return int
+     */
+    int insertSelective(User user);
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
+    /**
+     * 查询所有人员
+     *
+     * @param user 人员
+     * @return List<User>
+     */
     List<User> selectAllUser(User user);
 
-    User selectByPrimaryKey(Integer userid);
+    /**
+     * 根据主键查找
+     *
+     * @param userId 用户id
+     * @return User
+     */
+    User selectByPrimaryKey(Integer userId);
 
-//    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-//
-//    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+    /**
+     * 修改用户资料
+     *
+     * @param user 用户资料
+     * @return int
+     */
+    int updateByPrimaryKeySelective(User user);
 
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
 }

@@ -1,8 +1,6 @@
 package com.sk.mall.controller.font;
 
 
-import com.sk.mall.entity.Goods;
-import com.sk.mall.entity.ImagePath;
 import com.sk.mall.entity.ShopCart;
 import com.sk.mall.entity.User;
 import com.sk.mall.service.GoodsService;
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Controller
 public class CartController {

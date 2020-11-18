@@ -6,24 +6,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>长理商城-${goodsInfo['goods'].goodsname}</title>
+    <title>山科商城${goods.goodsName}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- all css here -->
-    <!-- bootstrap v3.3.6 css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.min.css">
     <!-- style css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
     <link href="${pageContext.request.contextPath}/css/shopdetail.css" rel="stylesheet">
-    <!-- <script src="./detail/js/jquery.js"></script> -->
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-
-    <%--<script src="${pageContext.request.contextPath}/js/sort.js"></script>--%>
 
     <!-- bootstrap js -->
     <script src="${pageContext.request.contextPath}/css/bootstrap/js/bootstrap.min.js"></script>
@@ -63,7 +56,7 @@
 
                 $(".tabs li:first a").click(); //web 浏览器，单击第一个标签吧
 
-            }); //end ready
+            });
 
             $(".centerbox li").click(function () {
                 $("li").removeClass("now");
@@ -150,9 +143,6 @@
         <div class="shop_menu shop_menu_2 main-detail-div">
             <ul class="cramb_area cramb_area_5 main-detail-nav">
                 <li><a href="/shop/main">首页 /</a></li>
-                <%--<li><a href="index.html">Shop /</a></li>
-                <li><a href="index.html">Headlight/</a></li>
-                <li><a href="index.html">Hats /</a></li>--%>
                 <li class="br-active">${goods.goodsName}</li>
             </ul>
         </div>
@@ -209,9 +199,9 @@
                                     <span class="sku">${goods.activity.activityName}</span>
                                     <span class="span-block">${goods.activity.activityAddress}</span>
                                     <span class="span-block">折扣:${goods.activity.disCount}</span>
-                                    <c:if test="${!empty goodsInfo['goods'].activity.fullPrice}">
+                                    <c:if test="${!empty goods.activity.fullPrice}">
                                         <span class="span-block">
-                                            满${goods.activity.fullprice}减${goods.activity.reducePrice}
+                                            满${goods.activity.fullPrice}减${goods.activity.reducePrice}
                                         </span>
                                     </c:if>
                                     <c:if test="${!empty goods.activity.fullNum}">
@@ -260,8 +250,7 @@
         </div>
     </div>
 </div>
-<!--zoom elavator area one end-->
-<!--tab area start-->
+
 <div class="tab_area_start">
     <div class="container">
         <div class="row">
@@ -269,11 +258,10 @@
                 <div class="my-tabs">
                     <!-- Nav tabs -->
                     <ul class="favtabs favtabs-2 favtabs-nytr" role="tablist">
-                        <%--<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Discription</a></li>--%>
                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
                                                                   data-toggle="tab">商品描述</a></li>
                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">评价
-                            (${commentList.size()})</a></li>
+                            (${goods.comments.size()})</a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -282,7 +270,7 @@
                                 <div class="col-md-12 col-xs-12">
                                     <div class="tb_desc">
                                         <h2>商品描述</h2>
-                                        <p>${goodsInfo['goods'].description}</p>
+                                        <p>${goods.description}</p>
                                     </div>
                                 </div>
                             </div>
@@ -293,9 +281,9 @@
                                     <div class="tb_desc">
                                         <div class="review_area_heading">
                                             <div id="comnt">
-                                                <h2>${commentList.size()}条评论</h2>
+                                                <h2>${goods.comments.size()}条评论</h2>
                                                 <ol class="commentlist">
-                                                    <c:forEach items="${commentList}" var="comment">
+                                                    <c:forEach items="${goods.comments}" var="comment">
                                                         <li id="li-comment-22" class="comment even thread-even depth-1"
                                                             itemscope="">
                                                             <div id="comment-22" class="comment_container">
@@ -327,12 +315,12 @@
                                                                         </div>
                                                                     </div>
                                                                     <p class="meta">
-                                                                        <strong>${comment.username}</strong>
+                                                                        <strong>${comment.user.username}</strong>
                                                                         –
-                                                                        <time datetime="${comment.commenttime}">
-                                                                                ${comment.commenttime.year+1900}年
-                                                                                ${comment.commenttime.month+1}月
-                                                                                ${comment.commenttime.date}日
+                                                                        <time datetime="${comment.commentTime}">
+                                                                                ${comment.commentTime.year+1900}年
+                                                                                ${comment.commentTime.month+1}月
+                                                                                ${comment.commentTime.date}日
                                                                         </time>
                                                                         :
                                                                         <a href="#"
@@ -350,61 +338,6 @@
                                                     </c:forEach>
                                                 </ol>
                                             </div>
-                                            <%--<div class="review_form_area">
-                                                <div class="review_form">
-                                                    <div class="revew_form_content">
-                                                        <h3 id="reply-title" class="comment-reply-title">
-                                                            Add a review
-                                                            <small>
-                                                                <a id="cancel-comment-reply-link" style="display:none;" href="#" rel="nofollow">Cancel reply</a>
-                                                            </small>
-                                                        </h3>
-                                                        <form id="commentform" class="comment-form" method="post" action="form">
-                                                            <div class="comment-form-rating">
-                                                                <label class="comment">Your Rating</label>
-                                                                <div class="price_rating price_rating_2 price_rating_3">
-                                                                    <a href="#">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </a>
-                                                                    <a href="#">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </a>
-                                                                    <a href="#">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </a>
-                                                                    <a href="#">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </a>
-                                                                    <a href="#">
-                                                                        <i class="fa fa-star-o"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="comment-form-comment">
-                                                                <label class="comment">Your Review</label>
-                                                                <textarea id="comment" aria-required="true" rows="8" cols="45" name="comment"></textarea>
-                                                            </div>
-                                                            <div class="comment-form-author">
-                                                                <label class="comment">
-                                                                    Name
-                                                                    <span class="required required_menu">*</span>
-                                                                </label>
-                                                                <input id="author" class="mix_type" type="text" aria-required="true" size="30" value="" name="author">
-                                                            </div>
-                                                            <div class="comment-form-email">
-                                                                <label class="comment">
-                                                                    Email
-                                                                    <span class="required required_menu">*</span>
-                                                                </label>
-                                                                <input id="email" class="mix_type" type="text" aria-required="true" size="30" value="" name="email">
-                                                            </div>
-                                                            <div class="form-submit">
-                                                                <input id="sub" class="submt" type="submit" value="Submit" name="submit">
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -416,11 +349,6 @@
         </div>
     </div>
 </div>
-<!--tab area end-->
-<!-- jquery latest version -->
-<!-- <script src="js/vendor/jquery-1.12.0.min.js"></script> -->
-<!-- bootstrap js -->
-<!-- <script src="js/bootstrap.min.js"></script> -->
 
 </body>
 </html>

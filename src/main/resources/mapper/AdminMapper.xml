@@ -7,8 +7,8 @@
         <result column="password" jdbcType="VARCHAR" property="password"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, username, password
-   </sql>
+        id, username, password
+    </sql>
 
     <select id="selectByName" parameterType="com.sk.mall.entity.Admin" resultMap="BaseResultMap">
         select
