@@ -5,15 +5,33 @@ public class OrderItem {
 
     private Integer orderId;
 
+    private Integer goodsId;
+
     private Goods goods;
 
     private Integer num;
 
+
     public OrderItem() {
+    }
+
+    public OrderItem(Integer id, Integer orderId, Integer goodsId, Integer num) {
+        this.id = id;
+        this.orderId = orderId;
+        this.goodsId = goodsId;
+        this.num = num;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
     }
 
     public void setId(Integer id) {

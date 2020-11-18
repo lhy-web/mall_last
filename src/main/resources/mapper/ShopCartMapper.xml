@@ -11,38 +11,39 @@
     <sql id="Base_Column_List">
         userId, goodsId, cateDate, goodsNum
     </sql>
+
     <select id="getShopCartsByUserId" resultMap="BaseResultMap">
         select userId, goodsId, cateDate, goodsNum
         from shopcart
-        where userId = #{userid,jdbcType=INTEGER}
+        where userId = #{userId,jdbcType=INTEGER}
     </select>
 
     <select id="selectByPrimaryKey" parameterType="com.sk.mall.entity.ShopCart" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from shopcart
-        where userId = #{userid,jdbcType=INTEGER}
-        and goodsid = #{goodsid,jdbcType=INTEGER}
+        where userId = #{userId,jdbcType=INTEGER}
+        and goodsId = #{goodsId,jdbcType=INTEGER}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="com.sk.mall.entity.ShopCart">
         delete
         from shopcart
-        where userId = #{userid,jdbcType=INTEGER}
-          and goodsid = #{goodsid,jdbcType=INTEGER}
+        where userId = #{userId,jdbcType=INTEGER}
+          and goodsId = #{goodsId,jdbcType=INTEGER}
     </delete>
 
 
     <insert id="insertSelective" parameterType="com.sk.mall.entity.ShopCart">
         insert into shopcart
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userid != null">
+            <if test="userId != null">
                 userId,
             </if>
-            <if test="goodsid != null">
+            <if test="goodsId != null">
                 goodsId,
             </if>
-            <if test="catedate != null">
+            <if test="cateDate != null">
                 cateDate,
             </if>
             <if test="goodsNum != null">
@@ -72,7 +73,7 @@
             <if test="cateDate != null">
                 cateDate = #{cateDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="goodsnum != null">
+            <if test="goodsNum != null">
                 goodsNum = #{goodsNum,jdbcType=INTEGER},
             </if>
         </set>

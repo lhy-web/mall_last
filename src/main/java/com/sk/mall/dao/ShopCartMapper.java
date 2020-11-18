@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author qiaochx
+ */
 @Repository
 public interface ShopCartMapper {
 
@@ -13,7 +16,7 @@ public interface ShopCartMapper {
 
     int insertSelective(ShopCart record);
 
-    List<ShopCart> getShopCartsByUserId(String userId);
+    List<ShopCart> getShopCartsByUserId(int userId);
 
     ShopCart selectByPrimaryKey(ShopCart key);
 

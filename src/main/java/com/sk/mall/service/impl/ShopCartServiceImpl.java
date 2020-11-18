@@ -21,7 +21,7 @@ public class ShopCartServiceImpl implements ShopCartService {
     }
 
     @Override
-    public List<ShopCart> selectByExample(String userId) {
+    public List<ShopCart> selectByExample(int userId) {
         return shopCartMapper.getShopCartsByUserId(userId);
     }
 

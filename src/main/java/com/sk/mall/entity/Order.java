@@ -29,6 +29,24 @@ public class Order {
 
     private Address address;
 
+    public Order() {
+    }
+
+    public Order(Integer id, Integer userId, Date orderTime, Float oldPrice, Float newPrice, Boolean isPay, Boolean isSend, Boolean isReceive, Boolean isComplete, Integer addressId, List<OrderItem> orderItems, Address address) {
+        this.id = id;
+        this.userId = userId;
+        this.orderTime = orderTime;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.isPay = isPay;
+        this.isSend = isSend;
+        this.isReceive = isReceive;
+        this.isComplete = isComplete;
+        this.addressId = addressId;
+        this.orderItems = orderItems;
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }

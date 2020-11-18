@@ -12,6 +12,14 @@ public class ShopCart {
 
     private Integer goodsId;
 
+    public ShopCart() {
+    }
+
+    public ShopCart(Integer userId, Integer goodsId) {
+        this.userId = userId;
+        this.goodsId = goodsId;
+    }
+
     public Date getCateDate() {
         return cateDate;
     }

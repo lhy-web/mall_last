@@ -106,7 +106,7 @@
     </select>
 
     <select id="getAllByState" resultMap="orderIncludeAddress">
-        select o.* ,a.*from indent o , address a where o.addressId = a.id
+        select o.* ,a.* from indent o , address a where o.addressId = a.id
         <if test="isSend !=null and !isSend">
             and isSend = 0
         </if>
@@ -148,15 +148,8 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.sk.mall.entity.Order">
-        insert into indent (id, userId, orderTime,
-                            oldPrice, newPrice, isPay, isSend,
-                            isReceive, isComplete, addressId)
-        values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP},
-                #{oldPrice,jdbcType=REAL}, #{newPrice,jdbcType=REAL}, #{isPay,jdbcType=BIT}, #{issend,jdbcType=BIT},
-                #{isReceive,jdbcType=BIT}, #{isComplete,jdbcType=BIT}, #{addressId,jdbcType=INTEGER})
-    </insert>
-    <insert id="insertSelective" parameterType="com.sk.mall.entity.Order" useGeneratedKeys="true" keyProperty="orderid">
+
+    <insert id="insertSelective" parameterType="com.sk.mall.entity.Order" useGeneratedKeys="true" keyProperty="id">
         insert into indent
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

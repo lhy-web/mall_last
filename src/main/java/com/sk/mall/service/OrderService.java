@@ -1,6 +1,7 @@
 package com.sk.mall.service;
 
 import com.sk.mall.entity.Order;
+import com.sk.mall.entity.OrderItem;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author qiaochx
  */
 public interface OrderService {
-//     void insertOrder(Order order);
+     void insertOrder(Order order);
 
     /**
      * 删除订单
@@ -34,8 +35,8 @@ public interface OrderService {
 
     //
     Order getById(int orderId);
-//
-//    void insertOrderItem(OrderItem orderItem);
+
+    void insertOrderItem(OrderItem orderItem);
 
     /**
      * 根据用户id查找订单

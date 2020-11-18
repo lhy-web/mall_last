@@ -41,9 +41,9 @@
             <c:forEach items="${address}" var="addItem">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="addressid" class="address-check" value="${addItem.addressid}"
+                        <input type="radio" name="addressid" class="address-check" value="${addItem.id}"
                                checked>
-                            ${addItem.province} ${addItem.city} ${addItem.county} ${addItem.detailaddr}（${addItem.conname}收）${addItem.contel}
+                            ${addItem.province} ${addItem.city} ${addItem.county} ${addItem.detailAddress}（${addItem.conName}收）${addItem.contel}
                     </label>
                 </div>
             </c:forEach>
@@ -75,11 +75,11 @@
                                 <c:forEach items="${goodsAndImage}" var="goods">
                                     <tr>
                                         <td class="product-thumbnail product-thumbnail-2"><a
-                                                href="${pageContext.request.contextPath}/detail?goodsid=${goods.goodsid}"><img
+                                                href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}"><img
                                                 src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
                                                 alt=""/></a></td>
                                         <td class="product-name product-name_2"><a
-                                                href="${pageContext.request.contextPath}/detail?goodsid=${goods.goodsid}">${goods.goodsname}</a>
+                                                href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">${goods.goodsName}</a>
                                         </td>
                                         <td class="product-price"><span
                                                 class="amount-list amount-list-2">￥${goods.price}</span></td>
@@ -95,20 +95,6 @@
                                 </c:forEach>
 
                                 </tbody>
-                                <%--<tfoot>
-                                <tr>
-                                    <td colspan="6">
-                                        <div class="coupon">
-                                            <!-- <label for="coupon_code"></label>
-                                                <input id="coupon_code" class="input-text" type="text" placeholder="Coupon code" value="" name="coupon_code"> -->
-                                            <a
-                                                    class="button_act button_act_3 button_act_333 button_act_tp "
-                                                    href="./shopcart.jsp">更新购物车</a>
-                                            <!-- <a class="button_act btn-tip " href="#">Update cart</a> -->
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tfoot>--%>
                             </table>
                         </div>
                         <div class="row">
@@ -158,8 +144,6 @@
                 </div>
             </div>
         </div>
-        <%--</form>--%>
-
     </div>
 </div>
 <div id="path" hidden>${pageContext.request.contextPath}</div>

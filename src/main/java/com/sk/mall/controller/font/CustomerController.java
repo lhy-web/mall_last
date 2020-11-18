@@ -263,7 +263,7 @@ public class CustomerController {
 
     @RequestMapping("/finishList")
     @ResponseBody
-    public Msg finishiList(Integer orderid) {
+    public Msg finishList(Integer orderid) {
         Order order = orderService.getById(orderid);
         order.setIsReceive(true);
         order.setIsComplete(true);

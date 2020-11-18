@@ -49,8 +49,7 @@ public class FrontGoodsController {
             return "redirect:/main";
         }
         User user = (User) session.getAttribute("user");
-        //要传回的数据存在HashMap中
-        Map<String, Object> goodsInfo = new HashMap<String, Object>();
+
         //查询商品的基本信息
         Goods goods = goodsService.selectById(goodsid);
         if (user == null) {

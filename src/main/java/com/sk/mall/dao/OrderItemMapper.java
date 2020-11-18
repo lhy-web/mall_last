@@ -14,8 +14,6 @@ public interface OrderItemMapper {
 
     int deleteByPrimaryKey(Integer itemid);
 
-    int insert(OrderItem record);
-
     int insertSelective(OrderItem record);
 
 //    List<OrderItem> selectByExample(OrderItemExample example);
