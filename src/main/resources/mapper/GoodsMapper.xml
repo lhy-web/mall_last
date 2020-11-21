@@ -42,7 +42,6 @@
         select g.*
         from goods g
         where g.id = #{id}
-          and isSale = '1'
     </select>
 
     <select id="getBySearchName" resultMap="ResultMapIncludeImage">

@@ -229,11 +229,18 @@
                               method="post">
                             <input type="hidden" value="${goods.id}" name="goodsId"/>
                             <input type="number" value="1" name="goodsNum">
-                            <button class="add-tocart cart_zpf" type="submit">加入购物车</button>
+                            <c:if test="${goods.isSale == '1'}">
+                                <button class="add-tocart cart_zpf" type="submit">加入购物车</button>
+                            </c:if>
+                            <c:if test="${goods.isSale != '1'}">
+                                <button class="add-tocart cart_zpf" type="submit" disabled style="background: #5e5e5e">加入购物车</button>
+                            </c:if>
                         </form>
-                        <div class="add_defi new_meta">
+                        <c:if test="${goods.isSale == '1'}">
+                            <div class="add_defi new_meta">
                             <a data-original-title="Add to Wishlist" data-toggle="tooltip" class="fav-button big-font"
                                data-id="${goods.id}">
+
                                 <c:if test="${goods.fav}">
                                     <i class="fa fa-heart"></i>
                                     取消收藏
@@ -244,6 +251,8 @@
                                 </c:if>
                             </a>
                         </div>
+                        </c:if>
+
                     </div>
                 </div>
             </div>

@@ -18,10 +18,7 @@ public interface GoodsService {
 
     void updateGoodsById(Goods goods);
 
-    //
-//    List<ImagePath> findImagePath(Integer goodsid);
-//
-    Goods selectById(Integer goodsid);
+    Goods selectById(Integer goodsId);
 
     List<Goods> getBySearchName(String keyWord);
 
