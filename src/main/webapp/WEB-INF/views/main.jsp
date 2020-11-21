@@ -396,6 +396,55 @@
         </div>
     </div>
     <div class="content">
+        <c:if test="${! empty hotGoods}">
+            <div class="module">
+                <div class="hd">
+                    <h2>热销产品</h2>
+                    <hr>
+                </div>
+                <div class="bd">
+                    <div class="data">
+                        <ul>
+                            <c:forEach items="${hotGoods}" var="goods">
+                                <li class="data-item-li">
+                                    <div class="to-big">
+                                        <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}"><img
+                                                src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
+                                                alt=""
+                                                width="200" height="200"/>
+                                        </a>
+                                    </div>
+                                    <p class="text-right">
+                                        <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">${goods.goodsName}</a>
+                                    </p>
+                                    <div class="text-right">
+                                        <b>￥${goods.price}</b>
+                                    </div>
+                                    <div>
+                                        <c:if test="${goods.fav}">
+                                            <button
+                                                    class="like-button glyphicon glyphicon-heart btn btn-default"
+                                                    data-id="${goods.id}"
+                                                    style="display: none;"></button>
+                                        </c:if>
+                                        <c:if test="${!goods.fav}">
+                                            <button
+                                                    class="like-button glyphicon glyphicon-heart-empty btn btn-default"
+                                                    data-id="${goods.id}"
+                                                    style="display: none;"></button>
+                                        </c:if>
+                                        <!-- <button class="like-button1 glyphicon glyphicon-heart-empty btn btn-default "></button> -->
+                                    </div>
+                                </li>
+                            </c:forEach>
+
+
+                            <div class="clear-float" style="clear: both;"></div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <c:forEach items="${categories}" var="category">
             <c:if test="${! empty category.goods}">
                 <div class="module">
@@ -448,6 +497,8 @@
                 </div>
             </c:if>
         </c:forEach>
+
+
     </div>
 </div>
 </body>

@@ -196,7 +196,7 @@
                             <td><a href="" class="white-text templatemo-sort-by">活动<span class="caret"></span></a></td>
                             <td>详情</td>
                             <td>编辑</td>
-                            <td>删除</td>
+                            <td>操作</td>
                             <td>活动</td>
                         </tr>
                         </thead>

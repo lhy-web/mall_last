@@ -50,7 +50,7 @@ public class LoginController {
             // 如果存在，把用户信息存储在session中
             HttpSession session = request.getSession();
             session.setAttribute("admin", selectAdmin);
-            return "redirect:/admin/user/show";
+            return "redirect:/admin/goods/show";
         }
     }
 

@@ -70,4 +70,6 @@ public interface GoodsMapper {
      * @return List<Goods>
      */
     List<Goods> selectGoodsByCateLike(String cate);
+
+
 }

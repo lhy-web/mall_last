@@ -4,6 +4,7 @@ package com.sk.mall.service.impl;
 import com.sk.mall.dao.FavoriteMapper;
 import com.sk.mall.dao.GoodsMapper;
 import com.sk.mall.dao.ImagePathMapper;
+import com.sk.mall.dao.OrderItemMapper;
 import com.sk.mall.entity.Category;
 import com.sk.mall.entity.Favorite;
 import com.sk.mall.entity.Goods;
@@ -13,7 +14,9 @@ import com.sk.mall.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
@@ -30,6 +33,10 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private FavoriteMapper favoriteMapper;
+
+
+    @Autowired
+    private OrderItemMapper orderItemMapper;
 
     @Override
     public List<Goods> selectFavByUserId(Integer userId) {
@@ -105,5 +112,21 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> selectGoodsByCateLike(String cate) {
         return goodsMapper.selectGoodsByCateLike("%" + cate + "%");
+    }
+
+    @Override
+    public List<Goods> getHotGoods(int num) {
+        List<Map<String, Object>> totalGoods = orderItemMapper.getTotalGoods();
+        List<Goods> goods = new ArrayList<>();
+        int i = 0;
+        for (Map<String, Object> good : totalGoods) {
+            Goods goods1 = goodsMapper.getById(Integer.parseInt(good.get("goodsId").toString()));
+            goods.add(goods1);
+            i++;
+            if (i >= num) {
+                break;
+            }
+        }
+        return goods;
     }
 }

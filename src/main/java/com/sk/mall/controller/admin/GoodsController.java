@@ -237,4 +237,25 @@ public class GoodsController {
         cateService.deleteById(category.getId());
         return Msg.success("删除成功");
     }
+
+    /**
+     * 商品上下架
+     *
+     * @param goodsId 商品id
+     * @return Msg
+     */
+    @RequestMapping("/operationSale")
+    @ResponseBody
+    public Msg operationSale(Integer goodsId) {
+        Goods goods = goodsService.selectById(goodsId);
+        if (goods.getIsSale() == 1){
+            goods.setIsSale(0);
+            goodsService.updateGoodsById(goods);
+            return Msg.success("下架成功");
+        } else{
+            goods.setIsSale(1);
+            goodsService.updateGoodsById(goods);
+            return Msg.success("上架成功");
+        }
+    }
 }

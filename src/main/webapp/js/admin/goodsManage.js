@@ -64,22 +64,6 @@ $(document).on("click", "#saveUpdate", function () {
         }
     });
 
-    /*var goodsid = $("#goodsid").text();
-    var updateForm = new FormData(document.getElementById("update-goods"));
-    $.ajax({
-        url:"/shop/admin/goods/update/" + goodsid,
-        type:"post",
-        data:updateForm,
-        processData:false,
-        contentType:false,
-        success:function(result){
-            swal(result.msg,'','success');
-        },
-        error:function(){
-            alert("错误！！");
-            window.clearInterval(timer);
-        }
-    });*/
 });
 
 $(document).on("click", ".templatemo-delete-btn", function () {
@@ -108,6 +92,25 @@ $(document).on("click", ".templatemo-delete-btn", function () {
                 }
             });
         });
+});
+
+
+$(document).on("click", ".templatemo-sale-btn", function () {
+    var goodsid = $(this).parents("tr").find("td:eq(0)").text();
+
+    /*swal("删除！", "你的虚拟文件已经被删除。", "success");*/
+    $.ajax({
+        url: "/shop/admin/goods/operationSale/",
+        type: "POST",
+        data: {goodsId: goodsid},
+        success: function (result) {
+            swal(result.msg, "", "success");
+            to_page('/shop', currentPage);
+        },
+        error: function () {
+            to_page('/shop', currentPage);
+        }
+    });
 });
 
 /*$(document).on("click",".templatemo-activity-btn",function () {
@@ -215,7 +218,12 @@ function build_goods_table(path, result) {
 
         var editBtn = $("<button></button>").addClass("templatemo-edit-btn").append("编辑");
         var deleteBtn = $("<button></button>").addClass("templatemo-delete-btn").append("删除");
-
+        var sale;
+        if (item.isSale == '1') {
+            sale = $("<button></button>").addClass("templatemo-sale-btn").append("下架");
+        } else {
+            sale = $("<button></button>").addClass("templatemo-sale-btn").append("上架");
+        }
         var desTd = $("<td hidden></td>").append(detailBtn);
 
         //活动按钮
@@ -227,11 +235,10 @@ function build_goods_table(path, result) {
             $("#activity-goodsid").text($(this).attr("data-actGoodsid"));
             getActivity();
         });
-
         var actTd = $("<td></td>").append(actBtn);
         var detailTd = $("<td></td>").append(detailA);
         var editTd = $("<td></td>").append(editBtn);
-        var deleteTd = $("<td></td>").append(deleteBtn);
+        var deleteTd = $("<td></td>").append(sale).append(deleteBtn);
 
         $("<tr></tr>").append(goodsid).append(goodsname).append(price).append(num).append(detailcate).append(activityid).append(desTd).append(detailTd).append(editTd).append(deleteTd).append(actTd).appendTo("#goodsinfo tbody");
     })

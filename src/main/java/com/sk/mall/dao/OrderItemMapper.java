@@ -5,6 +5,7 @@ import com.sk.mall.entity.OrderItem;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface OrderItemMapper {
@@ -49,4 +50,6 @@ public interface OrderItemMapper {
      * @return List<OrderItem>
      */
     List<OrderItem> getOrderItemByOrderId(int orderId);
+
+    List<Map<String, Object>> getTotalGoods();
 }

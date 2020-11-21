@@ -54,7 +54,6 @@
     <select id="getAllGoods" resultMap="BaseResultMap">
         select *
         from goods
-        where isSale = '1'
         order by upTime
     </select>
 
@@ -175,8 +174,12 @@
             <if test="description != null">
                 description = #{description,jdbcType=LONGVARCHAR},
             </if>
+            <if test="isSale != null">
+                isSale = #{isSale,jdbcType=LONGVARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
 
 </mapper>

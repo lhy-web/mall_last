@@ -187,4 +187,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <select id="getTotalGoods" resultType="java.util.HashMap">
+        select goodsId ,sum(num) as countNum from orderitem group by goodsId order by countNum desc
+    </select>
 </mapper>
