@@ -36,10 +36,6 @@ public class AddressServiceImpl implements AddressService {
         addressMapper.deleteByPrimaryKey(addressid);
     }
 
-    @Override
-    public void insert(Address address) {
-        addressMapper.insert(address);
-    }
 
     @Override
     public void insertSelective(Address address) {

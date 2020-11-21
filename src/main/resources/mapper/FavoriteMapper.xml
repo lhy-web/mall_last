@@ -31,11 +31,6 @@
           and goodsId = #{goodsId,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="com.sk.mall.entity.Favorite">
-        insert into collection (userId, goodsId, collectTime)
-        values (#{userId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{collectTime,jdbcType=TIMESTAMP})
-    </insert>
-
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Favorite">
         insert into collection
         <trim prefix="(" suffix=")" suffixOverrides=",">

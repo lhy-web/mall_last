@@ -8,29 +8,38 @@ import java.util.List;
 
 @Repository
 public interface OrderMapper {
-    //    long countByExample(OrderExample example);
-//
-//    int deleteByExample(OrderExample example);
-//
+
+    /**
+     * 删除订单
+     *
+     * @param orderId 订单id
+     * @return int
+     */
     int deleteById(Integer orderId);
 
-
+    /**
+     * 插入订单
+     *
+     * @param record 订单信息
+     * @return int
+     */
     int insertSelective(Order record);
 
-    //
-//    List<Order> selectByExample(OrderExample example);
-//
-    Order getById(Integer orderid);
+    /**
+     * 根据订单id查询订单
+     *
+     * @param orderId 订单id
+     * @return Order
+     */
+    Order getById(Integer orderId);
 
-    //
-//    int updateByExampleSelective(@Param("record") Order record, @Param("example") OrderExample example);
-//
-//    int updateByExample(@Param("record") Order record, @Param("example") OrderExample example);
-//
+    /**
+     * 更新订单信息
+     *
+     * @param record 订单
+     * @return int
+     */
     int updateByPrimaryKeySelective(Order record);
-//
-//    int updateByPrimaryKey(Order record);
-//
 
     /**
      * 根据userId来查询所有的订单
@@ -40,5 +49,11 @@ public interface OrderMapper {
      */
     List<Order> getAllOrderByUserId(int userId);
 
+    /**
+     * 根据订单状态查询
+     *
+     * @param order order
+     * @return  List<Order>
+     */
     List<Order> getAllByState(Order order);
 }

@@ -7,14 +7,21 @@ import java.util.List;
 
 @Repository
 public interface AddressMapper {
-//    long countByExample(AddressExample example);
-//
-//    int deleteByExample(AddressExample example);
 
-    int deleteByPrimaryKey(Integer addressid);
+    /**
+     * 删除地址
+     *
+     * @param addressId 地址id
+     * @return int
+     */
+    int deleteByPrimaryKey(Integer addressId);
 
-    int insert(Address record);
-
+    /**
+     * 添加地址
+     *
+     * @param record 地址信息
+     * @return int
+     */
     int insertSelective(Address record);
 
     /**
@@ -25,13 +32,21 @@ public interface AddressMapper {
      */
     List<Address> getAllAddressByUserId(Integer userId);
 
+    /**
+     * 根据id查询地址
+     *
+     * @param addressId 地址id
+     * @return Address
+     */
     Address selectByPrimaryKey(Integer addressId);
 
-//    int updateByExampleSelective(@Param("record") Address record, @Param("example") AddressExample example);
-//
-//    int updateByExample(@Param("record") Address record, @Param("example") AddressExample example);
-
+    /**
+     * 修改地址
+     *
+     * @param record 地址
+     * @return int
+     */
     int updateByPrimaryKeySelective(Address record);
 
-    int updateByPrimaryKey(Address record);
+
 }

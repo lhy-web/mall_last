@@ -8,7 +8,12 @@ import java.util.List;
 @Repository
 public interface ImagePathMapper {
 
-    int addImagePath(ImagePath record);
+    /**
+     * 添加照片
+     *
+     * @param record 图片
+     */
+    void addImagePath(ImagePath record);
 
 
     /**

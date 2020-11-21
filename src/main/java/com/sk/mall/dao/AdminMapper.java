@@ -15,8 +15,6 @@ public interface AdminMapper {
      *
      * @param admin 管理员信息
      * @return com.sk.mall.entity.Admin
-     * @date 2020/11/12
-     * 修改人和其它信息：
      **/
     Admin selectByName(Admin admin);
 

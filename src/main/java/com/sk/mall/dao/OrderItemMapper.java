@@ -8,25 +8,39 @@ import java.util.List;
 
 @Repository
 public interface OrderItemMapper {
-//    long countByExample(OrderItemExample example);
-//
-//    int deleteByExample(OrderItemExample example);
 
-    int deleteByPrimaryKey(Integer itemid);
 
+    /**
+     * 删除子订单
+     *
+     * @param itemId 子订单id
+     * @return int
+     */
+    int deleteByPrimaryKey(Integer itemId);
+
+    /**
+     * 新增订单
+     *
+     * @param record 订单信息
+     * @return int
+     */
     int insertSelective(OrderItem record);
 
-//    List<OrderItem> selectByExample(OrderItemExample example);
-
+    /**
+     * 根据订单id查找订单
+     *
+     * @param itemid 订单id
+     * @return OrderItem
+     */
     OrderItem selectByPrimaryKey(Integer itemid);
 
-//    int updateByExampleSelective(@Param("record") OrderItem record, @Param("example") OrderItemExample example);
-//
-//    int updateByExample(@Param("record") OrderItem record, @Param("example") OrderItemExample example);
-
+    /**
+     * 修改订单信息
+     *
+     * @param record 订单信息
+     * @return int
+     */
     int updateByPrimaryKeySelective(OrderItem record);
-
-    int updateByPrimaryKey(OrderItem record);
 
     /**
      * 根据订单id获取订单商品

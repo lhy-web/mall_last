@@ -32,66 +32,6 @@
         </association>
     </resultMap>
 
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
     <sql id="Base_Column_List">
         id, userId, orderTime, oldPrice, newPrice, isPay, isSend, isReceive, isComplete,
     addressId
@@ -117,37 +57,20 @@
             and isComplete = 1
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.sk.mall.entity.Order" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from indent
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
+
     <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from indent
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete
         from indent
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.sk.mall.entity.Order">
-        delete from indent
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
+
 
     <insert id="insertSelective" parameterType="com.sk.mall.entity.Order" useGeneratedKeys="true" keyProperty="id">
         insert into indent
@@ -216,66 +139,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.sk.mall.entity.Order" resultType="java.lang.Long">
-        select count(*) from indent
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update indent
-        <set>
-            <if test="record.id != null">
-                id = #{record.id,jdbcType=INTEGER},
-            </if>
-            <if test="record.userId != null">
-                userId = #{record.userId,jdbcType=INTEGER},
-            </if>
-            <if test="record.orderTime != null">
-                orderTime = #{record.orderTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.oldPrice != null">
-                oldPrice = #{record.oldPrice,jdbcType=REAL},
-            </if>
-            <if test="record.newPrice != null">
-                newPrice = #{record.newPrice,jdbcType=REAL},
-            </if>
-            <if test="record.isPay != null">
-                isPay = #{record.isPay,jdbcType=BIT},
-            </if>
-            <if test="record.isSend != null">
-                isSend = #{record.isSend,jdbcType=BIT},
-            </if>
-            <if test="record.isReceive != null">
-                isReceive = #{record.isReceive,jdbcType=BIT},
-            </if>
-            <if test="record.isComplete != null">
-                isComplete = #{record.isComplete,jdbcType=BIT},
-            </if>
-            <if test="record.addressId != null">
-                addressId = #{record.addressId,jdbcType=INTEGER},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update indent
-        set id = #{record.id,jdbcType=INTEGER},
-        userId = #{record.userId,jdbcType=INTEGER},
-        orderTime = #{record.orderTime,jdbcType=TIMESTAMP},
-        oldPrice = #{record.oldPrice,jdbcType=REAL},
-        newPrice = #{record.newPrice,jdbcType=REAL},
-        isPay = #{record.isPay,jdbcType=BIT},
-        isSend = #{record.isSend,jdbcType=BIT},
-        isReceive = #{record.isReceive,jdbcType=BIT},
-        isComplete = #{record.isComplete,jdbcType=BIT},
-        addressId = #{record.addressId,jdbcType=INTEGER}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.sk.mall.entity.Order">
         update indent
         <set>
@@ -309,17 +173,5 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.sk.mall.entity.Order">
-        update indent
-        set userId     = #{userId,jdbcType=INTEGER},
-            orderTime  = #{orderTime,jdbcType=TIMESTAMP},
-            oldPrice   = #{oldPrice,jdbcType=REAL},
-            newPrice   = #{newPrice,jdbcType=REAL},
-            isPay      = #{isPay,jdbcType=BIT},
-            isSend     = #{isSend,jdbcType=BIT},
-            isReceive  = #{isReceive,jdbcType=BIT},
-            isComplete = #{isComplete,jdbcType=BIT},
-            addressId  = #{addressId,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+
 </mapper>

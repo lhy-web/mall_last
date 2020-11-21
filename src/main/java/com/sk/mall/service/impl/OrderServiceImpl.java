@@ -1,6 +1,5 @@
 package com.sk.mall.service.impl;
 
-
 import com.sk.mall.dao.OrderItemMapper;
 import com.sk.mall.dao.OrderMapper;
 import com.sk.mall.entity.Order;
@@ -18,13 +17,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
 
-    @Autowired(required = false)
+    @Autowired
     private OrderItemMapper orderItemMapper;
 
-    //
-//    @Autowired(required = false)
-//    private AddressMapper addressMapper;
-//
     @Override
     public void insertOrder(Order order) {
         orderMapper.insertSelective(order);
@@ -40,29 +35,6 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getAllByState(order);
     }
 
-    //
-//
-//    @Override
-//    public List<Order> selectOrderByExample(OrderExample orderExample) {
-//        return orderMapper.selectByExample(orderExample);
-//    }
-//
-//
-//    @Override
-//    public List<Order> queryAllOrderByUserId(int userId) {
-//        return orderMapper.queryAllOrderByUserId(userId);
-//    }
-//
-//    @Override
-//    public List<OrderItem> getOrderItemByExample(OrderItemExample orderItemExample) {
-//        return orderItemMapper.selectByExample(orderItemExample);
-//    }
-//
-//    @Override
-//    public Address getAddressByKey(Integer addressid) {
-//        return addressMapper.selectByPrimaryKey(addressid);
-//    }
-//
     @Override
     public void updateOrderByKey(Order order) {
         orderMapper.updateByPrimaryKeySelective(order);

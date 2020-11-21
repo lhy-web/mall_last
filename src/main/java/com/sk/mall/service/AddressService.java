@@ -22,8 +22,6 @@ public interface AddressService {
 
     void deleteByPrimaryKey(Integer addressid);
 
-    void insert(Address address);
-
     void insertSelective(Address address);
 
     Address selectByPrimaryKey(Integer addressid);

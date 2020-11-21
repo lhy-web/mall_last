@@ -9,8 +9,20 @@ import java.util.List;
 @Repository
 public interface CommentMapper {
 
-    int insertSelective(Comment record);
+    /**
+     * 添加评论
+     *
+     * @param comment 评论
+     * @return int
+     */
+    int insertSelective(Comment comment);
 
+    /**
+     * 根据商品查询评论
+     *
+     * @param goodsId 商品id
+     * @return List<Comment>
+     */
     List<Comment> getByGoodsId(String goodsId);
 
 
