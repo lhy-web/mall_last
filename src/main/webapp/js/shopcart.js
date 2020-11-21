@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     var path = $("#path").text();
     showcart();
@@ -74,10 +73,15 @@ function build_cart_table(result) {
             delA.click(function () {
                 deleteCartGoods(item.id);
             });
-
-            var shopimage = $("<td></td>").addClass("product-thumbnail product-thumbnail-2")
-                .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id)
-                    .append($("<img/>").attr("src", "/shop/pictures/" + item.imagePaths[0].path)));
+            var shopimage;
+            if (item.imagePaths[0] != null) {
+                shopimage = $("<td></td>").addClass("product-thumbnail product-thumbnail-2")
+                    .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id)
+                        .append($("<img/>").attr("src", "/shop/pictures/" + item.imagePaths[0].path)));
+            } else {
+                shopimage = $("<td></td>").addClass("product-thumbnail product-thumbnail-2")
+                    .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id));
+            }
 
             var goodsname = $("<td></td>").addClass("product-name product-name_2")
                 .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id).append(item.goodsName));

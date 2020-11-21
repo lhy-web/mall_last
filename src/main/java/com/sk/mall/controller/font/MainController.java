@@ -1,6 +1,8 @@
 package com.sk.mall.controller.font;
 
 
+import com.sk.mall.entity.Category;
+import com.sk.mall.entity.Favorite;
 import com.sk.mall.entity.Goods;
 import com.sk.mall.entity.User;
 import com.sk.mall.service.CateService;
@@ -26,95 +28,55 @@ public class MainController {
 
     @RequestMapping("/")
     public String showAdmin(Model model, HttpSession session) {
-        Integer userid;
+        Integer userId;
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            userid = null;
+            userId = null;
         } else {
-            userid = user.getId();
+            userId = user.getId();
         }
-
-        //数码分类
-        List<Goods> digGoods = getCateGoods("数码", userid);
-        model.addAttribute("digGoods", digGoods);
-
-        //家电
-        List<Goods> houseGoods = getCateGoods("家电", userid);
-        model.addAttribute("houseGoods", houseGoods);
-
-        //服饰
-        List<Goods> colGoods = getCateGoods("服饰", userid);
-        model.addAttribute("colGoods", colGoods);
-
-        //书籍
-        List<Goods> bookGoods = getCateGoods("书籍", userid);
-        model.addAttribute("bookGoods", bookGoods);
-
+        //数码分类及商品
+        List<Category> categories = cateService.getAllCate();
+        for (Category category : categories) {
+            List<Goods> digGoods = getCateGoods(category.getCateName(), userId);
+            category.setGoods(digGoods);
+        }
+        model.addAttribute("categories", categories);
         return "main";
     }
 
 
     @RequestMapping("/main")
     public String showAllGoods(Model model, HttpSession session) {
-        Integer userid;
+        Integer userId;
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            userid = null;
+            userId = null;
         } else {
-            userid = user.getId();
+            userId = user.getId();
         }
-        //数码分类
-        List<Goods> digGoods = getCateGoods("数码", userid);
-        model.addAttribute("digGoods", digGoods);
-        //家电
-        List<Goods> houseGoods = getCateGoods("家电", userid);
-        model.addAttribute("houseGoods", houseGoods);
-        //服饰
-        List<Goods> colGoods = getCateGoods("服饰", userid);
-        model.addAttribute("colGoods", colGoods);
-        //书籍
-        List<Goods> bookGoods = getCateGoods("书籍", userid);
-        model.addAttribute("bookGoods", bookGoods);
-
+        //数码分类及商品
+        List<Category> categories = cateService.getAllCate();
+        for (Category category : categories) {
+            List<Goods> digGoods = getCateGoods(category.getCateName(), userId);
+            category.setGoods(digGoods);
+        }
+        model.addAttribute("categories", categories);
         return "main";
     }
 
     public List<Goods> getCateGoods(String cate, Integer userid) {
-        List<Goods> goodsAndImage = new ArrayList<>();
-//        //查询分类
-//        CategoryExample digCategoryExample = new CategoryExample();
-//        digCategoryExample.or().andCatenameLike(cate);
-//        List<Category> digCategoryList = cateService.selectByExample(digCategoryExample);
-//
-//        if (digCategoryList.size() == 0) {
-//            return null;
-//        }
-//
-//        //查询属于刚查到的分类的商品
-//        GoodsExample digGoodsExample = new GoodsExample();
-//        List<Integer> digCateId = new ArrayList<>();
-//        for (Category tmp : digCategoryList) {
-//            digCateId.add(tmp.getCateid());
-//        }
-//        digGoodsExample.or().andCategoryIn(digCateId);
-//
-//        List<Goods> goodsList = goodsService.selectByExampleLimit(digGoodsExample);
-//
-//
-//        //获取每个商品的图片
-//        for (Goods goods : goodsList) {
-//            //判断是否为登录状态
-//            if (userid == null) {
-//                goods.setFav(false);
-//            } else {
-//                Favorite favorite = goodsService.selectFavByKey(new FavoriteKey(userid, goods.getGoodsid()));
-//                goods.setFav(favorite != null);
-//            }
-//
-//            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getGoodsid());
-//            goods.setImagePaths(imagePathList);
-//            goodsAndImage.add(goods);
-//        }
-        return goodsAndImage;
+        List<Goods> goodsList = goodsService.selectGoodsByCateLike(cate);
+        //获取每个商品的图片
+        for (Goods goods : goodsList) {
+            //判断是否为登录状态
+            if (userid == null) {
+                goods.setFav(false);
+            } else {
+                Favorite favorite = goodsService.selectFavByKey(new Favorite(userid, goods.getId()));
+                goods.setFav(favorite != null);
+            }
+        }
+        return goodsList;
     }
 }

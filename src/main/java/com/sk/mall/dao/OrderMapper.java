@@ -16,7 +16,8 @@ public interface OrderMapper {
 
 
     int insertSelective(Order record);
-//
+
+    //
 //    List<Order> selectByExample(OrderExample example);
 //
     Order getById(Integer orderid);

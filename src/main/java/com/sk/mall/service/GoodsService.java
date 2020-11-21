@@ -50,4 +50,13 @@ public interface GoodsService {
      * @return List<Goods>
      */
     List<Goods> selectFavByUserId(Integer userId);
+
+
+    /**
+     * 根据分类名称模糊查询
+     *
+     * @param cate 用户id
+     * @return List<Goods>
+     */
+    List<Goods> selectGoodsByCateLike(String cate);
 }

@@ -36,6 +36,7 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.selectFavByUserId(userId);
     }
 
+
     @Override
     public Integer addGoods(Goods goods) {
         Category category = cateService.selectById(goods.getCategory());
@@ -73,15 +74,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.updateByPrimaryKeySelective(goods);
     }
 
-    //
-//    @Override
-//    public List<ImagePath> findImagePath(Integer goodsid) {
-//        ImagePathExample imagePathExample = new ImagePathExample();
-//        imagePathExample.or().andGoodidEqualTo(goodsid);
-//
-//        return imagePathMapper.selectByExample(imagePathExample);
-//    }
-//
+
     @Override
     public Goods selectById(Integer goodsid) {
         return goodsMapper.getById(goodsid);
@@ -107,9 +100,10 @@ public class GoodsServiceImpl implements GoodsService {
     public void deleteFavByKey(Favorite favoriteKey) {
         favoriteMapper.deleteByPrimaryKey(favoriteKey);
     }
-//
-//    @Override
-//    public List<Favorite> selectFavByExample(FavoriteExample favoriteExample) {
-//        return favoriteMapper.selectByExample(favoriteExample);
-//    }
+
+
+    @Override
+    public List<Goods> selectGoodsByCateLike(String cate) {
+        return goodsMapper.selectGoodsByCateLike("%" + cate + "%");
+    }
 }

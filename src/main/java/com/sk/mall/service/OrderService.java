@@ -10,7 +10,7 @@ import java.util.List;
  * @author qiaochx
  */
 public interface OrderService {
-     void insertOrder(Order order);
+    void insertOrder(Order order);
 
     /**
      * 删除订单

@@ -51,4 +51,6 @@ public interface GoodsMapper {
      * @return List<Goods>
      */
     List<Goods> selectFavByUserId(Integer userId);
+
+    List<Goods> selectGoodsByCateLike(String cate);
 }

@@ -1,10 +1,22 @@
 package com.sk.mall.entity;
 
+import java.util.List;
+
 public class Category {
 
     private Integer id;
 
     private String cateName;
+
+    private List<Goods> goods;
+
+    public List<Goods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
+    }
 
     public Integer getId() {
         return id;

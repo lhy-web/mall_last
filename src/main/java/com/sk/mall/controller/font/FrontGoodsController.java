@@ -120,58 +120,24 @@ public class FrontGoodsController {
 
     @RequestMapping("/category")
     public String getCateGoods(String cate, @RequestParam(value = "page", defaultValue = "1") Integer pn, Model model, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//
-//        //一页显示几个数据
-//        PageHelper.startPage(pn, 16);
-//
-//        //查询分类id
-//        CategoryExample categoryExample = new CategoryExample();
-//        categoryExample.or().andCatenameLike(cate);
-//        List<Category> categoryList = cateService.selectByExample(categoryExample);
-//
-//        //获取查出的类别id
-//        List<Integer> cateId = new ArrayList<>();
-//        for (Category category : categoryList) {
-//            cateId.add(category.getId());
-//        }
-//
-//        //查询数据
-//        GoodsExample goodsExample = new GoodsExample();
-//        goodsExample.or().andDetailcateLike("%" + cate + "%");
-//        if (!cateId.isEmpty()) {
-//            goodsExample.or().andCategoryIn(cateId);
-//        }
-//        List<Goods> goodsList = goodsService.selectByExample(goodsExample);
-//
-//        //获取图片地址
-//        for (int i = 0; i < goodsList.size(); i++) {
-//            Goods goods = goodsList.get(i);
-//
-//            List<ImagePath> imagePathList = goodsService.findImagePath(goods.getId());
-//
-//            goods.setImagePaths(imagePathList);
-//
-//            //判断是否收藏
-//            if (user == null) {
-//                goods.setFav(false);
-//            } else {
-//                Favorite favorite = goodsService.selectFavByKey(new FavoriteKey(user.getId(), goods.getId()));
-//                if (favorite == null) {
-//                    goods.setFav(false);
-//                } else {
-//                    goods.setFav(true);
-//                }
-//            }
-
-//            goodsList.set(i, goods);
-//        }
-//
-//
-//        //显示几个页号
-//        PageInfo page = new PageInfo(goodsList, 5);
-//        model.addAttribute("pageInfo", page);
-//        model.addAttribute("cate", cate);
+        User user = (User) session.getAttribute("user");
+        //一页显示几个数据
+        PageHelper.startPage(pn, 16);
+        List<Goods> goodsList = goodsService.selectGoodsByCateLike(cate);
+        //获取是否收藏
+        for (Goods goods : goodsList) {
+            //判断是否收藏
+            if (user == null) {
+                goods.setFav(false);
+            } else {
+                Favorite favorite = goodsService.selectFavByKey(new Favorite(user.getId(), goods.getId()));
+                goods.setFav(favorite != null);
+            }
+        }
+        //显示几个页号
+        PageInfo page = new PageInfo(goodsList, 5);
+        model.addAttribute("pageInfo", page);
+        model.addAttribute("cate", cate);
         return "category";
     }
 

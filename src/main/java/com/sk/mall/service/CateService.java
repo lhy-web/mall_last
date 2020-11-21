@@ -52,4 +52,5 @@ public interface CateService {
      * @param id id
      */
     void deleteById(Integer id);
+
 }

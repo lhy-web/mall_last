@@ -21,7 +21,6 @@
     <resultMap extends="ResultMapWithBLOBs" id="ResultMapIncludeImage" type="com.sk.mall.entity.Goods">
         <collection property="imagePaths" javaType="ArrayList" ofType="com.sk.mall.entity.ImagePath"
                     select="com.sk.mall.dao.ImagePathMapper.getImagesByGoodsId" column="id"/>
-
     </resultMap>
 
     <resultMap extends="ResultMapIncludeImage" id="ResultMapIncludeComment" type="com.sk.mall.entity.Goods">
@@ -108,38 +107,30 @@
         select g.*
         from goods g
         where g.id = #{id}
-    </select>
-
-    <select id="selectByExampleWithBLOBs" parameterType="com.sk.mall.entity.Goods"
-            resultMap="ResultMapWithBLOBs">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from goods
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
+          and isSale = '1'
     </select>
 
     <select id="getBySearchName" resultMap="ResultMapIncludeImage">
         select *
         from goods
         where goodsName like #{keyword}
+          and isSale = '1'
     </select>
 
     <select id="getAllGoods" resultMap="BaseResultMap">
         select *
         from goods
+        where isSale = '1'
         order by upTime
     </select>
 
+
+    <select id="selectGoodsByCateLike" resultMap="ResultMapIncludeImage">
+        select *
+        from goods
+        where category in (select id from category where cateName like #{cate})
+          and isSale = '1'
+    </select>
 
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete
