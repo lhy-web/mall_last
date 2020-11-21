@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/admin/user")
+@RequestMapping("/superadmin/user")
 public class UserController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class UserController {
      */
     @RequestMapping("/show")
     public String userManage() {
-        return "admin/userManage";
+        return "superadmin/userManage";
     }
 
 

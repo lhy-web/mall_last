@@ -18,7 +18,7 @@ $(document).on("click", ".templatemo-delete-btn", function () {
         function () {
             /*swal("删除！", "你的虚拟文件已经被删除。", "success");*/
             $.ajax({
-                url: "/shop/admin/user/delete/" + goodsid,
+                url: "/shop/superadmin/user/delete/" + goodsid,
                 type: "DELETE",
                 success: function (result) {
                     swal(result.msg, "", "success");
@@ -33,7 +33,7 @@ $(document).on("click", ".templatemo-delete-btn", function () {
 
 function to_page(path, page) {
     $.ajax({
-        url: path + "/admin/user/showjson",
+        url: path + "/superadmin/user/showjson",
         data: "page=" + page,
         type: "get",
         success: function (result) {

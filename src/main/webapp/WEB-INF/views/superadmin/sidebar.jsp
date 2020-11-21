@@ -9,9 +9,9 @@
     </div>
     <nav class="templatemo-left-nav">
         <ul>
-            <li><a href="${pageContext.request.contextPath}/admin/user/show"><i class="fa fa-user fa-fw"></i>用户管理</a>
+            <li><a href="${pageContext.request.contextPath}/superadmin/user/show"><i class="fa fa-user fa-fw"></i>用户管理</a>
             </li>
-            <li><a href="${pageContext.request.contextPath}/admin/logout"><i class="fa fa-eject fa-fw"></i>退出系统</a></li>
+            <li><a href="${pageContext.request.contextPath}/superadmin/logout"><i class="fa fa-eject fa-fw"></i>退出系统</a></li>
         </ul>
     </nav>
 </div>

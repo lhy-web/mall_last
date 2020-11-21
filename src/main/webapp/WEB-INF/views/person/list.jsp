@@ -123,7 +123,7 @@
     <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
             <div class="demo-avatar-dropdown">
-                <h1>长理商城</h1>
+                <h1>山科商城</h1>
                 <div class="mdl-layout-spacer"></div>
             </div>
         </header>
