@@ -155,7 +155,7 @@ public class GoodsController {
                 if (multipartFile.getOriginalFilename() == null || multipartFile.getOriginalFilename().equals("")) {
                     throw new RuntimeException("请添加图片");
                 }
-                String fileName = goods.getGoodsName() + multipartFile.getOriginalFilename();
+                String fileName = multipartFile.getOriginalFilename();
                 String imagePath = ImageUtil.imagePath(multipartFile, fileName);
                 //把图片路径存入数据库中
                 goodsService.addImagePath(new ImagePath(null, goods.getId(), imagePath));

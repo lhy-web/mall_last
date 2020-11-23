@@ -152,7 +152,7 @@
                     <div id="leftbox">
                         <div id="showbox">
                             <c:forEach items="${goods.imagePaths}" var="path">
-                                <img src="${pageContext.request.contextPath}/pictures/${path.path}" width="400"
+                                <img src="${pageContext.request.contextPath}/image/${path.path}" width="400"
                                      height="400"/>
                             </c:forEach>
                         </div>

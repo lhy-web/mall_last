@@ -409,7 +409,7 @@
                                 <li class="data-item-li">
                                     <div class="to-big">
                                         <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}"><img
-                                                src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
+                                                src="${pageContext.request.contextPath}/image/${goods.imagePaths[0].path}"
                                                 alt=""
                                                 width="200" height="200"/>
                                         </a>
@@ -460,7 +460,7 @@
                                     <li class="data-item-li">
                                         <div class="to-big">
                                             <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}"><img
-                                                    src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
+                                                    src="${pageContext.request.contextPath}/image/${goods.imagePaths[0].path}"
                                                     alt=""
                                                     width="200" height="200"/>
                                             </a>
