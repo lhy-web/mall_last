@@ -76,7 +76,7 @@
                                     <tr>
                                         <td class="product-thumbnail product-thumbnail-2"><a
                                                 href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}"><img
-                                                src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
+                                                src="${pageContext.request.contextPath}/image/${goods.imagePaths[0].path}"
                                                 alt=""/></a></td>
                                         <td class="product-name product-name_2"><a
                                                 href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">${goods.goodsName}</a>
