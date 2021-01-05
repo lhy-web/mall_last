@@ -18,6 +18,8 @@
 </head>
 
 <script type="text/javascript">
+    /*
+    * 获取随机验证码*/
     function reloadcode() {
         var verify = document.getElementById('code');
         verify.setAttribute("src", "${pageContext.request.contextPath}/verificationcodeimg?it=" + Math.random());

@@ -87,7 +87,7 @@
                 var goodsId = $(this).attr("data-id");
                 //取消收藏
                 $.ajax({
-                    url: "/shop/deleteCollect",
+                    url: "/shop/deleteCollect", 
                     type: "POST",
                     data: {
                         goodsid: goodsId
@@ -151,7 +151,7 @@
                                     <li class="data-item-li">
                                         <div class="to-big">
                                             <a href="${pageContext.request.contextPath}/detail?goodsid=${goods.id}">
-                                                <img src="${pageContext.request.contextPath}/pictures/${goods.imagePaths[0].path}"
+                                                <img src="${pageContext.request.contextPath}/image/${goods.imagePaths[0].path}"
                                                      width="240px" height="240px" alt=""/>
                                             </a>
                                         </div>

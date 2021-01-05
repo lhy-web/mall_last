@@ -19,7 +19,7 @@ public class LoginController {
     @Autowired
     private AdminService adminService;
 
-    /**
+    /**F
      * 返回到登录页面
      *
      * @return String

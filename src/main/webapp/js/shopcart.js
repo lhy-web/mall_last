@@ -77,7 +77,7 @@ function build_cart_table(result) {
             if (item.imagePaths[0] != null) {
                 shopimage = $("<td></td>").addClass("product-thumbnail product-thumbnail-2")
                     .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id)
-                        .append($("<img/>").attr("src", "/shop/pictures/" + item.imagePaths[0].path)));
+                        .append($("<img/>").attr("src", "/shop/image/" + item.imagePaths[0].path)));
             } else {
                 shopimage = $("<td></td>").addClass("product-thumbnail product-thumbnail-2")
                     .append($("<a></a>").attr("href", "/shop/detail?goodsid=" + item.id));
@@ -98,7 +98,9 @@ function build_cart_table(result) {
             numIput.change(function () {
                 updateCart(item.id, $(this).val());
             });
-
+            if(item.num<0){
+                item.num=0;
+            }
             var totalPrice = $("<td></td>").addClass("product-price")
                 .append($("<span></span>").addClass("amount-list amount-list-2").append("￥" + item.price * item.num));
 

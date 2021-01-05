@@ -18,16 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Controller
 public class CustomerController {
+    //l
 
     @RequestMapping("/login")
     public String loginView() {
@@ -210,14 +213,92 @@ public class CustomerController {
      * @return String
      */
     @RequestMapping("/info/list")
-    public String list(HttpServletRequest request, Model orderModel) {
+    public String list(@RequestParam(value = "page", defaultValue = "1") Integer pn,HttpServletRequest request, Model orderModel) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }
+        PageHelper.startPage(pn, 2);
         List<Order> orderList = orderService.getAllByUserId(user.getId());
-        orderModel.addAttribute("orderList", orderList);
+        for (Order order : orderList) {
+            System.out.println(order);
+        }
+        PageInfo<Order> page = new PageInfo<>(orderList, 5);
+        orderModel.addAttribute("orderList",page);
+        return "/person/list";
+    }
+
+/*
+* 订单模糊查询
+* */
+    @RequestMapping(value = "/info/search", method = RequestMethod.GET)
+    public String InfoSearch(@RequestParam(value = "page", defaultValue = "1") Integer pn,HttpServletRequest request,String keyword, Model orderModel) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+        PageHelper.startPage(pn, 2);
+        List<Order> orderList = orderService.getSearchByGoodsName(user.getId(),keyword);
+        PageInfo<Order> page = new PageInfo<>(orderList, 5);
+        orderModel.addAttribute("orderList",page);
+        orderModel.addAttribute("keyword",keyword);
+        return "/person/search";
+    }
+
+
+
+/*
+* 未发货的订单
+* */
+    @RequestMapping("/info/list/send")
+    public String listSend(@RequestParam(value = "page", defaultValue = "1") Integer pn,HttpServletRequest request, Model orderModel) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        PageHelper.startPage(pn, 2);
+        List<Order> orderList = orderService.getSendOrderByUserId(user.getId());
+        PageInfo<Order> page = new PageInfo<>(orderList, 5);
+        orderModel.addAttribute("orderList",page);
+        orderModel.addAttribute("a","send");
+        return "/person/list";
+    }
+
+    @RequestMapping("/info/list/receive")
+    public String listReceive(@RequestParam(value = "page", defaultValue = "1") Integer pn,HttpServletRequest request, Model orderModel) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        PageHelper.startPage(pn, 2);
+        List<Order> orderList = orderService.getReceiveOrderByUserId(user.getId());
+        PageInfo<Order> page = new PageInfo<>(orderList, 5);
+        orderModel.addAttribute("orderList",page);
+        orderModel.addAttribute("a","receive");
+        return "/person/list";
+    }
+
+    @RequestMapping("/info/list/complete")
+    public String listCompelete(@RequestParam(value = "page", defaultValue = "1") Integer pn,HttpServletRequest request, Model orderModel) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+
+        PageHelper.startPage(pn, 2);
+        List<Order> orderList = orderService.getCompleteOrderByUserId(user.getId());
+
+        PageInfo<Order> page = new PageInfo<>(orderList, 5);
+        orderModel.addAttribute("orderList",page);
+        orderModel.addAttribute("a","complete");
         return "/person/list";
     }
 

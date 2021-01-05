@@ -1,6 +1,7 @@
 package com.sk.mall.dao;
 
 
+import com.sk.mall.entity.Order;
 import com.sk.mall.entity.OrderItem;
 import org.springframework.stereotype.Repository;
 
@@ -52,4 +53,6 @@ public interface OrderItemMapper {
     List<OrderItem> getOrderItemByOrderId(int orderId);
 
     List<Map<String, Object>> getTotalGoods();
+
+
 }

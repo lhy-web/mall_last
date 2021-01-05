@@ -45,6 +45,41 @@
           and o.userId = #{userId}
     </select>
 
+    <select id="getSendOrderByUserId" resultMap="orderResult">
+        select *
+        from indent
+        where userId = #{userId}
+        and   isSend = 0
+        and   isReceive =0
+        and   isComplete =0
+    </select>
+
+    <select id="getReceiveOrderByUserId" resultMap="orderResult">
+        select *
+        from indent
+        where userId = #{userId}
+        and   isSend = 1
+        and   isReceive =0
+        and   isComplete =0
+    </select>
+    <select id="getSearchByGoodsName" resultMap="orderResult">
+      select i.*
+      from indent i,
+		 orderitem o,
+		 goods g
+      where i.id=o.orderId and o.goodsId=g.id
+			and g.goodsName like #{keyword} and i.userId=#{id}
+    </select>
+
+
+    <select id="getCompleteOrderByUserId" resultMap="orderResult">
+        select *
+        from indent
+        where userId = #{userId}
+        and   isSend = 1
+        and   isReceive =1
+        and   isComplete =1
+    </select>
     <select id="getAllByState" resultMap="orderIncludeAddress">
         select o.* ,a.* from indent o , address a where o.addressId = a.id
         <if test="isSend !=null and !isSend">

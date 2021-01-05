@@ -4,6 +4,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>--%>
+
 <%@page contentType="image/jpeg" %>
 <jsp:useBean id="image" scope="page" class="com.sk.mall.util.verificate.Verificate"/>
 <%

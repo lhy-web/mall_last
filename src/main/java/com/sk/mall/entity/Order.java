@@ -32,6 +32,24 @@ public class Order {
     public Order() {
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", orderTime=" + orderTime +
+                ", oldPrice=" + oldPrice +
+                ", newPrice=" + newPrice +
+                ", isPay=" + isPay +
+                ", isSend=" + isSend +
+                ", isReceive=" + isReceive +
+                ", isComplete=" + isComplete +
+                ", addressId=" + addressId +
+                ", orderItems=" + orderItems +
+                ", address=" + address +
+                '}';
+    }
+
     public Order(Integer id, Integer userId, Date orderTime, Float oldPrice, Float newPrice, Boolean isPay, Boolean isSend, Boolean isReceive, Boolean isComplete, Integer addressId, List<OrderItem> orderItems, Address address) {
         this.id = id;
         this.userId = userId;

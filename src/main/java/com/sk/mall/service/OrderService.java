@@ -45,4 +45,13 @@ public interface OrderService {
      * @return 订单列表
      */
     List<Order> getAllByUserId(int userId);
+
+
+    List<Order> getSendOrderByUserId(Integer id);
+
+    List<Order> getReceiveOrderByUserId(Integer id);
+
+    List<Order> getCompleteOrderByUserId(Integer id);
+
+    List<Order> getSearchByGoodsName(Integer id,String keyword);
 }

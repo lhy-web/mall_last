@@ -117,10 +117,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> getHotGoods(int num) {
         List<Map<String, Object>> totalGoods = orderItemMapper.getTotalGoods();
+        System.out.println(totalGoods.size());
         List<Goods> goods = new ArrayList<>();
         int i = 0;
         for (Map<String, Object> good : totalGoods) {
-            Goods goods1 = goodsMapper.getById(Integer.parseInt(good.get("goodsId").toString()));
+            Goods goods1 = goodsMapper.getById(Integer.parseInt(good.get("countNum").toString()));
+            System.out.println(goods1);
             goods.add(goods1);
             i++;
             if (i >= num) {

@@ -33,6 +33,9 @@ public class ShopCart {
     }
 
     public void setGoodsNum(Integer goodsNum) {
+        if(goodsNum<1){
+            goodsNum=1;
+        }
         this.goodsNum = goodsNum;
     }
 

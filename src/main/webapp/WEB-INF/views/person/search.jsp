@@ -119,10 +119,8 @@
 
 
                            <a href="${pageContext.request.contextPath}/info/list/send">未发货</a>
-                           <a href="${pageContext.request.contextPath}/info/list/receive">待收货</a>
-                           <a href="${pageContext.request.contextPath}/info/list/complete">已完成</a>
-                    <a href="${pageContext.request.contextPath}/">倒叙</a>
-                    <a href="${pageContext.request.contextPath}/">正序</a>
+                               <a href="${pageContext.request.contextPath}/info/list/receive">待收货</a>
+                              <a href="${pageContext.request.contextPath}/info/list/complete">已完成</a>
 
 
             </div>
@@ -301,29 +299,14 @@
                         <c:forEach items="${orderList.navigatepageNums}" var="pageNums">
                             <c:if test="${pageNums == orderList.pageNum}">
                                 <li class="active">
-                                    <c:if test="${a eq 'send'}">
-
-                                        <a href="${pageContext.request.contextPath}/info/list/send?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
-                                    <c:if test="${a eq 'receive'}">
-                                        <a href="${pageContext.request.contextPath}/info/list/receive?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
-                                    <c:if test="${a eq 'complete'}">
-                                        <a href="${pageContext.request.contextPath}/info/list/complete?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
+                                        <a href="${pageContext.request.contextPath}/info/search?keyword=${keyword}&page=${pageNums}">${pageNums}</a>
                                 </li>
                             </c:if>
                             <c:if test="${pageNums != orderList.pageNum}">
                                 <li>
-                                    <c:if test="${a eq 'send'}">
-                                        <a href="${pageContext.request.contextPath}/info/list/send?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
-                                    <c:if test="${a eq 'receive'}">
-                                        <a href="${pageContext.request.contextPath}/info/list/receive?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
-                                    <c:if test="${a eq 'complete'}">
-                                        <a href="${pageContext.request.contextPath}/info/list/complete?page=${pageNums}">${pageNums}</a>
-                                    </c:if>
+
+                                        <a href="${pageContext.request.contextPath}/info/search?keyword=${keyword}&page=${pageNums}">${pageNums}</a>
+
 
                                 </li>
                             </c:if>
@@ -331,48 +314,23 @@
 
                         <c:if test="${orderList.hasNextPage}">
                             <li>
-                                <c:if test="${a eq 'send'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/send?page=${orderList.nextPage}"
+
+                                    <a href="${pageContext.request.contextPath}/info/search?keyword=${keyword}&page=${orderList.nextPage}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
-                                </c:if>
-                                <c:if test="${a eq 'receive'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/receive?page=${orderList.nextPage}"
-                                       aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </c:if>
-                                <c:if test="${a eq 'complete'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/complete?page=${orderList.nextPage}"
-                                       aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </c:if>
 
                             </li>
                         </c:if>
 
                         <c:if test="${!orderList.hasNextPage}">
                             <li class="disabled">
-                                <c:if test="${a eq 'send'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/send?page=${orderList.nextPage}"
+
+                                    <a href="${pageContext.request.contextPath}/info/search?keyword=${keyword}&page=${orderList.nextPage}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
-                                </c:if>
-                                <c:if test="${a eq 'receive'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/receive?page=${orderList.nextPage}"
-                                       aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </c:if>
-                                <c:if test="${a eq 'complete'}">
-                                    <a href="${pageContext.request.contextPath}/info/list/complete?page=${orderList.nextPage}"
-                                       aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </c:if>
+
 
                             </li>
                         </c:if>

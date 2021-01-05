@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class VerificationCodeImgController {
-
+//l
     @RequestMapping("/verificationcodeimg")
     public ModelAndView verificationcodeimg() {
         ModelAndView verificationcodeimg = new ModelAndView();

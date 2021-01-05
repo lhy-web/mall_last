@@ -54,4 +54,24 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getAllByUserId(int userId) {
         return orderMapper.getAllOrderByUserId(userId);
     }
+
+    @Override
+    public List<Order> getSendOrderByUserId(Integer id) {
+        return orderMapper.getSendOrderByUserId(id);
+    }
+
+    @Override
+    public List<Order> getReceiveOrderByUserId(Integer id) {
+        return orderMapper.getReceiveOrderByUserId(id);
+    }
+
+    @Override
+    public List<Order> getCompleteOrderByUserId(Integer id) {
+        return orderMapper.getCompleteOrderByUserId(id);
+    }
+
+    @Override
+    public List<Order> getSearchByGoodsName(Integer id,String keyword) {
+        return orderMapper.getSearchByGoodsName(id,"%"+keyword+"%");
+    }
 }

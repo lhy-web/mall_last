@@ -188,6 +188,6 @@
     </update>
 
     <select id="getTotalGoods" resultType="java.util.HashMap">
-        select goodsId ,sum(num) as countNum from orderitem group by goodsId order by countNum desc
+        select goodsId,countNum from hotgoods order by countNum desc
     </select>
 </mapper>

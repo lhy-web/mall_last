@@ -46,7 +46,6 @@ $(document).ready(function () {
     var goodsId = {};
 
     $("[name='evaluate']").click(function () {
-        alert(111);
         $("#evaluate").modal({
             backdrop: 'static'
         });

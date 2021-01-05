@@ -56,4 +56,15 @@ public interface OrderMapper {
      * @return  List<Order>
      */
     List<Order> getAllByState(Order order);
+
+
+
+
+    List<Order> getSendOrderByUserId(Integer id);
+
+    List<Order> getReceiveOrderByUserId(Integer id);
+
+    List<Order> getCompleteOrderByUserId(Integer id);
+
+    List<Order> getSearchByGoodsName(Integer id, String keyword);
 }

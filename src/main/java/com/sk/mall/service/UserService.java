@@ -4,9 +4,7 @@ import com.sk.mall.entity.User;
 
 import java.util.List;
 
-/**
- * @author qiaochx
- */
+
 public interface UserService {
     /**
      * 根据主键查找

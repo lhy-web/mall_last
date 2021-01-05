@@ -41,7 +41,7 @@ public class MainController {
             List<Goods> digGoods = getCateGoods(category.getCateName(), userId);
             category.setGoods(digGoods);
         }
-        List<Goods> hotGoods = this.goodsService.getHotGoods(3);
+        List<Goods> hotGoods = this.goodsService.getHotGoods(4);
         model.addAttribute("categories", categories);
         model.addAttribute("hotGoods", hotGoods);
         return "main";
@@ -63,7 +63,7 @@ public class MainController {
             List<Goods> digGoods = getCateGoods(category.getCateName(), userId);
             category.setGoods(digGoods);
         }
-        List<Goods> hotGoods = this.goodsService.getHotGoods(3);
+        List<Goods> hotGoods = this.goodsService.getHotGoods(4);
         model.addAttribute("categories", categories);
         model.addAttribute("hotGoods", hotGoods);
         return "main";

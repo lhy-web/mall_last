@@ -66,7 +66,7 @@ public class FrontGoodsController {
     public String searchGoods(@RequestParam(value = "page", defaultValue = "1") Integer pn, String keyword, Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         //一页显示几个数据
-        PageHelper.startPage(pn, 16);
+        PageHelper.startPage(pn, 9);
         //查询数据
         List<Goods> goodsList = goodsService.getBySearchName(keyword);
 
